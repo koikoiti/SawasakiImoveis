@@ -49,7 +49,7 @@
 		
 		#Busca a pagina e verifica se existe
 		function BuscaPagina(){
-			$Sql = "Select * from c_paginas where nome = '".$this->Pagina."'";
+			$Sql = "SELECT * FROM t_paginas WHERE url = '".$this->Pagina."'";
 			$result = $this->Execute($Sql);
 			$num_rows = $this->Linha($result);
 			if($num_rows){
@@ -93,7 +93,7 @@
 		
 		#Funcao que carrega as páginas
 		function CarregaPaginas(){
-			$urlDesenvolve = 'sistema_base';
+			$urlDesenvolve = 'sawasakiimoveis';
 			$primeiraBol = true;
 			$uri = $_SERVER["REQUEST_URI"];
 			$exUrls = explode('/',$uri);
