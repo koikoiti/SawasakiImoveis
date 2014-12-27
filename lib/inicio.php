@@ -6,5 +6,5 @@
 	$banco = new bancoinicio();
 
 	#Imprimi valores
-	$Conteudo = $banco->CarregaHtml('inicio');
+	$Conteudo = utf8_encode($banco->CarregaHtml('inicio'));
 ?>
