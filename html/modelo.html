@@ -8,7 +8,10 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="description" content="">
 		<meta name="author" content="">
-
+        
+        <!-- FlexSlider -->
+        <script src="<%URLPADRAO%>html/js/slider/jquery.flexslider.js"></script>
+        
         <!--[if lte IE 6]>
             <link rel="stylesheet" href="//universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
         <![endif]-->
@@ -60,7 +63,7 @@
       <script src="js/sliderheader/respond.min.js"></script>
     <![endif]-->
 
-        <div id="myCarousel" class="carousel slide" data-interval="1000">
+        <div id="myCarousel" class="carousel slide">
             <div class="carousel-inner">
                 <div class="item">
                     <img src="<%URLPADRAO%>html/img/japao1.jpg" />
@@ -189,8 +192,6 @@
             <script src="<%URLPADRAO%>html/js/slider/jquery.responsivethumbnailgallery.min.js"></script>  <!-- REQUIRED: Responsive Gallery Plugin -->
             <script src="<%URLPADRAO%>html/js/slider/jquery.onebyone.min.js"></script>     				<!-- REQUIRED: Slider Plugin -->
             <script src="<%URLPADRAO%>html/js/slider/jquery.touchwipe.min.js"></script>    				<!-- REQUIRED: Plugin to make Slider Plugin work on Touch Devices -->
-            <script src="<%URLPADRAO%>html/js/slider/jquery.onebyone.min.js"></script>     				<!-- REQUIRED: Slider Plugin -->
-            <script src="<%URLPADRAO%>html/js/slider/jquery.touchwipe.min.js"></script>    				<!-- REQUIRED: Plugin to make Slider Plugin work on Touch Devices -->
 
 
             <script src="<%URLPADRAO%>html/js/include/jquery.fitvids.min.js"></script>     		 		<!-- RECOMMENDED: Responsive videos -->			
@@ -205,9 +206,7 @@
 
             <script src="<%URLPADRAO%>html/js/config.js"></script>						 				<!-- DO NOT REMOVE: Contains major plugin initiations and functions -->
 		<!--<![endif]-->
-		        <!-- FlexSlider -->
-        <script defer src="<%URLPADRAO%>html/js/slider/jquery.flexslider.js"></script>
-
+		        
         <!-- Flexslider for details page slider -->
         <script type="text/javascript">
             $(window).load(function () {
@@ -225,9 +224,14 @@
 
                 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.carousel').carousel();
+    $(document).ready(function()
+    {
+    $('.carousel').carousel({
+      interval: 6000
     });
+
+    $('.carousel').carousel('next');
+});
 </script>
 
 
