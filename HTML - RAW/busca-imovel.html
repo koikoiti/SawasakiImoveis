@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head runat="server">
 <meta charset="utf-8">
@@ -101,112 +101,203 @@
   </nav>
   <!--end nav bar--> 
 </header>
-
-<!-- INSERIR CONTEUDO --><!-- INSERIR CONTEUDO --><!-- INSERIR CONTEUDO --><!-- INSERIR CONTEUDO --><!-- INSERIR CONTEUDO --><!-- INSERIR CONTEUDO --><!-- INSERIR CONTEUDO -->
-
 <section id="main"> 
   <!-- Slider start-->
-  <div id="slide-wrapper">
-    <div id="banner">
-      <div class="oneByOne_item"> <img src="img/demo/home-page/slide1.jpg" alt="Placeholder" class="bigImage"> <span class="slide5Txt1" data-animate="fadeInLeftBig">Nome do Imóvel</span> <span class="slide5Txt2" data-animate="fadeInRightBig">R$000,000 | Cidade, Estado</span> </div>
-      <div class="oneByOne_item"> <img src="img/demo/home-page/slide2.jpg" alt="Placeholder" class="bigImage"> <span class="slide5Txt1">Nome do Imóvel</span> <span class="slide5Txt2">R$000,000 | Cidade, Estado</span> </div>
-      <div class="oneByOne_item"> <img src="img/demo/home-page/slide3.jpg" alt="Placeholder" class="bigImage"> <span class="slide5Txt1">Nome do Imóvel</span> <span class="slide5Txt2">R$000,000 | Cidade, Estado</span> </div>
-      <div class="oneByOne_item"> <img src="img/demo/home-page/slide4.jpg" alt="Placeholder" class="bigImage"> <span class="slide5Txt1">Nome do Imóvel</span> <span class="slide5Txt2">R$000,000 | Cidade, Estado</span> </div>
-    </div>
-  </div>
-  <!-- end slider -->
   
   <div class="body-text">
     <div class="container-fluid">
-      <div class="row-fluid"> 
-        
-        <!--west pane span9-->
-        <div class="span9">
-          <div class="row-fluid">
-            <h1>Imóveis</h1>
+      <div class="row-fluid">
+        <div class="span9 listing-js"> 
+          
+          <!-- Create Google Map: Center the map by positiong the latitude and longitude-->
+          <div id="google-map-js" data-lat="-25.4759131" data-lng="-49.239996" data-zoom="10">
+            <div id="map_div" marker="../wp-content/themes/peachrealestate/img/pin/marker.png">&nbsp;</div>
           </div>
-          <div class="row-fluid hotproperties">
-            <div class="span4 set-equal-heights-js">
-              <div class="thumbnail"> <a href="detalheimovel.html"><img src="img/demo/home-page/1.jpg" alt="Placeholder" class="thumbnail"></a>
-                <div class="caption"> <a href="detalheimovel.html" class="prop-title">Cobertura Residencial, Curitiba/PR</a>
-                  <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
-                  <p class="price">R$259,000</p>
-                  <p class="description"> Apartamento com 3 dormitórios, finais 1 e 2 - Frente para rua </p>
-                  <ul class="list-btns">
-                    <li><a href="detalheimovel.html"><i class="icon-info-sign"></i>DETALHE</a></li>
-                  </ul>
-                </div>
+          <!-- end google map--> 
+          
+          <!-- page heading -->
+          <h1>Procurar listas para - "VENDA" </h1>
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <div class="span7 dropdown-results"> 
+                
+                <!-- result found query -->
+                <p class="foundPosts">11 propriedades encontradas</p>
+                <!-- result found query end --> 
+                <!-- Test variable --> 
+                
               </div>
             </div>
-            <div class="set-equal-heights-js span4">
-              <div class="thumbnail"> <span class="sticker sticker-hot">Novo</span> <a href="detalheimovel.html"><img src="img/demo/home-page/2.jpg" alt="Placeholder" class="thumbnail"></a>
-                <div class="caption"> <a href="detalheimovel.html" class="prop-title">Cobertura Residencial, Curitiba/PR</a>
-                  <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
-                  <p class="price">R$259,000</p>
-                  <p class="description"> Apartamento com 3 dormitórios, finais 1 e 2 - Frente para rua </p>
-                  <ul class="list-btns">
-                    <li><a href="detalheimovel.html"><i class="icon-info-sign"></i>DETALHE</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="span4 set-equal-heights-js">
-              <div class="thumbnail"> <a href="detalheimovel.html"><img src="img/demo/home-page/3.jpg" alt="Placeholder" class="thumbnail"></a>
-                <div class="caption"> <a href="property.html" class="prop-title">Cobertura Residencial, Curitiba/PR</a>
-                  <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
-                  <p class="price">R$259,000</p>
-                  <p class="description"> Apartamento com 3 dormitórios, finais 1 e 2 - Frente para rua </p>
-                  <ul class="list-btns">
-                    <li><a href="detalheimovel.html"><i class="icon-info-sign"></i>DETALHE</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="clearfix"></div>
           </div>
-          <div class="row-fluid hotproperties">
-            <div class="span4 set-equal-heights-js">
-              <div class="thumbnail"> <a href="detalheimovel.html"><img src="img/demo/home-page/1.jpg" alt="Placeholder" class="thumbnail"></a>
-                <div class="caption"> <a href="detalheimovel.html" class="prop-title">Cobertura Residencial, Curitiba/PR</a>
-                  <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
-                  <p class="price">R$259,000</p>
-                  <p class="description"> Apartamento com 3 dormitórios, finais 1 e 2 - Frente para rua </p>
-                  <ul class="list-btns">
-                    <li><a href="detalheimovel.html"><i class="icon-info-sign"></i>DETALHE</a></li>
-                  </ul>
-                </div>
+          <!-- end page heading --> 
+          
+          <!-- create listing for rent -->
+          <div class="container-fluid appartment-listing" id="renting-map-js"> 
+            
+            <!--start list-->
+            <div class="span6">
+              <div class="span5"><a href="#"><img alt='Image' src='img/galeria/image1-142x123.jpg' /></a></div>
+              <div class="span7">
+                <p class="prop-title">Cobertura Residencial, Curitiba/PR</p>
+                <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
+                <p class="price">$52000</p>
+                <!-- Google Map info (These values will be hidden to the user)-->
+                <p class="street">CORONEL OTONI MACIEL, CURITIBA, PARANÁ</p>
+                <p class="lat">43.797962</p>
+                <p class="lng">-79.804687</p>
+                <!--<p class="lnk">http://myorange.ca/wp_peachrealestate/property-view/open-home-post/</p>-->
+                <!--for js value passing--> 
+                <!-- end google map info --> 
+                <!-- Short List Btns -->
+                <ul class="list-btns">
+                  <li><a href="javascript:void(0);" id="appartment_1" class="add-to-list-js" 
+													data-shortlist="<img src='img/galeria/image1-48x42.jpg' />														  <div><a href='#' id='appartment_1'>Cobertura Residencial</a>$52000</div>"> <i class="icon-plus-sign"></i>LISTAR</a></li>
+                  <li><a href="../property-view/open-home-post/index.html"><i class="icon-info-sign"></i>DETALHE</a></li>
+                </ul>
+                <!-- end short list --> 
               </div>
             </div>
-            <div class="set-equal-heights-js span4">
-              <div class="thumbnail"> <span class="sticker sticker-hot">Novo</span> <a href="detalheimovel.html"><img src="img/demo/home-page/2.jpg" alt="Placeholder" class="thumbnail"></a>
-                <div class="caption"> <a href="detalheimovel.html" class="prop-title">Cobertura Residencial, Curitiba/PR</a>
-                  <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
-                  <p class="price">R$259,000</p>
-                  <p class="description"> Apartamento com 3 dormitórios, finais 1 e 2 - Frente para rua </p>
-                  <ul class="list-btns">
-                    <li><a href="detalheimovel.html"><i class="icon-info-sign"></i>DETALHE</a></li>
-                  </ul>
-                </div>
+            <!--end list--> 
+            
+            <!--start list-->
+            <div class="span6">
+              <div class="span5"><a href="#"><img alt='Image' src='img/galeria/image1-142x123.jpg' /></a></div>
+              <div class="span7">
+                <p class="prop-title">Cobertura Residencial, Curitiba/PR</p>
+                <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
+                <p class="price">$52000</p>
+                <!-- Google Map info (These values will be hidden to the user)-->
+                <p class="street">CORONEL OTONI MACIEL, CURITIBA, PARANÁ</p>
+                <p class="lat">43.797962</p>
+                <p class="lng">-79.804687</p>
+                <!--for js value passing--> 
+                <!-- end google map info --> 
+                <!-- Short List Btns -->
+                <ul class="list-btns">
+                  <li><a href="javascript:void(0);" id="appartment_1" class="add-to-list-js" 
+													data-shortlist="<img src='img/galeria/image1-48x42.jpg' />														  <div><a href='#' id='appartment_1'>Cobertura Residencial</a>$52000</div>"> <i class="icon-plus-sign"></i>LISTAR</a></li>
+                  <li><a href="../property-view/open-home-post/index.html"><i class="icon-info-sign"></i>DETALHE</a></li>
+                </ul>
+                <!-- end short list --> 
               </div>
             </div>
-            <div class="span4 set-equal-heights-js">
-              <div class="thumbnail"> <a href="detalheimovel.html"><img src="img/demo/home-page/3.jpg" alt="Placeholder" class="thumbnail"></a>
-                <div class="caption"> <a href="detalheimovel.html" class="prop-title">Cobertura Residencial, Curitiba/PR</a>
-                  <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
-                  <p class="price">R$259,000</p>
-                  <p class="description"> Apartamento com 3 dormitórios, finais 1 e 2 - Frente para rua </p>
-                  <ul class="list-btns">
-                    <li><a href="detalheimovel.html"><i class="icon-info-sign"></i>DETALHE</a></li>
-                  </ul>
-                </div>
+            <!--end list--> 
+            
+            <!--start list-->
+            <div class="span6">
+              <div class="span5"><a href="#"><img alt='Image' src='img/galeria/image1-142x123.jpg' /></a></div>
+              <div class="span7">
+                <p class="prop-title">Cobertura Residencial, Curitiba/PR</p>
+                <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
+                <p class="price">$52000</p>
+                <!-- Google Map info (These values will be hidden to the user)-->
+                <p class="street">CORONEL OTONI MACIEL, CURITIBA, PARANÁ</p>
+                <p class="lat">43.797962</p>
+                <p class="lng">-79.804687</p>
+                <!--for js value passing--> 
+                <!-- end google map info --> 
+                <!-- Short List Btns -->
+                <ul class="list-btns">
+                  <li><a href="javascript:void(0);" id="appartment_1" class="add-to-list-js" 
+													data-shortlist="<img src='img/galeria/image1-48x42.jpg' />														  <div><a href='#' id='appartment_1'>Cobertura Residencial</a>$52000</div>"> <i class="icon-plus-sign"></i>LISTAR</a></li>
+                  <li><a href="../property-view/open-home-post/index.html"><i class="icon-info-sign"></i>DETALHE</a></li>
+                </ul>
+                <!-- end short list --> 
               </div>
             </div>
-            <div class="clearfix"></div>
+            <!--end list--> 
+            
+            <!--start list-->
+            <div class="span6">
+              <div class="span5"><a href="#"><img alt='Image' src='img/galeria/image1-142x123.jpg' /></a></div>
+              <div class="span7">
+                <p class="prop-title">Cobertura Residencial, Curitiba/PR</p>
+                <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
+                <p class="price">$52000</p>
+                <!-- Google Map info (These values will be hidden to the user)-->
+                <p class="street">CORONEL OTONI MACIEL, CURITIBA, PARANÁ</p>
+                <p class="lat">43.797962</p>
+                <p class="lng">-79.804687</p>
+                <!--for js value passing--> 
+                <!-- end google map info --> 
+                <!-- Short List Btns -->
+                <ul class="list-btns">
+                  <li><a href="javascript:void(0);" id="appartment_1" class="add-to-list-js" 
+													data-shortlist="<img src='img/galeria/image1-48x42.jpg' />														  <div><a href='#' id='appartment_1'>Cobertura Residencial</a>$52000</div>"> <i class="icon-plus-sign"></i>LISTAR</a></li>
+                  <li><a href="../property-view/open-home-post/index.html"><i class="icon-info-sign"></i>DETALHE</a></li>
+                </ul>
+                <!-- end short list --> 
+              </div>
+            </div>
+            <!--end list--> 
+            
+            <!--start list-->
+            <div class="span6">
+              <div class="span5"><a href="#"><img alt='Image' src='img/galeria/image1-142x123.jpg' /></a></div>
+              <div class="span7">
+                <p class="prop-title">Cobertura Residencial, Curitiba/PR</p>
+                <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
+                <p class="price">$52000</p>
+                <!-- Google Map info (These values will be hidden to the user)-->
+                <p class="street">CORONEL OTONI MACIEL, CURITIBA, PARANÁ</p>
+                <p class="lat">43.797962</p>
+                <p class="lng">-79.804687</p>
+                <!--for js value passing--> 
+                <!-- end google map info --> 
+                <!-- Short List Btns -->
+                <ul class="list-btns">
+                  <li><a href="javascript:void(0);" id="appartment_1" class="add-to-list-js" 
+													data-shortlist="<img src='img/galeria/image1-48x42.jpg' />														  <div><a href='#' id='appartment_1'>Cobertura Residencial</a>$52000</div>"> <i class="icon-plus-sign"></i>LISTAR</a></li>
+                  <li><a href="../property-view/open-home-post/index.html"><i class="icon-info-sign"></i>DETALHE</a></li>
+                </ul>
+                <!-- end short list --> 
+              </div>
+            </div>
+            <!--end list--> 
+            
+            <!--start list-->
+            <div class="span6">
+              <div class="span5"><a href="#"><img alt='Image' src='img/galeria/image1-142x123.jpg' /></a></div>
+              <div class="span7">
+                <p class="prop-title">Cobertura Residencial, Curitiba/PR</p>
+                <p class="size">Quartos: 5 • Banheiros: 2 • Estacionamentos 2</p>
+                <p class="price">$52000</p>
+                <!-- Google Map info (These values will be hidden to the user)-->
+                <p class="street">CORONEL OTONI MACIEL, CURITIBA, PARANÁ</p>
+                <p class="lat">43.797962</p>
+                <p class="lng">-79.804687</p>
+                <!--for js value passing--> 
+                <!-- end google map info --> 
+                <!-- Short List Btns -->
+                <ul class="list-btns">
+                  <li><a href="javascript:void(0);" id="appartment_1" class="add-to-list-js" 
+													data-shortlist="<img src='img/galeria/image1-48x42.jpg' />														  <div><a href='#' id='appartment_1'>Cobertura Residencial</a>$52000</div>"> <i class="icon-plus-sign"></i>LISTAR</a></li>
+                  <li><a href="../property-view/open-home-post/index.html"><i class="icon-info-sign"></i>DETALHE</a></li>
+                </ul>
+                <!-- end short list --> 
+              </div>
+            </div>
+            <!--end list--> 
+            
+
+            
+
+            
           </div>
+          <!-- end map plot-->
+<!--          <div class="container-fluid">
+            <div class="row-fluid" style="border:none;">
+              <div class="span12">
+                <div class="pagination pagination-centered">
+                  <div class='wp-pagenavi'> <span class='current'>1</span><a href='page/2/index.html' class='page larger'>2</a><a href='page/2/index.html' class='nextpostslink'>Next »</a> </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
+          <!-- end paging --> 
+          
         </div>
-        <!--end of west pane span9--> 
-        
-        <!--east pane with width of span3-->
+        <!-- end listing-js -->
         <div class="span3"> 
           <!--
 								"Quick Search" Widget
@@ -215,6 +306,7 @@
 											  the width is automatically "Re-adjusted" with javascript
 											  See "config.js" for more details	
 							-->
+          
           <div class="qbox">
             <h3><i class="icon-search pull-right"></i>Busca rápida</h3>
             <form>
@@ -334,18 +426,32 @@
             </form>
           </div>
           
-          <!-- Start Zone Alert -->
-          <div class="qbox">
-            <h3><i class="icon-eye-open pull-right"></i>Atenção</h3>
-            <div>
-              <p>Registre sua busca e lhe avisaremos quando o imóvel estiver disponível.</p>
-              <a data-toggle="modal" href="#myModal" class="btn btn-small">Registrar</a> </div>
-          </div>
-          <!-- end Zone Alert --> 
+          <!-- // MY SHORT LIST // -->
           
+          <div class="qbox">
+            <h3>Minha Lista
+              <label class="badge badge-important pull-right" id="short-list-count-js">0</label>
+            </h3>
+            <div> 
+              <!-- dummy short list items -->
+              <ol class="shortlist">
+                
+                <!--<li>
+				<img src="http://placehold.it/48x42/E37F14/FFFFFF" alt="Placeholder Image">
+				<div>
+					<a href="javascript:void(0);">City Center Condo</a>
+					$1200
+				</div>
+			</li>-->
+                
+              </ol>
+              <!-- end dummy short list items -->
+              <ol id="show-items" class="shortlist">
+              </ol>
+              <a href="javascript:void(0);" class="link" id="clear-all">Limpar Lista</a> </div>
+          </div>
+          <!--/end my short list--> 
         </div>
-        <!--end of span3--> 
-        
       </div>
     </div>
   </div>

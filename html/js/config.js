@@ -208,20 +208,20 @@
 			max : 10,
 			values : [1, 4],
 			slide : function(event, ui) {
-				$beds.val("Select Bedrooms: " + ui.values[0] + " - " + ui.values[1]);
+				$beds.val("Selecionar quartos: " + ui.values[0] + " - " + ui.values[1]);
 			}
 		});
-		$beds.val("Select Bedrooms: " + $uislider.slider("values", 0) + " - " + $uislider.slider("values", 1));
+		$beds.val("Selecionar quartos: " + $uislider.slider("values", 0) + " - " + $uislider.slider("values", 1));
 		$uiSliderPrice.slider({
 			range : true,
 			min : 25000,
 			max : 925000,
 			values : [110000, 255000],
 			slide : function(event, ui) {
-				$uiAmount.val("Price Range: $" + ui.values[0] + " - $" + ui.values[1]);
+				$uiAmount.val("Faixa de preço: R$" + ui.values[0] + " - R$" + ui.values[1]);
 			}
 		});
-		$uiAmount.val("Price Range: $" + $uiSliderPrice.slider("values", 0) + " - $" + $uiSliderPrice.slider("values", 1)); 
+		$uiAmount.val("Faixa de preço: R$" + $uiSliderPrice.slider("values", 0) + " - R$" + $uiSliderPrice.slider("values", 1)); 
 		
 		/*end jQuery UI Slider*/ 
 		

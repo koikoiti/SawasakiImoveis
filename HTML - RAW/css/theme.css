@@ -64,12 +64,12 @@ html {
 header, footer {
     background: url('../img/pattern/bg-header.jpg');
     background-color: #FCBE00;
-    border-bottom: 1px solid #FCBE00;
+    border-bottom: 4px solid #FFFFFF;
     display: block;
 }
 
 body {
-    /*background: url('../img/pattern/whitey.png');*/
+    background: url('../img/pattern/whitey.png');
     margin: 0;
     padding: 0;
     font-size: 13px;
@@ -406,7 +406,7 @@ h1 > .btn-group {
 /*	Main body text area
 	/* ---------------------------------------------------------------------- */
 .body-text {
-    padding: 20px 0 0 0;
+    padding: 5px 0 0 0;
 }
 
     .body-text > div {
@@ -870,13 +870,21 @@ p.body-paragraph {
 
 .hotproperties .thumbnail img {
     margin-bottom: 10px;
-    width: 100%;
+/*    width: 100%;*/
     -webkit-box-sizing: border-box; /* webkit */
     -khtml-box-sizing: border-box; /* konqueror */
     -moz-box-sizing: border-box; /* firefox */
     box-sizing: border-box; /* css3 */
 }
 
+
+.hotproperties .thumbnail img:hover {
+	-webkit-box-shadow: 4px 4px 0px 0px rgba(247, 139, 0, 0.96);
+-moz-box-shadow:    4px 4px 0px 0px rgba(247, 139, 0, 0.96);
+box-shadow:         4px 4px 0px 0px rgba(247, 139, 0, 0.96);
+	}
+	
+	
 .hotproperties .thumbnail .caption {
     padding: 0 5px;
 }
@@ -1030,7 +1038,8 @@ div.gallery span.sticker {
 /*	Footer
 	/* ---------------------------------------------------------------------- */
 footer {
-    background: url('..\img\pattern\low_contrast_linen.png');
+    background: url('../img/pattern/bg-footer.jpg');
+	background-repeat:repeat;
     background-color: #313131;
     margin-top: 0;
     font-weight: bold;
@@ -2315,7 +2324,7 @@ img.team-member {
 }
 
 .box-footer {
-    background: #272727;
+    background: rgba(0, 0, 0, 0.45);
     border-radius: 5px;
     padding: 15px;
     max-width: 940px;
@@ -2324,21 +2333,21 @@ img.team-member {
 }
 
     .box-footer h3 {
-        color: #777777;
+        color: #FFFFFF;
         font-size: 15px;
         text-transform: none;
-        font-weight: bold;
+
     }
 
     .box-footer p {
-        color: #404040;
+        color: #969696;
         font-size: 15px;
         text-transform: none;
         font-weight: bold;
     }
 
         .box-footer p:last-child {
-            color: #404040;
+            color: #969696;
             font-size: 15px;
             border-bottom: none;
         }
@@ -2363,3 +2372,20 @@ background:none !important;
 }
 
 /*************************************  SLIDER HEADER **************************************/
+
+
+.fundo-estamos {
+	padding: 20px;
+background: #fff;
+border-radius: 40px;
+	
+	}
+	
+	.fundo-estamos h4 {
+		background: #FABB00;
+color: #fff;
+padding: 20px;
+border-radius: 50px;
+text-align: center;
+font-weight: bold;
+		}

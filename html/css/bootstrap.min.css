@@ -5059,7 +5059,7 @@ to {
 
 .carousel-inner {
     position: relative;
-    width: 250px;
+    width: 600px;
     overflow: hidden;
     float:right;
 }
@@ -5243,15 +5243,20 @@ border: 1px solid #fff;
 
 .floatright {
     float:right;
+	padding-right:0;
 }
 
 .floatleft {
     float:left;
 }
 
-@media (max-width:637px) {
+@media (max-width:942px) {
 
     .floatright {
    display:none;
 }
 }
+
+@media (min-width:635px) and (max-width:742px) {
+	.carousel {display:none;}
+	}
