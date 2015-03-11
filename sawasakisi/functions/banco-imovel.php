@@ -66,7 +66,7 @@
             if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
                 $caminhoCriar = $_SERVER['DOCUMENT_ROOT'] . "/arq/imoveis/$idimovel";
             }else{
-                $caminhoCriar = $_SERVER['DOCUMENT_ROOT'] . "/sawasakisi/arq/imoveis/$idimovel";
+                $caminhoCriar = $_SERVER['DOCUMENT_ROOT'] . "/sawasakiimoveis/arq/imoveis/$idimovel";
             }
             $caminho = "arq/imoveis/$idimovel";
             #Cria diretório

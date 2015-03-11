@@ -4,7 +4,7 @@
 	#Verifica SERVER (web/local)
     if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
         #WEB
-        define('UrlPadrao' , "http://www.sawasakiimoveis.com/sawasakisi");
+        define('UrlPadrao' , "http://www.sawasakiimoveis.com/sawasakisi/");
     	
     	#Definições do Banco de Dados
     	define('DB_Host' , "localhost");
