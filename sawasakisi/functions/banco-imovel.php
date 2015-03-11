@@ -83,12 +83,13 @@
             // Tudo para o proprietario, leitura e execucao para o grupo do prop
             chmod ("/somedir/somefile", 0750);
         */
+			
             mkdir($caminhoCriar, 0755);
             foreach($files as $file){
                 #Pega extensão da imagem
                 preg_match("/\.(gif|png|jpg|jpeg){1}$/i", $file["name"], $ext);
                 $caminhoMover = "/$idimovel - $cont" . "." . $ext[1];
-                move_uploaded_file($file["tmp_name"], $caminho.$caminhoMover);
+                move_uploaded_file($file["tmp_name"], $caminhoCriar.$caminhoMover);
                 $Sql = "INSERT INTO t_imagens_imovel (idimovel, caminho) VALUES ('$idimovel', '".$caminho.$caminhoMover."')";
                 parent::Execute($Sql);
                 $cont++;
@@ -176,7 +177,7 @@
             $num_rows = parent::Linha($result);
             if($num_rows){
                 while($rs = parent::ArrayData($result)){
-                    $imagens .= "<div id='".$rs['idimagemimovel']."' style='float: left; clear: both; width: 20%'><div class='fileinput-preview thumbnail selFile'><img style='max-height: 400px;' src='".UrlPadrao.$rs['caminho']."'></div><a href='#' onclick='removeFoto(\"".$rs['idimagemimovel']."\")' class='btn btn-danger'>Remover</a></div>";
+                    $imagens .= "<div id='".$rs['idimagemimovel']."' style='float: left; clear: both; width: 20%'><div class='fileinput-preview thumbnail selFile'><img style='max-height: 400px;' src='http://www.sawasakiimoveis.com/".$rs['caminho']."'></div><a href='#' onclick='removeFoto(\"".$rs['idimagemimovel']."\")' class='btn btn-danger'>Remover</a></div>";
                 }
             }
             return $imagens;

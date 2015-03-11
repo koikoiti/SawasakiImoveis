@@ -8,7 +8,7 @@
     
     $idimagemimovel = $_POST['id'];
     
-    $SqlCaminho = "SELECT * FROM t_imagens_imovel WHERE idimagemimovel = $id$idimagemimovel";
+    $SqlCaminho = "SELECT * FROM t_imagens_imovel WHERE idimagemimovel = $idimagemimovel";
     $resultCaminho = $banco->Execute($SqlCaminho);
     $rsCaminho = $banco->ArrayData($resultCaminho);
     if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
@@ -16,10 +16,10 @@
     }else{
         $caminhoRemover = $_SERVER['DOCUMENT_ROOT'] . "/SawasakiSI/" . $rsCaminho['caminho'];
     }
-    
+
     unlink($caminhoRemover);
     
-    $Sql = "DELETE FROM t_imagens_imovel WHERE idimagemimovel = $id$idimagemimovel";
+    $Sql = "DELETE FROM t_imagens_imovel WHERE idimagemimovel = $idimagemimovel";
     $banco->Execute($Sql);
     
     echo 1;
