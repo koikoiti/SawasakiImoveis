@@ -14,7 +14,7 @@
     if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
         $caminhoRemover = $_SERVER['DOCUMENT_ROOT'] . "/" . $rsCaminho['caminho'];
     }else{
-        $caminhoRemover = $_SERVER['DOCUMENT_ROOT'] . "/SawasakiSI/" . $rsCaminho['caminho'];
+        $caminhoRemover = $_SERVER['DOCUMENT_ROOT'] . "/sawasakiimoveis/" . $rsCaminho['caminho'];
     }
 
     unlink($caminhoRemover);

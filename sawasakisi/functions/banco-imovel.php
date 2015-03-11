@@ -129,10 +129,16 @@
         function RemoveFotos($idimovel){
             $Sql = "SELECT * FROM t_imagens_imovel WHERE idimovel = $idimovel";
             $result = parent::Execute($Sql);
-            while($rs = parent::ArrayData($result)){
-                unlink($rs['caminho']);
+            #Verifica SERVER (web/local)
+            if(strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
+                $caminhoRemover = $_SERVER['DOCUMENT_ROOT'] . "/";
+            }else{
+                $caminhoRemover = $_SERVER['DOCUMENT_ROOT'] . "/sawasakiimoveis/";
             }
-            rmdir("arq/imoveis/$idimovel");
+            while($rs = parent::ArrayData($result)){
+                unlink($caminhoRemover.$rs['caminho']);
+            }
+            rmdir($caminhoRemover."arq/imoveis/$idimovel");
         }
         
         #Busca Imovel por ID
@@ -177,7 +183,7 @@
             $num_rows = parent::Linha($result);
             if($num_rows){
                 while($rs = parent::ArrayData($result)){
-                    $imagens .= "<div id='".$rs['idimagemimovel']."' style='float: left; clear: both; width: 20%'><div class='fileinput-preview thumbnail selFile'><img style='max-height: 400px;' src='http://www.sawasakiimoveis.com/".$rs['caminho']."'></div><a href='#' onclick='removeFoto(\"".$rs['idimagemimovel']."\")' class='btn btn-danger'>Remover</a></div>";
+                    $imagens .= "<div id='".$rs['idimagemimovel']."' style='float: left; clear: both; width: 20%'><div class='fileinput-preview thumbnail selFile'><img style='max-height: 400px;' src='".UrlFoto.$rs['caminho']."'></div><a href='#' onclick='removeFoto(\"".$rs['idimagemimovel']."\")' class='btn btn-danger'>Remover</a></div>";
                 }
             }
             return $imagens;

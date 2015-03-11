@@ -5,6 +5,7 @@
     if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
         #WEB
         define('UrlPadrao' , "http://www.sawasakiimoveis.com/sawasakisi/");
+        define('UrlFoto', 'http://www.sawasakiimoveis.com/');
     	
     	#Definições do Banco de Dados
     	define('DB_Host' , "localhost");
@@ -14,6 +15,7 @@
     }else{
         #LOCAL
         define('UrlPadrao' , "http://localhost/sawasakiimoveis/sawasakisi/");
+        define('UrlFoto', 'http://localhost/sawasakiimoveis/');
     	
     	#Definições do Banco de Dados
     	define('DB_Host' , "localhost");
