@@ -2,8 +2,6 @@
 ## Eclipse
 #################
 
-conf/tags.php
-
 *.pydevproject
 .metadata
 bin/
