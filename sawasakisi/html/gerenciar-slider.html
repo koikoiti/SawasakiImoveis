@@ -1,0 +1,37 @@
+<div class="header">
+    <h3>Gerenciar Slider (Padrão: 940x341)</h3>
+</div>
+<div class="content">
+    <div><button type="button" class="btn btn-success btn-flat">Adicionar Slide</button></div>
+    <%SLIDER%>
+</div>
+<script type="text/javascript">
+function alterar(id){
+    var texto1 = $('#texto1' + id).val().trim();
+    var texto2 = $('#texto2' + id).val().trim();
+    
+    if(texto1 != '' && texto2 != ''){
+        $.post("<%URLPADRAO%>lib/ajax/alteraSlideSite.php",
+			{id:id, texto1:texto1, texto2:texto2},
+			function(retorno){
+			    if(retorno == 1){
+			        window.location.reload();
+			    }
+			}
+		);
+    }
+}
+
+function remover(id){
+    if(confirm("Deseja remover este slide?")){
+        $.post("<%URLPADRAO%>lib/ajax/removeSlideSite.php",
+			{id:id},
+			function(retorno){
+			    if(retorno == 1){
+			        window.location.reload();
+			    }
+			}
+		);
+    }
+}
+</script>

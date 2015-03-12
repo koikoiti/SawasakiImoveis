@@ -151,8 +151,6 @@
         }
         if($_POST['copa']){
             $copa = 1;
-        }else{
-            $copa = 0;
         }
         if($_POST['cozinha']){
             $cozinha = 1;

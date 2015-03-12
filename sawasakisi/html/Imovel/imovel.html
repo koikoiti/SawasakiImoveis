@@ -405,7 +405,6 @@ function buscaCep(cep){
             $.post("<%URLPADRAO%>lib/ajax/removeFotoImovel.php",
     			{id:id},
     			function(retorno){
-                    console.log(retorno);
 				    if(retorno == 1){
 				        $('#'+id).remove();
 				    }

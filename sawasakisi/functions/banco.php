@@ -87,9 +87,10 @@
                                         <li><a href="<%URLPADRAO%>usuario">Inserir Novo</a></li>
                                     </ul>
                                 </li>
-                                <li class="parent"><a href="#"><i class="fa fa-edit"></i><span>Dados Site</span></a>
+                                <li class="parent"><a href="#"><i class="fa fa-edit"></i><span>Gerenciar Site</span></a>
                                     <ul class="sub-menu">
-                                        <li><a href="<%URLPADRAO%>dados-site">Editar</a></li>
+                                        <li><a href="<%URLPADRAO%>gerencia-slider">Gerenciar Slider</a></li>
+                                        <li><a href="<%URLPADRAO%>gerencia-destaques">Gerenciar Destaques</a></li>
                                     </ul>
                                 </li>';
                     }

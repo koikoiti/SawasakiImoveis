@@ -12,7 +12,7 @@
         $msg = "acesso negado";
     }
     
-	#Imprimi valores
+	#Imprime valores
 	$Conteudo = utf8_encode($banco->CarregaHtml('inicio'));
     $Conteudo = str_replace('<%MSG%>', $msg, $Conteudo);
 ?>
