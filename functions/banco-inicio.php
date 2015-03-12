@@ -17,6 +17,7 @@
                 $Linha = str_replace('<%AREAUTIL%>', $rs['area_util'], $Linha);
                 $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
                 $Linha = str_replace('<%DESCRICAO%>', $rs['descricao'], $Linha);
+                $Linha = str_replace('<%NOVO%>', '<span class="sticker sticker-hot">Novo</span>', $Linha);
                 $retorno .= $Linha;
             }
             
@@ -39,6 +40,7 @@
                 $Linha = str_replace('<%AREAUTIL%>', $rs['area_util'], $Linha);
                 $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
                 $Linha = str_replace('<%DESCRICAO%>', $rs['descricao'], $Linha);
+                $Linha = str_replace('<%NOVO%>', '<span class="sticker sticker-hot">Novo</span>', $Linha);
                 $retorno .= $Linha;
             }
             
