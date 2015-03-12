@@ -89,8 +89,8 @@
                                 </li>
                                 <li class="parent"><a href="#"><i class="fa fa-edit"></i><span>Gerenciar Site</span></a>
                                     <ul class="sub-menu">
-                                        <li><a href="<%URLPADRAO%>gerencia-slider">Gerenciar Slider</a></li>
-                                        <li><a href="<%URLPADRAO%>gerencia-destaques">Gerenciar Destaques</a></li>
+                                        <li><a href="<%URLPADRAO%>gerenciar-slider">Gerenciar Slider</a></li>
+                                        <li><a href="<%URLPADRAO%>gerenciar-destaques">Gerenciar Destaques</a></li>
                                     </ul>
                                 </li>';
                     }
