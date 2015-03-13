@@ -156,7 +156,7 @@
         function MontaCidadeEstado(){
             $Sql = 'SELECT DISTINCT cidade, estado FROM t_imoveis WHERE cidade <> "" AND estado <> ""';
             $result = $this->Execute($Sql);
-            $ce = '<select name="ce[]" data-placeholder="-- Cidade --" multiple="multiple" class="chzn-select" style="width:100%;" tabindex="2">';
+            $ce = '<select id="ce" name="ce[]" data-placeholder="-- Cidade --" multiple="multiple" class="chzn-select" style="width:100%;" tabindex="2">';
             while($rs = $this->ArrayData($result)){
                 $aux = $rs['cidade'] . "/" . $rs['estado'];
                 $ce .= '<option value="'.$aux.'">'.$aux.'</option>';
