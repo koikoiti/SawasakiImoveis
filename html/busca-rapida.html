@@ -1,0 +1,59 @@
+<div class="qbox">
+	<h3><i class="icon-search pull-right"></i>Busca rápida</h3>
+	<form id="busca_rapida">
+    	<div>
+            <label>Categoria</label>
+            <%SELECTCATEGORIA%>
+        </div>
+        <div>
+            <label>Cidade/Estado</label>
+            <%SELECTCIDADEESTADO%>
+        </div>  
+        <!--div>
+            <p>
+                <input type="text" id="beds" readonly class="disabled">
+            </p>
+
+       		<div id="ui-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+            	<div class="ui-slider-range ui-widget-header"></div>
+                <a class="ui-slider-handle ui-state-default ui-corner-all" href="javascript:void(0)"></a>
+                <a class="ui-slider-handle ui-state-default ui-corner-all" href="javascript:void(0)"></a>
+            </div>
+        </div>
+        <div>
+            <p>
+                <input type="text" id="amount" readonly class="disabled" style="margin-top:10px;">
+            </p>
+        
+       		<div id="ui-slider-price" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+            	<div class="ui-slider-range ui-widget-header"></div>
+                <a class="ui-slider-handle ui-state-default ui-corner-all" href="javascript:void(0)"></a>
+                <a class="ui-slider-handle ui-state-default ui-corner-all" href="javascript:void(0)"></a>
+            </div>
+        </div-->
+        <button onclick="enviarBusca()" type="button" class="btn btn-inverse btn-small">Procurar</button>
+    </form>
+</div>
+<script type="text/javascript">
+function enviarBusca(){
+    var ce = [];
+    $('.select[name="ce[]"] :selected').each(function(i, obj) {
+        ce.push("ce[]=" + $(this).val());
+    });
+    
+    console.log(ce);
+    
+    var tipo;
+    tipo = $('select[name="tipo"]').val();
+    if(tipo == 0){
+        tipo = '';
+    }
+    
+    if(tipo == '' && ce.length < 1){
+        alert('Preencha algum parâmetro de busca!');
+    }else{
+        window.location.href = "<%URLPADRAO%>busca/?" + ce.join('&') + "&tipo=" + tipo;
+    }
+    
+}
+</script>

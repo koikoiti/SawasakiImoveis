@@ -117,5 +117,52 @@
 				}
 			}
 		}
+        
+        #Retorna array da consulta SQL
+        function ArrayData($result){
+            return mysql_fetch_array($result, MYSQL_ASSOC);
+        }
+        
+        #Monta busca rapida
+        function MontaBuscaRapida($idcategoria = 0){
+            $Auxilio = $this->CarregaHtml('busca-rapida');
+            
+            $select_categoria = $this->MontaSelectCategoria($idcategoria);
+            $cidade_estado = $this->MontaCidadeEstado();
+            
+            $Auxilio = str_replace('<%SELECTCATEGORIA%>', $select_categoria, $Auxilio);
+            $Auxilio = str_replace('<%SELECTCIDADEESTADO%>', $cidade_estado, $Auxilio);
+            return utf8_encode($Auxilio);
+        }
+        
+        #Monta select categorias
+        function MontaSelectCategoria($idcategoria){
+            $Sql = "SELECT * FROM fixo_categorias_imovel ORDER BY nome ASC";
+            $result = $this->Execute($Sql);
+            $categorias = '<select name="tipo" data-placeholder="-- Tipo do Imóvel --" class="chzn-select" style="width:100%;" tabindex="0">';
+            $categorias .= '<option value="0"> Tipo do Imóvel </option>';
+            while($rs = $this->ArrayData($result)){
+                if($idcategoria == $rs['idcategoria']){
+                    $categorias .= '<option selected value="'.$rs['idcategoria'].'">'.$rs['nome'].'</option>';
+                }else{
+                    $categorias .= '<option value="'.$rs['idcategoria'].'">'.$rs['nome'].'</option>';
+                }
+            }
+            $categorias .= '</select>';
+            return $categorias;
+        }
+        
+        #Monta cidade/estado
+        function MontaCidadeEstado(){
+            $Sql = 'SELECT DISTINCT cidade, estado FROM t_imoveis WHERE cidade <> "" AND estado <> ""';
+            $result = $this->Execute($Sql);
+            $ce = '<select name="ce[]" data-placeholder="-- Cidade --" multiple="multiple" class="chzn-select" style="width:100%;" tabindex="2">';
+            while($rs = $this->ArrayData($result)){
+                $aux = $rs['cidade'] . "/" . $rs['estado'];
+                $ce .= '<option value="'.$aux.'">'.$aux.'</option>';
+            }
+            $ce .= '</select>';
+            return $ce;
+        }
 	}
 ?>
