@@ -4,72 +4,26 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="span12">
-                        <h1>Coronel Otoni Maciel, Curitiba, Paraná 
-                        </h1>
+                        <h1><%ENDERECO%></h1>
                     </div>
                 </div>
                 <div class="row-fluid">
                     <div class="span8">
-
-
                         <div class="gall">
 
                             <div class="flexslider">
                                 <ul class="slides">
-
-
-
-
-
-                                    <li data-thumb="<%URLPADRAO%>html/img/galeria/image2-77x51.jpg">
-                                        <img src="<%URLPADRAO%>html/img/galeria/image2-618x410.jpg" />
-                                    </li>
-                                    <li data-thumb="<%URLPADRAO%>html/img/galeria/image4-77x51.jpg">
-                                        <img src="<%URLPADRAO%>html/img/galeria/image4-618x410.jpg" />
-                                    </li>
-                                    <li data-thumb="">
-                                        <img src="#" />
-                                    </li>
-                                    <li data-thumb="">
-                                        <img src="#" />
-                                    </li>
-                                    <li data-thumb="">
-                                        <img src="#" />
-                                    </li>
-                                    <li data-thumb="">
-                                        <img src="#" />
-                                    </li>
-                                    <li data-thumb="">
-                                        <img src="#" />
-                                    </li>
-                                    <li data-thumb="">
-                                        <img src="#" />
-                                    </li>
-
+                                    <%SLIDER%>
                                 </ul>
                             </div>
                             <!-- slider end -->
-
-
-
-
                         </div>
-
-
-
-
                         <!-- about property -->
                         <div class="row-fluid property-info">
                             <h4 style="margin-top:20px;">Detalhes do Imóvel</h4>
 
                             <p class="description">
-                                Excelente apartamento em um empreendimento magnífico. Contendo 03 dormitórios sendo 01 suíte, ampla sala de estar, sala de jantar, lavabo, bwc social, sacada, cozinha com acesso a sacada e lavanderia separada. Com inúmeras opções de lazer o West Side Comfort Residences é um verdadeiro clube em um dos melhores bairros da capital. ComPortaria com sala de espera, Acesso veículos, Halls de Acesso as torres, Salão de Festas,  Espaço Gourmet,  Fitness/Pilates,  Espaço teen,  Salão de Jogos,  Salão de Festas Infantil,  Brinquedoteca e Estimulação de Bebês,  Espaço mulher,  Cinema,  Piscina aquecida e coberta,  Piscina infantil,  Solarium,  Espaço Zen,  Fitness Externo,  Praça Central,  Quadra,  Play Kids,  Play Baby,  Churrasqueiras, Redário,  Agility dog,  Alongamento,  Pet care (subsolo),  Bicicletario (subsolo) e muito mais!
-                            </p>
-
-                            <p class="description">
-                                West Side Comfort Residences. O nome já diz tudo! O novo alto padrão da Cyrela foi planejado para quem procura conforto e exclusividade. Com unidades a partir de 93m², e até 4 vagas de garagem, o West Side reúne qualidade e bem-estar num só produto: possui ampla área de lazer, disposta num terreno com mais de 7.000m², em uma das regiões mais privilegiadas de Curitiba: o bairro Vila Izabel. Conheça o West Side e descubra o prazer de morar com qualidade de vida!
-Próximo a tudo, a escolas, farmácias, hipermercados, panificadoras, shoppings centers.
-Vale a pena conferir.
+                                <%DESCRICAO%>
                             </p>
 
                             <p class="description">
@@ -81,11 +35,8 @@ E-mail: sawasakiimoveis@gmail.com
  
 Obs. Imóvel Sujeito a Alterações de preços sem aviso prévio.
                             </p>
-                            <p class="description">
-                            </p>
-
                             <p class="asking-price">
-                                <span>Preço</span> R$259,000.00
+                                <span>Valor</span> R$ <%VALOR%>
                             </p>
                         </div>
                         <!-- end about property -->
@@ -97,13 +48,12 @@ Obs. Imóvel Sujeito a Alterações de preços sem aviso prévio.
                         <h4>Caracteristicas do Imóvel</h4>
                         <div class="property-info">
                             <ul class="property-info">
-                                <li><strong>Quartos:</strong> 4+1 </li>
-                                <li><strong>Banheiros:</strong> 3 1/2</li>
-                                <li><strong>Estacionamentos</strong> 3</li>
-                                <li><strong>Categoria:</strong> Apartamento</li>
-                                <li><strong>Local:</strong> Curitiba, Paraná</li>
-                                <li><strong>Área Total:</strong> 162.00 m²</li>
-                                <li><strong>Endereço:</strong> Rua: Coronel Otoni Maciel, Curitiba, Paraná</li>
+                                <li><strong>Quartos:</strong> <%QUARTOS%> </li>
+                                <li><strong>Idade:</strong> <%IDADE%></li>
+                                <li><strong>Garagem:</strong> <%GARAGEM%></li>
+                                <li><strong>Categoria:</strong> <%CATEGORIA%></li>
+                                <li><strong>Área Total:</strong> <%AREATOTAL%></li>
+                                <li><strong>Endereço:</strong> <%ENDERECO%></li>
                             </ul>
                         </div>
 
@@ -112,7 +62,8 @@ Obs. Imóvel Sujeito a Alterações de preços sem aviso prévio.
 
                         <!--single map-->
                         <h4>Mapa</h4>
-                        <div id="single_map" style="width: 100%; height: 250px;" data-address="Coronel Otoni Maciel, Curitiba, Paraná" data-iconrel="<%URLPADRAO%>html/img/pin/marker_2.png" data-zoom="15"></div>
+                        <a target="_blank" href="https://www.google.com/maps/dir//<%ENDERECOMAPS%>/"><img src="http://maps.googleapis.com/maps/api/staticmap?center=<%ENDERECOMAPS%>&zoom=16&scale=1&size=294x250&maptype=roadmap&format=png&visual_refresh=true&markers=icon:.%7Cshadow:false%7C<%ENDERECOMAPS%>" alt="Google Map of <%ENDERECOMAPS%>"></a>
+                        <!--div id="single_map" style="width: 100%; height: 250px;" data-address="Coronel Otoni Maciel, Curitiba, Paraná" data-iconrel="<%URLPADRAO%>html/img/pin/marker_2.png" data-zoom="15"></div-->
 
                         <!--divider-->
                         <div class="divider"></div>
