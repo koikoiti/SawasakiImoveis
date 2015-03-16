@@ -188,5 +188,32 @@
             }
             return $imagens;
         }
+        
+        #Monta ficha imóvel
+        function VisualizaFichaImovel($idimovel){
+            $Sql = "SELECT I.*, C.nome AS categoria, X.* FROM t_imoveis I 
+                    INNER JOIN fixo_categorias_imovel C ON I.idcategoria = C.idcategoria
+                    INNER JOIN t_imagens_imovel X ON X.idimovel = I.idimovel
+                    WHERE I.idimovel = $idimovel";
+            $result = parent::Execute($Sql);
+            $rs = parent::ArrayData($result);
+            
+            require_once('app/mpdf60/mpdf.php');
+            $mpdf = new mPDF('', 'A4');
+            
+            $Auxilio = utf8_encode(parent::CarregaHtml('Imovel/ficha'));
+            
+            #Replaces
+            
+            
+            $Auxilio = str_replace('<%REFERENCIA%>', $rs['referencia'], $Auxilio);
+            #$Auxilio = str_replace('<%IMAGE%>', $Imagem, $Auxilio);
+            
+            $mpdf->WriteHTML($Auxilio);
+            
+            $mpdf->Output();
+            
+            exit;
+        }
 	}
 ?>

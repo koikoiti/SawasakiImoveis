@@ -115,6 +115,9 @@
         
         $banco->RemoveImovel($idimovel);
         $banco->RedirecionaPara('lista-imovel');
+    }elseif($this->PaginaAux[0] == 'visualizar'){
+        $idimovel = $this->PaginaAux[1];
+        $banco->VisualizaFichaImovel($idimovel);
     }
         
     #Trabalha com Post
