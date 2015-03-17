@@ -302,7 +302,9 @@
                 <button style="box-shadow: none;background-color: #19b698;border-color: transparent;border-color: #CCCCCC;border-radius: 0;-webkit-border-radius: 0;outline: none;margin-bottom: 5px;margin-left: 3px;font-size: 13px;padding: 7px 11px;" type="submit" class="btn btn-success btn-flat">
                     <i class="fa fa-check"></i> Salvar
                 </button>
+                <%BOTAOVOLTAR%>
                 <%BOTAOEXCLUIR%>
+                <%BOTAOATIVARINATIVAR%>
            </div>
        </div>
     </div>
@@ -324,6 +326,18 @@ $(function() {
 });
 </script>
 <script type="text/javascript">
+function voltar(){
+    location.href = "<%URLPADRAO%>lista-imovel";
+}
+
+function ativar(idimovel){
+    location.href = "<%URLPADRAO%>imovel/ativar/" + idimovel;
+}
+
+function inativar(idimovel){
+    location.href = "<%URLPADRAO%>imovel/inativar/" + idimovel;
+}
+
 function buscaCep(cep){
     if(cep.length == 9){
 		$.post("<%URLPADRAO%>lib/ajax/buscacep.php",
