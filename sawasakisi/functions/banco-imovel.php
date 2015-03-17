@@ -227,6 +227,13 @@
             $Auxilio = str_replace('<%CIDADEESTADO%>', utf8_encode($rs['cidade'] . "/" . $rs['estado']), $Auxilio);
             $Auxilio = str_replace('<%TELEFONE%>', $rs['telefone'], $Auxilio);
             
+            #Segunda table
+            $Auxilio = str_replace('<%CATEGORIA%>', utf8_encode($rs['categoria']), $Auxilio);
+            
+            #Terceira table
+            $Auxilio = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Auxilio);
+            $Auxilio = str_replace('<%DESCRICAO%>', utf8_encode($rs['descricao']), $Auxilio);
+            
             #Imagem
             $Imagem = "<img style='max-height: 200px;' src='".UrlPdf.$rs['caminho']."'/>";
             $Auxilio = str_replace('<%IMG%>', $Imagem, $Auxilio);
