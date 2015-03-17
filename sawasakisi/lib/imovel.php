@@ -19,6 +19,7 @@
         $titulo = "Editar Imóvel";
         
         $referencia = $rsImovel['referencia'];
+        $angariador = $rsImovel['angariador'];
         $idcategoria = $rsImovel['idcategoria'];
         $cep = $rsImovel['cep'];
         $cidade = $rsImovel['cidade'];
@@ -135,6 +136,7 @@
     #Trabalha com Post
 	if(isset($_POST["acao"]) && $_POST["acao"] != '' ){
         $referencia = strip_tags(trim(addslashes($_POST["referencia"])));
+        $angariador = utf8_decode(strip_tags(trim(addslashes($_POST["angariador"]))));
         $idcategoria = $_POST['categoria'];
         $cep = strip_tags(trim(addslashes($_POST["cep"])));
         $cidade = utf8_decode(strip_tags(trim(addslashes($_POST["cidade"]))));
@@ -237,7 +239,7 @@
         
         if($idimovel){
             #Update
-            $banco->AtualizaImovel($idimovel, $idcategoria, $referencia, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
+            $banco->AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
             $banco->RedirecionaPara('lista-imovel');
         }else{
             #Busca Imovel no banco e verifica se ele existe
@@ -247,7 +249,7 @@
                 $msg = "Número de referência já cadastrado!";
             }else{
                 #Insert
-                $banco->InsereImovel($referencia, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
+                $banco->InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
                 $banco->RedirecionaPara('lista-imovel');
             }
         }
@@ -261,6 +263,7 @@
     $Conteudo = str_replace("<%TITULO%>", $titulo, $Conteudo);
     $Conteudo = str_replace("<%SELECTCATEGORIAS%>", $select_categorias, $Conteudo);
     $Conteudo = str_replace("<%REFERENCIA%>", $referencia, $Conteudo);
+    $Conteudo = str_replace("<%ANGARIADOR%>", $angariador, $Conteudo);
     $Conteudo = str_replace("<%CEP%>", $cep, $Conteudo);
     $Conteudo = str_replace("<%ENDERECO%>", $endereco, $Conteudo);
     $Conteudo = str_replace("<%NUMERO%>", $numero, $Conteudo);
