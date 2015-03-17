@@ -212,8 +212,20 @@
             $logo = "<img style='height: 80px;' src='".UrlPdf."html/img/logo.png"."' />";
             $Auxilio = str_replace('<%DATA%>', $data, $Auxilio);
             $Auxilio = str_replace('<%LOGO%>', $logo, $Auxilio);
+            
             #Primeira table
             $Auxilio = str_replace('<%REFERENCIA%>', $rs['referencia'], $Auxilio);
+            $Auxilio = str_replace('<%ANGARIADOR%>', utf8_encode($rs['angariador']), $Auxilio);
+            $Auxilio = str_replace('<%DATACADASTRO%>', date('d/m/Y - H:i', strtotime($rs['data_cadastro'])), $Auxilio);
+            $Auxilio = str_replace('<%ENDERECO%>', utf8_encode($rs['endereco']), $Auxilio);
+            $Auxilio = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Auxilio);
+            $Auxilio = str_replace('<%ENTRERUAS%>', utf8_encode($rs['entreruas']), $Auxilio);
+            $Auxilio = str_replace('<%PONTOREFERENCIA%>', utf8_encode($rs['ponto_referencia']), $Auxilio);
+            $Auxilio = str_replace('<%CEP%>', $rs['cep'], $Auxilio);
+            $Auxilio = str_replace('<%NOMECOND%>', utf8_encode($rs['nomecond']), $Auxilio);
+            $Auxilio = str_replace('<%PROPRIETARIO%>', utf8_encode($rs['proprietario']), $Auxilio);
+            $Auxilio = str_replace('<%CIDADEESTADO%>', utf8_encode($rs['cidade'] . "/" . $rs['estado']), $Auxilio);
+            $Auxilio = str_replace('<%TELEFONE%>', $rs['telefone'], $Auxilio);
             
             #Imagem
             $Imagem = "<img style='max-height: 200px;' src='".UrlPdf.$rs['caminho']."'/>";
