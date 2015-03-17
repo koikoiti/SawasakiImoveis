@@ -1,12 +1,28 @@
 <?php
 	class bancoimovel extends banco{
 		#Lista os imoveis
-        function ListaImoveis(){
+        function ListaImoveis($referencia, $idcategoria, $endereco, $bairro, $cidade){
             $Auxilio = parent::CarregaHtml("Imovel/itens/lista-imovel-itens");
             
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I
-                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria
+                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
+                    WHERE 1
                     ";
+            if($referencia != ''){
+                $Sql .= " AND I.referencia LIKE '%".utf8_decode($referencia)."%'";
+            }
+            if($idcategoria != ''){
+                $Sql .= " AND I.idcategoria = '$idcategoria'";
+            }
+            if($endereco != ''){
+                $Sql .= " AND I.endereco LIKE '%".utf8_decode($endereco)."%'";
+            }
+            if($bairro != ''){
+                $Sql .= " AND I.bairro LIKE '%".utf8_decode($bairro)."%'";
+            }
+            if($cidade != ''){
+                $Sql .= " AND I.cidade LIKE '%".utf8_decode($cidade)."%'";
+            }
             $result = parent::Execute($Sql);
             $num_rows = parent::Linha($result);
             if($num_rows){
@@ -152,6 +168,27 @@
         function SelectCategorias($idcategoria){
 			$Sql = "SELECT * FROM fixo_categorias_imovel ORDER BY nome";
 			$select_categorias = "<select required class='form-control' name='categoria'>";
+			$select_categorias .= "<option selected value=''>Selecione uma Categoria!</option>";
+			$result = parent::Execute($Sql);
+			if($result){
+				while($rs = parent::ArrayData($result)){
+					if($rs['idcategoria'] == $idcategoria){
+						$select_categorias .= "<option selected value='".$rs['idcategoria']."'>".$rs['nome']."</option>";
+					}else{
+						$select_categorias .= "<option value='".$rs['idcategoria']."'>".$rs['nome']."</option>";
+					}
+				}
+				$select_categorias .= "</select>";
+				return $select_categorias;
+			}else{
+				return false;
+			}
+        }
+        
+        #Monta select busca Categorias
+        function SelectBuscaCategorias($idcategoria){
+			$Sql = "SELECT * FROM fixo_categorias_imovel ORDER BY nome";
+			$select_categorias = "<select id='categoria' style='float: left; width: 15%;' class='form-control' name='categoria'>";
 			$select_categorias .= "<option selected value=''>Selecione uma Categoria!</option>";
 			$result = parent::Execute($Sql);
 			if($result){
