@@ -8,13 +8,18 @@
     if($_GET){
         if($_GET['pesquisa']){
             #Busca normal
+            $pesquisa = utf8_decode($_GET['pesquisa']);
+            $busca_titulo = '<h1>Resultados da busca para "<span class="search-terms">'.$pesquisa.'</span>"</h1>';
             
+            $busca = $banco->MontaBuscaNormal($pesquisa);
         }else{
             #Busca rápida
             $idcategoria = $_GET['tipo'];
             $ce = $_GET['ce'];
             
             $busca = $banco->MontaBuscaRapidaItens($idcategoria, $ce);
+            
+            $busca_titulo = '<h1>Resultados da busca rápida:</h1>';
         }
     }
     
@@ -26,4 +31,5 @@
 	$Conteudo = utf8_encode($banco->CarregaHtml('busca'));
     $Conteudo = str_replace('<%BUSCARAPIDA%>', $busca_rapida, $Conteudo);
     $Conteudo = str_replace('<%BUSCAITENS%>', $busca, $Conteudo);
+    $Conteudo = str_replace('<%TITULOBUSCA%>', utf8_encode($busca_titulo), $Conteudo);
 ?>

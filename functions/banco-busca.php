@@ -37,5 +37,31 @@
             
             return $Busca;
         }
+        
+        #Monta busca normal
+        function MontaBuscaNormal($pesquisa){
+            $Auxilio = parent::CarregaHtml('itens/busca-itens');
+            $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
+                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
+                    WHERE I.referencia LIKE '%$pesquisa%' 
+                    OR I.bairro LIKE '%$pesquisa%' 
+                    OR I.endereco LIKE '%$pesquisa%'
+                    OR I.cidade LIKE '%$pesquisa%'";
+            $result = parent::Execute($Sql);
+            while($rs = parent::ArrayData($result)){
+                $Linha = $Auxilio;
+                $SqlCaminho = "SELECT * FROM t_imagens_imovel WHERE idimovel = " . $rs['idimovel'] . " ORDER BY caminho ASC";
+                $resultCaminho = parent::Execute($SqlCaminho);
+                $rsCaminho = parent::ArrayData($resultCaminho);
+                $Linha = str_replace('<%CAMINHO%>', $rsCaminho['caminho'], $Linha);
+                $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
+                $Linha = str_replace('<%DESCRICAO%>', utf8_encode($rs['descricao']), $Linha);
+                $tipo_endereco = $rs['categoria'] . " - " . $rs['cidade'] . "/" . $rs['estado'];
+                $Linha = str_replace('<%TIPOENDERECO%>', utf8_encode($tipo_endereco), $Linha);
+                $Busca .= $Linha;
+            }
+            
+            return $Busca;
+        }
 	}
 ?>

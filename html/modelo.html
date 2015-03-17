@@ -114,7 +114,7 @@
 							<div class="navbar-form pull-right" style="overflow:auto;">
 								<div class="input-append">
 									<input style="width: 300px;;" class="span2" id="appendedInputButton" type="text" x-webkit-speech="x-webkit-speech" placeholder="Procure aqui... (Bairro, Rua, Nº Referência)">
-									<button class="btn btn-peach" type="button"> 
+									<button onclick="pesquisar()" class="btn btn-peach" type="button"> 
 										Pesquisar
 									</button>
 								</div>
@@ -235,9 +235,16 @@
 });
 </script>
 
-
-
     </form>
+<script type="text/javascript">
+function pesquisar(){
+    var busca = $("#appendedInputButton").val().trim();
+    
+    if(busca != ''){
+        location.href = '<%URLPADRAO%>busca/?pesquisa='+busca;
+    }
+}
+</script>
 
 </body>
 </html>
