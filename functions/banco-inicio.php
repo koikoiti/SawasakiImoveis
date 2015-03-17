@@ -1,48 +1,45 @@
 <?php
 	class bancoinicio extends banco{
-		
-        #Destaques1
-        function MontaDestaques1(){
-            $Auxilio = parent::CarregaHtml('itens/inicio-destaque-itens');
-            $Sql = "SELECT I.*, M.* FROM t_imoveis I 
-                    INNER JOIN t_imagens_imovel M ON I.idimovel = M.idimovel 
-                    ORDER BY I.data_cadastro DESC LIMIT 0, 3";
-            $result = parent::Execute($Sql);
-            while($rs = mysql_fetch_array($result, MYSQL_ASSOC)){
-                $Linha = $Auxilio;
-                $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
-                $Linha = str_replace('<%CAMINHO%>', $rs['caminho'], $Linha);
-                $Linha = str_replace('<%REFERENCIA%>', $rs['referencia'], $Linha);
-                $Linha = str_replace('<%DORMITORIOS%>', $rs['dormitorios'], $Linha);
-                $Linha = str_replace('<%AREAUTIL%>', $rs['area_util'], $Linha);
-                $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
-                $Linha = str_replace('<%DESCRICAO%>', $rs['descricao'], $Linha);
-                $Linha = str_replace('<%NOVO%>', '<span class="sticker sticker-hot">Novo</span>', $Linha);
-                $retorno .= $Linha;
-            }
-            
-            return utf8_encode($retorno);
-        }
         
-        #Destaques2
-        function MontaDestaques2(){
+        #Destaques
+        function MontaDestaques(){
             $Auxilio = parent::CarregaHtml('itens/inicio-destaque-itens');
-            $Sql = "SELECT I.*, M.* FROM t_imoveis I 
-                    INNER JOIN t_imagens_imovel M ON I.idimovel = M.idimovel 
-                    ORDER BY I.data_cadastro DESC LIMIT 3, 3";
+            $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
+                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
+                    WHERE ativo = 1 ORDER BY RAND() LIMIT 6";
             $result = parent::Execute($Sql);
+            $cont = 0;
             while($rs = mysql_fetch_array($result, MYSQL_ASSOC)){
                 $Linha = $Auxilio;
+                $SqlFoto = "SELECT * FROM t_imagens_imovel WHERE idimovel = " . $rs['idimovel'] . " ORDER BY caminho ASC";
+                $resultFoto = parent::Execute($SqlFoto);
+                $rsFoto = parent::ArrayData($resultFoto);
                 $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
-                $Linha = str_replace('<%CAMINHO%>', $rs['caminho'], $Linha);
+                $Linha = str_replace('<%CAMINHO%>', $rsFoto['caminho'], $Linha);
                 $Linha = str_replace('<%REFERENCIA%>', $rs['referencia'], $Linha);
-                $Linha = str_replace('<%DORMITORIOS%>', $rs['dormitorios'], $Linha);
-                $Linha = str_replace('<%AREAUTIL%>', $rs['area_util'], $Linha);
+                $Linha = str_replace('<%CATEGORIA%>', utf8_encode($rs['categoria']), $Linha);
+                $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
+                $Linha = str_replace('<%CIDADEESTADO%>', utf8_encode($rs['cidade'] . "/" . $rs['estado']), $Linha);
                 $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
-                $Linha = str_replace('<%DESCRICAO%>', $rs['descricao'], $Linha);
-                $Linha = str_replace('<%NOVO%>', '<span class="sticker sticker-hot">Novo</span>', $Linha);
+                #Colocar 'novo' para imóveis cadastrados a 15 dias
+                if(strtotime($rs['data_cadastro']) < strtotime('-15 day') ){
+                    $label_novo = '';
+                }else{
+                    $label_novo = '<span class="sticker sticker-hot">Novo</span>';
+                }
+                $Linha = str_replace('<%NOVO%>', $label_novo, $Linha);
+                if($cont == 0){
+                    $retorno .= '<div class="row-fluid hotproperties">';
+                }
+                if($cont == 3){
+                    $retorno .= '<div class="clearfix"></div>
+                            	</div>
+                                <div class="row-fluid hotproperties">';
+                }
                 $retorno .= $Linha;
+                $cont++;
             }
+            $retorno .= '<div class="clearfix"></div></div>';
             
             return utf8_encode($retorno);
         }
