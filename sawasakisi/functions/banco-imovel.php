@@ -199,21 +199,36 @@
             $rs = parent::ArrayData($result);
             
             require_once('app/mpdf60/mpdf.php');
-            $mpdf = new mPDF('', 'A4');
-            
+            $mpdf = new mPDF('utf-8', 'A4');
+                        
             $Auxilio = utf8_encode(parent::CarregaHtml('Imovel/ficha'));
             
+            $Imagem = "<img  src='http://127.0.0.1/sawasakiimoveis/".$rs['caminho']."'/>";
+            
             #Replaces
-            
-            
             $Auxilio = str_replace('<%REFERENCIA%>', $rs['referencia'], $Auxilio);
-            #$Auxilio = str_replace('<%IMAGE%>', $Imagem, $Auxilio);
+            $Auxilio = str_replace('<%IMG%>', $Imagem, $Auxilio);
             
-            $mpdf->WriteHTML($Auxilio);
+            $mpdf->WriteHTML($Auxilio, 2);
             
             $mpdf->Output();
             
             exit;
+            
+            /*
+            require_once("app/fpdf/fpdf.php");
+            define('FPDF_FONTPATH', 'app/fpdf/font/');
+            
+            $pdf = new FPDF("P");
+			$pdf->Open();
+			$pdf->AddPage();
+			
+			$pdf->SetXY(15.5, 20);
+			
+            #$pdf->Image("http://www.sawasakiimoveis.com/html/img/demo/home-page/slide1.jpg", 10, 10, -300);
+            $pdf->Image("http://127.0.0.1/SawasakiImoveis/".str_replace(' ', '%20',$rs['caminho']), 10, 10, -300);
+            $pdf->Output("awdawd" . ".pdf", "I");
+            */
         }
 	}
 ?>

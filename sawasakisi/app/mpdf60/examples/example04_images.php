@@ -1,6 +1,8 @@
 <?php
 
-
+ini_set('display_startup_errors',1);
+ini_set('display_errors',1);
+error_reporting(-1);
 
 $html = '
 <style>
@@ -194,6 +196,7 @@ include("../mpdf.php");
 $mpdf=new mPDF('c'); 
 
 $mpdf->WriteHTML($html);
+$mpdf->showImageErrors = true;
 
 $mpdf->Output();
 exit;
