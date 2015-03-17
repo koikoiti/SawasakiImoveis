@@ -6,6 +6,7 @@
         #WEB
         define('UrlPadrao' , "http://www.sawasakiimoveis.com/sawasakisi/");
         define('UrlFoto', 'http://www.sawasakiimoveis.com/');
+        define('UrlPdf', 'http://www.sawasakiimoveis.com/');
     	
     	#Definições do Banco de Dados
     	define('DB_Host' , "localhost");
@@ -16,7 +17,8 @@
         #LOCAL
         define('UrlPadrao' , "http://localhost/sawasakiimoveis/sawasakisi/");
         define('UrlFoto', 'http://localhost/sawasakiimoveis/');
-    	
+    	define('UrlPdf', 'http://127.0.0.1/sawasakiimoveis/');
+        
     	#Definições do Banco de Dados
     	define('DB_Host' , "localhost");
     	define('DB_Database' , "sawasakisi");

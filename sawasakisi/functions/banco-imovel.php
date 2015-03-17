@@ -191,44 +191,38 @@
         
         #Monta ficha imóvel
         function VisualizaFichaImovel($idimovel){
+            #Busca dados imóvel
             $Sql = "SELECT I.*, C.nome AS categoria, X.* FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON I.idcategoria = C.idcategoria
                     INNER JOIN t_imagens_imovel X ON X.idimovel = I.idimovel
-                    WHERE I.idimovel = $idimovel";
+                    WHERE I.idimovel = $idimovel 
+                    ORDER BY caminho ASC";
             $result = parent::Execute($Sql);
             $rs = parent::ArrayData($result);
             
+            #Inicia mPDF
             require_once('app/mpdf60/mpdf.php');
-            $mpdf = new mPDF('utf-8', 'A4');
+            $mpdf = new mPDF('utf-8', 'A4', '', '', 8, 8, 0, 9);
                         
+            #HTML Auxilio
             $Auxilio = utf8_encode(parent::CarregaHtml('Imovel/ficha'));
             
-            $Imagem = "<img  src='http://127.0.0.1/sawasakiimoveis/".$rs['caminho']."'/>";
-            
             #Replaces
+            $data = 'Curitiba, ' . date('d/m/Y');
+            $logo = "<img style='height: 80px;' src='".UrlPdf."html/img/logo.png"."' />";
+            $Auxilio = str_replace('<%DATA%>', $data, $Auxilio);
+            $Auxilio = str_replace('<%LOGO%>', $logo, $Auxilio);
+            #Primeira table
             $Auxilio = str_replace('<%REFERENCIA%>', $rs['referencia'], $Auxilio);
+            
+            #Imagem
+            $Imagem = "<img style='max-height: 200px;' src='".UrlPdf.$rs['caminho']."'/>";
             $Auxilio = str_replace('<%IMG%>', $Imagem, $Auxilio);
             
-            $mpdf->WriteHTML($Auxilio, 2);
-            
+            $mpdf->WriteHTML($Auxilio);
+            $mpdf->SetFooter(' ');
             $mpdf->Output();
-            
             exit;
-            
-            /*
-            require_once("app/fpdf/fpdf.php");
-            define('FPDF_FONTPATH', 'app/fpdf/font/');
-            
-            $pdf = new FPDF("P");
-			$pdf->Open();
-			$pdf->AddPage();
-			
-			$pdf->SetXY(15.5, 20);
-			
-            #$pdf->Image("http://www.sawasakiimoveis.com/html/img/demo/home-page/slide1.jpg", 10, 10, -300);
-            $pdf->Image("http://127.0.0.1/SawasakiImoveis/".str_replace(' ', '%20',$rs['caminho']), 10, 10, -300);
-            $pdf->Output("awdawd" . ".pdf", "I");
-            */
         }
 	}
 ?>
