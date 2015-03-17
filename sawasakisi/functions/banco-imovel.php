@@ -221,7 +221,7 @@
             $Auxilio = str_replace('<%ENTRERUAS%>', utf8_encode($rs['entreruas']), $Auxilio);
             $Auxilio = str_replace('<%PONTOREFERENCIA%>', utf8_encode($rs['ponto_referencia']), $Auxilio);
             $Auxilio = str_replace('<%CEP%>', $rs['cep'], $Auxilio);
-            $Auxilio = str_replace('<%NOMECOND%>', utf8_encode($rs['nomecond']), $Auxilio);
+            $Auxilio = str_replace('<%COMPLEMENTO%>', utf8_encode($rs['complemento']), $Auxilio);
             $Auxilio = str_replace('<%PROPRIETARIO%>', utf8_encode($rs['proprietario']), $Auxilio);
             $Auxilio = str_replace('<%CIDADEESTADO%>', utf8_encode($rs['cidade'] . "/" . $rs['estado']), $Auxilio);
             $Auxilio = str_replace('<%TELEFONE%>', $rs['telefone'], $Auxilio);

@@ -9,8 +9,8 @@
 	if(isset($_POST["acao"]) && $_POST["acao"] != '' ){
         #recupera os dados passados por POST
 		$login = strip_tags(trim(addslashes($_POST["login"])));
-		$senha = md5(strip_tags(trim(addslashes($_POST["senha"]))));
-		
+        $senha = sha1($_POST["senha"]);
+        
 		#Busca Usuario no banco e verifica se ele existe
 		$result = $banco->BuscaUsuarioPorLogin($login);
 		$num_rows = $banco->Linha($result);
