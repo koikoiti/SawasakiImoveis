@@ -146,8 +146,8 @@
         $bairro = utf8_decode(strip_tags(trim(addslashes($_POST["bairro"]))));
         $complemento = utf8_decode(strip_tags(trim(addslashes($_POST["complemento"]))));
         $ponto_referencia = utf8_decode(strip_tags(trim(addslashes($_POST["ponto_referencia"]))));
-        $area_util = strip_tags(trim(addslashes($_POST["area_util"])));
-        $area_total = strip_tags(trim(addslashes($_POST["area_total"])));
+        $area_util = utf8_decode(strip_tags(trim(addslashes($_POST["area_util"]))));
+        $area_total = utf8_decode(strip_tags(trim(addslashes($_POST["area_total"]))));
         $proprietario = utf8_decode(strip_tags(trim(addslashes($_POST["proprietario"]))));
         $telefone = strip_tags(trim(addslashes($_POST["telefone"])));
         $dormitorios = strip_tags(trim(addslashes($_POST["dormitorios"])));
