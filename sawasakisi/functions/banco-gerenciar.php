@@ -40,5 +40,26 @@
             $Sql = "INSERT INTO t_slider (texto1, texto2, link, caminho) VALUES ('$texto1', '$texto2', '$link', '".$caminho.$caminhoMover."')";
             parent::Execute($Sql);
         }
+        
+        #Monta destaques
+        function MontaDestaques(){
+            $Auxilio = utf8_encode(parent::CarregaHtml('Destaques/destaques-itens'));
+            $Sql = "SELECT * FROM t_destaques";
+            $result = parent::Execute($Sql);
+            while($rsD = parent::ArrayData($result)){
+                $Linha = $Auxilio;
+                $SqlImovel = "SELECT I.*, M.caminho FROM t_imoveis I 
+                            INNER JOIN t_imagens_imovel M ON I.idimovel = M.idimovel
+                            WHERE I.idimovel = " . $rsD['idimovel'] . " 
+                            ORDER BY caminho ASC";
+                $resultImovel = parent::Execute($SqlImovel);
+                $rs = parent::ArrayData($resultImovel);
+                $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
+                $Linha = str_replace('<%CAMINHO%>', UrlFoto.$rs['caminho'], $Linha);
+                $Linha = str_replace('<%REFERENCIA%>', $rs['referencia'], $Linha);
+                $Destaques .= $Linha;
+            }
+            return $Destaques;
+        }
 	}
 ?>

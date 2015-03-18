@@ -34,6 +34,15 @@
                     $Linha = str_replace("<%BAIRRO%>", $rs['bairro'], $Linha);
                     $Linha = str_replace("<%CATEGORIA%>", $rs['categoria'], $Linha);
                     $Linha = str_replace("<%VALOR%>", number_format($rs['valor'], 2, ',', '.'), $Linha);
+                    #Verifica destaque
+                    $SqlDestaque = "SELECT * FROM t_destaques WHERE idimovel = " . $rs['idimovel'];
+                    $resultDestaque = parent::Execute($SqlDestaque);
+                    $linhaDestaque = parent::Linha($resultDestaque);
+                    if($linhaDestaque){
+                        $Linha = str_replace("<%DESTAQUE%>", '<i title="Este imóvel está em destaque!" class="fa fa-star"></i>', $Linha);
+                    }else{
+                        $Linha = str_replace("<%DESTAQUE%>", '', $Linha);
+                    }
                     $Imoveis .= $Linha;
                 }
             }else{
