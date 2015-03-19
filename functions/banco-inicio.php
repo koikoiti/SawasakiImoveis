@@ -4,13 +4,20 @@
         #Destaques
         function MontaDestaques(){
             $Auxilio = parent::CarregaHtml('itens/inicio-destaque-itens');
-            $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
-                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
-                    WHERE ativo = 1 ORDER BY RAND() LIMIT 6";
-            $result = parent::Execute($Sql);
+            $SqlDestaques = "SELECT * FROM t_destaques ORDER BY RAND() LIMIT 6";
+            $resultDestaques = parent::Execute($SqlDestaques);
             $cont = 0;
-            while($rs = mysql_fetch_array($result, MYSQL_ASSOC)){
+            while($rsDestaques = mysql_fetch_array($resultDestaques, MYSQL_ASSOC)){
                 $Linha = $Auxilio;
+                
+                #Dados imovel
+                $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
+                        INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
+                        WHERE I.idimovel = " . $rsDestaques['idimovel'];
+                $result = parent::Execute($Sql);
+                $rs = parent::ArrayData($result);
+                 
+                #Foto
                 $SqlFoto = "SELECT * FROM t_imagens_imovel WHERE idimovel = " . $rs['idimovel'] . " ORDER BY caminho ASC";
                 $resultFoto = parent::Execute($SqlFoto);
                 $rsFoto = parent::ArrayData($resultFoto);
@@ -21,6 +28,7 @@
                 $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
                 $Linha = str_replace('<%CIDADEESTADO%>', utf8_encode($rs['cidade'] . "/" . $rs['estado']), $Linha);
                 $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
+                
                 #Colocar 'novo' para imóveis cadastrados a 15 dias
                 if(strtotime($rs['data_cadastro']) < strtotime('-15 day') ){
                     $label_novo = '';
@@ -28,6 +36,8 @@
                     $label_novo = '<span class="sticker sticker-hot">Novo</span>';
                 }
                 $Linha = str_replace('<%NOVO%>', $label_novo, $Linha);
+                
+                #Verifica linha
                 if($cont == 0){
                     $retorno .= '<div class="row-fluid hotproperties">';
                 }
