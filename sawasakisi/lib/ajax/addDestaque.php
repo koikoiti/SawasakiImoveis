@@ -17,14 +17,18 @@
     if($linhasVerifica){
         echo 444;
     }else{
-        $SqlID = "SELECT idimovel FROM t_imoveis WHERE referencia = '$referencia'";
+        $SqlID = "SELECT * FROM t_imoveis WHERE referencia = '$referencia'";
         $resultID = $banco->Execute($SqlID);
         $linhaID = $banco->Linha($resultID);
         if($linhaID){
             $rsID = $banco->ArrayData($resultID);
-            $SqlInsert = "INSERT INTO t_destaques (idimovel) VALUES (".$rsID['idimovel'].")";
-            $banco->Execute($SqlInsert);
-            echo 1;
+            if($rsID['ativo'] == 1){
+                $SqlInsert = "INSERT INTO t_destaques (idimovel) VALUES (".$rsID['idimovel'].")";
+                $banco->Execute($SqlInsert);
+                echo 1;
+            }else{
+                echo 555;
+            }
         }else{
             echo 666;
         }

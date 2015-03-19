@@ -427,6 +427,13 @@
         function Inativar($idimovel){
             $Sql = "UPDATE t_imoveis SET ativo = 0 WHERE idimovel = $idimovel";
             parent::Execute($Sql);
+            $SqlVerifica = "SELECT * FROM t_destaques WHERE idimovel = $idimovel";
+            $resultVerifica = parent::Execute($SqlVerifica);
+            $linhaVerifica = parent::Linha($resultVerifica);
+            if($linhaVerifica){
+                $SqlTiraDestaque = "DELETE FROM t_destaques WHERE idimovel = $idimovel";
+                parent::Execute($SqlTiraDestaque);
+            }
             parent::RedirecionaPara('imovel/editar/'.$idimovel);
         }
 	}

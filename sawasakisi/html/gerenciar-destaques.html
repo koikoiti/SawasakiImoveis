@@ -17,7 +17,9 @@ function add(){
 				        alert('Imóvel já em destaque!');
 				    }else if(retorno == 666){
 				        alert('Referência não encontrada!');
-				    }else{
+				    }else if(retorno == 555){
+				        alert('Você não pode adicionar um imóvel INATIVO para a página de destaques!');
+                    }else{
 				        location.reload();
 				    }
     			}
