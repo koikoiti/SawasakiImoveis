@@ -27,13 +27,12 @@
                             </p>
 
                             <p class="description">
-                                Ligue e agende uma visita sem compromisso com um de nossos corretores. SAWASAKI IMÓVEIS.
-Para maiores informações: 3296-9942 / 3296-4454 / 9683-1984 ou após as 19:00 horas e feriados 9207-6881.
-HORÁRIO DE ATENDIMENTO DE SEGUNDA A SABÁDO DAS 08:00 ás 19:00 horas. DOMINGO das 09:00 ás 17:00 horas.
-Site: www.sawasakiimoveis.com.br
-E-mail: sawasakiimoveis@gmail.com
- 
-Obs. Imóvel Sujeito a Alterações de preços sem aviso prévio.
+                                Ligue e agende uma visita sem compromisso com um de nossos corretores.
+                                <br />
+                                Para maiores informações: (41) 3296-9942 / (41) 3296-4454 / (41) 9683-1984. Após 19:00 horas e feriados: (41) 9207-6881.
+                                Horário de Atendimento: Segunda à Sábado das 08:00 às 19:00 horas. Domingo das 09:00 às 17:00 horas.
+                                <br /><br />
+                                Obs.: Imóvel sujeito a alterações de preços sem aviso prévio.
                             </p>
                             <p class="asking-price">
                                 <span>Valor</span> R$ <%VALOR%>
@@ -68,7 +67,7 @@ Obs. Imóvel Sujeito a Alterações de preços sem aviso prévio.
                         <!--divider-->
                         <div class="divider"></div>
 
-                        <h4 class="">Contato</h4>
+                        <h4 class="">Registre seu interesse!</h4>
                         <!-- contact agent form -->
                         <div id="message"></div>
                         <div class="form-horizontal contact-agent-form" method="post" action="http://bootstraphunter.com/peachrealestate/php/contact_agent.php" name="contactform" id="contactform">
@@ -76,23 +75,23 @@ Obs. Imóvel Sujeito a Alterações de preços sem aviso prévio.
                             <input type="text" name="prp_name" id="prp_name" value="Nome do Imóvel">
                             <div class="field">
                                 <div class="label_field">
-                                    <label for="name" accesskey="N">Nome*</label>
+                                    <label for="name" accesskey="N">*Nome</label>
                                 </div>
-                                <input type="text" name="name" id="name" placeholder="Nome" class="span8">
+                                <input required type="text" name="nome" id="name" placeholder="Nome" class="span8">
                             </div>
 
                             <div class="field">
                                 <div class="label_field">
-                                    <label for="email" accesskey="E">Email*</label>
+                                    <label for="email" accesskey="E">*Email</label>
                                 </div>
-                                <input type="email" id="email" name="email" placeholder="seu_email@endereço.com" class="span8">
+                                <input required type="email" id="email" name="email" placeholder="seu_email@endereço.com" class="span8">
                             </div>
 
                             <div class="field">
                                 <div class="label_field">
-                                    <label for="phone" accesskey="P">Fone*</label>
+                                    <label for="phone" accesskey="P">*Telefone</label>
                                 </div>
-                                <input type="tel" name="phone" id="phone" placeholder="(41) 0000-0000" class="span8">
+                                <input required type="tel" name="telefone" onblur="verifica()" id="phone" placeholder="(XX) 0000-0000" class="span8 telefone">
                             </div>
 
                             <div class="field">
@@ -121,8 +120,17 @@ Obs. Imóvel Sujeito a Alterações de preços sem aviso prévio.
 
         </div>
         <!-- end body-text -->
-
-
-
         <!-- /container -->
 </section>
+<script type="text/javascript">
+$(function() {
+    $('.telefone').mask('(00) 0000-00009');
+});
+
+function verifica(){
+    var phone = $('#phone').val();
+    if(phone.length < 14){
+        $('#phone').val('');
+    }
+}
+</script>

@@ -58,7 +58,7 @@
                                 <div class="field span6">
                                     <div class="span12">
                                         <label for="phone" accesskey="T">Telefone de contato</label>
-                                        <input type="tel" class="span12" name="telefone" value="" id="phone" placeholder="">
+                                        <input type="tel" class="span12 telefone" name="telefone" value="" id="phone" placeholder="">
                                     </div>
 
                                 </div>
@@ -85,3 +85,8 @@
         </div>
         <!-- /container -->
 </section>
+<script type="text/javascript">
+$(function() {
+    $('.telefone').mask('(00) 0000-00009');
+});
+</script>
