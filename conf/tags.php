@@ -7,6 +7,10 @@
     define('pwGmail', '');
     define('emailRecebimento', '');
     
+    #Paginacao
+    define('Limite', 16);
+    define('QtdPag', 5);
+    
     #Verifica SERVER (web/local)
     if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
         #WEB
@@ -26,6 +30,5 @@
     	define('DB_Database' , "sawasakisi");
     	define('DB_User' , "root");
     	define('DB_Pass' , '');
-        
     }
 ?>
