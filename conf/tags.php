@@ -5,6 +5,7 @@
     #PHPMailer
     define('loginGmail', '');
     define('pwGmail', '');
+    define('emailRecebimento', '');
     
     #Verifica SERVER (web/local)
     if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {

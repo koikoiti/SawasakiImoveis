@@ -12,12 +12,15 @@
             
             // Dados de quem está enviando o email
             $mail->From = 'admin@sawasakiimoveis.com.br';
-            $mail->FromName = 'Sawasaki Imveis';
+            $mail->FromName = 'Sawasaki Imóveis';
             
             // Setando o conteudo
             $mail->isHTML(true);
-            $mail->Subject = 'Teste php mailer';
-            $mail->Body     = "teste";
+            $mail->Subject = 'Contato através do site da Sawasaki Imóveis!';
+            
+            #Corpo do e-mail
+            $aux = parent::CarregaHtml('Mail/contato-cliente');
+            $mail->Body     = $aux;
             
             // Validando a autenticação
             $mail->isSMTP();
@@ -51,12 +54,15 @@
             
             // Dados de quem está enviando o email
             $mail->From = 'admin@sawasakiimoveis.com.br';
-            $mail->FromName = 'Sawasaki Imveis';
+            $mail->FromName = 'Sawasaki Imóveis';
             
             // Setando o conteudo
             $mail->isHTML(true);
-            $mail->Subject = 'Teste php mailer';
-            $mail->Body     = "teste";
+            $mail->Subject = 'Contato através do site da Sawasaki Imóveis!';
+            
+            #Corpo do e-mail
+            $aux = parent::CarregaHtml('Mail/contato-empresa');
+            $mail->Body     = $aux;
             
             // Validando a autenticação
             $mail->isSMTP();
@@ -68,7 +74,7 @@
 			$mail->Password = pwGmail;
             
             // Setando o endereço de recebimento
-            $mail->addAddress('evandrokoiti@gmail.com', 'Koiti');
+            $mail->addAddress(emailRecebimento, 'Sawasaki Imóveis');
             
             // Enviando o e-mail
             if($mail->send()){
