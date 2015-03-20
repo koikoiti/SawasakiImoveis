@@ -29,6 +29,7 @@
         $bairro = $rsImovel['bairro'];
         $complemento = $rsImovel['complemento'];
         $ponto_referencia = $rsImovel['ponto_referencia'];
+        $entre_ruas = $rsImovel['entre_ruas'];
         $area_util = $rsImovel['area_util'];
         $area_total = $rsImovel['area_total'];
         $proprietario = $rsImovel['proprietario'];
@@ -42,6 +43,7 @@
         $idade = $rsImovel['idade'];
         $valor = $rsImovel['valor'];
         $descricao = $rsImovel['descricao'];
+        $informacoes = $rsImovel['informacoes'];
         #Checkboxes
             #Verificar averbada
         if($rsImovel['averbada'] != ''){
@@ -146,6 +148,7 @@
         $bairro = utf8_decode(strip_tags(trim(addslashes($_POST["bairro"]))));
         $complemento = utf8_decode(strip_tags(trim(addslashes($_POST["complemento"]))));
         $ponto_referencia = utf8_decode(strip_tags(trim(addslashes($_POST["ponto_referencia"]))));
+        $entre_ruas = utf8_decode(strip_tags(trim(addslashes($_POST["entre_ruas"]))));
         $area_util = utf8_decode(strip_tags(trim(addslashes($_POST["area_util"]))));
         $area_total = utf8_decode(strip_tags(trim(addslashes($_POST["area_total"]))));
         $proprietario = utf8_decode(strip_tags(trim(addslashes($_POST["proprietario"]))));
@@ -162,6 +165,7 @@
         $valor = str_replace('.', '', $valor);
         $valor = str_replace(',', '.', $valor);
         $descricao = utf8_decode(strip_tags(trim(addslashes($_POST["descricao"]))));
+        $informacoes = utf8_decode(strip_tags(trim(addslashes($_POST["informacoes"]))));
         #Checkboxes
         if($_POST['cbaverbada']){
             $averbada = strip_tags(trim(addslashes($_POST["averbada"])));
@@ -239,7 +243,7 @@
         
         if($idimovel){
             #Update
-            $banco->AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
+            $banco->AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
             $banco->RedirecionaPara('lista-imovel');
         }else{
             #Busca Imovel no banco e verifica se ele existe
@@ -249,7 +253,7 @@
                 $msg = "Número de referência já cadastrado!";
             }else{
                 #Insert
-                $banco->InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
+                $banco->InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
                 $banco->RedirecionaPara('lista-imovel');
             }
         }
@@ -272,6 +276,7 @@
     $Conteudo = str_replace("<%BAIRRO%>", $bairro, $Conteudo);
     $Conteudo = str_replace("<%COMPLEMENTO%>", $complemento, $Conteudo);
     $Conteudo = str_replace("<%PONTOREFERENCIA%>", $ponto_referencia, $Conteudo);
+    $Conteudo = str_replace("<%ENTRERUAS%>", $entre_ruas, $Conteudo);
     $Conteudo = str_replace("<%AREAUTIL%>", $area_util, $Conteudo);
     $Conteudo = str_replace("<%AREATOTAL%>", $area_total, $Conteudo);
     $Conteudo = str_replace("<%PROPRIETARIO%>", $proprietario, $Conteudo);
@@ -285,6 +290,7 @@
     $Conteudo = str_replace("<%IDADE%>", $idade, $Conteudo);
     $Conteudo = str_replace("<%VALOR%>", $valor, $Conteudo);
     $Conteudo = str_replace("<%DESCRICAO%>", $descricao, $Conteudo);
+    $Conteudo = str_replace("<%INFORMACOES%>", $informacoes, $Conteudo);
     #Checkboxes
         #Averbada
     $Conteudo = str_replace("<%AVERBADA%>", $averbada, $Conteudo);

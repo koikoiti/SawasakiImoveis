@@ -55,9 +55,9 @@
         }
         
         #Insere Imovel no banco
-        function InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files){
-            $Sql = "INSERT INTO t_imoveis (referencia, angariador, idcategoria, cep, cidade, estado, endereco, numero, complemento, bairro, ponto_referencia, data_cadastro, proprietario, telefone, area_util, area_total, sala, copa, cozinha, lavabo, dormitorios, suite, closet, hidromassagem, bwc_social, lavanderia, lareira, atico, armarios, sacada, escritorio, piso, esquadrias, garagem, dep_empregada, churrasqueira, playground, salao_festas, piscina, portao_eletronico, averbada, cadastrado_por, valor, descricao, condominio, ativo) 
-                    VALUES ('$referencia', '$angariador', '$idcategoria', '$cep', '$cidade', '$estado', '$endereco', '$numero', '$complemento', '$bairro', '$ponto_referencia', '".date("Y-m-d H:i:s")."', '$proprietario', '$telefone', '$area_util', '$area_total', '$sala', '$copa', '$cozinha', '$lavabo', '$dormitorios', '$suite', '$closet', '$hidromassagem', '$bwc_social', '$lavanderia', '$lareira', '$atico', '$armarios', '$sacada', '$escritorio', '$piso', '$esquadrias', '$garagem', '$dep_empregada', '$churrasqueira', '$playground', '$salao_festas', '$piscina', '$portao_eletronico', '$averbada', '".$_SESSION['nomeexibicao']."', '$valor', '$descricao', '$condominio', '1')";
+        function InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files){
+            $Sql = "INSERT INTO t_imoveis (referencia, angariador, idcategoria, cep, cidade, estado, endereco, numero, complemento, bairro, ponto_referencia, entre_ruas, data_cadastro, proprietario, telefone, area_util, area_total, sala, copa, cozinha, lavabo, dormitorios, suite, closet, hidromassagem, bwc_social, lavanderia, lareira, atico, armarios, sacada, escritorio, piso, esquadrias, garagem, dep_empregada, churrasqueira, playground, salao_festas, piscina, portao_eletronico, averbada, cadastrado_por, valor, descricao, informacoes, condominio, ativo) 
+                    VALUES ('$referencia', '$angariador', '$idcategoria', '$cep', '$cidade', '$estado', '$endereco', '$numero', '$complemento', '$bairro', '$ponto_referencia', '$entre_ruas', '".date("Y-m-d H:i:s")."', '$proprietario', '$telefone', '$area_util', '$area_total', '$sala', '$copa', '$cozinha', '$lavabo', '$dormitorios', '$suite', '$closet', '$hidromassagem', '$bwc_social', '$lavanderia', '$lareira', '$atico', '$armarios', '$sacada', '$escritorio', '$piso', '$esquadrias', '$garagem', '$dep_empregada', '$churrasqueira', '$playground', '$salao_festas', '$piscina', '$portao_eletronico', '$averbada', '".$_SESSION['nomeexibicao']."', '$valor', '$descricao', '$informacoes', '$condominio', '1')";
             if(parent::Execute($Sql)){
                 if($files){
                     $lastID = mysql_insert_id();
@@ -122,10 +122,10 @@
         }
         
         #Atualiza Imovel
-        function AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files){
+        function AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files){
             $Sql = "UPDATE t_imoveis SET idcategoria = '$idcategoria', referencia = '$referencia', angariador = '$angariador', cep = '$cep', cidade = '$cidade', estado = '$estado', endereco = '$endereco', numero = '$numero', bairro = '$bairro', complemento = '$complemento', 
-                    ponto_referencia = '$ponto_referencia', area_util = '$area_util', area_total = '$area_total', proprietario = '$proprietario', telefone = '$telefone', dormitorios = '$dormitorios', garagem = '$garagem', sala = '$sala', 
-                    churrasqueira = '$churrasqueira', piso = '$piso', esquadrias = '$esquadrias', idade = '$idade', valor = '$valor', descricao = '$descricao', averbada = '$averbada', copa = '$copa', cozinha = '$cozinha', lavabo = '$lavabo', lavanderia = '$lavanderia', 
+                    ponto_referencia = '$ponto_referencia', entre_ruas = '$entre_ruas', area_util = '$area_util', area_total = '$area_total', proprietario = '$proprietario', telefone = '$telefone', dormitorios = '$dormitorios', garagem = '$garagem', sala = '$sala', 
+                    churrasqueira = '$churrasqueira', piso = '$piso', esquadrias = '$esquadrias', idade = '$idade', valor = '$valor', descricao = '$descricao', informacoes = '$informacoes', averbada = '$averbada', copa = '$copa', cozinha = '$cozinha', lavabo = '$lavabo', lavanderia = '$lavanderia', 
                     suite = '$suite', closet = '$closet', hidromassagem = '$hidromassagem', bwc_social = '$bwc_social', lareira = '$lareira', atico = '$atico', armarios = '$armarios', sacada = '$sacada', escritorio = '$escritorio', 
                     dep_empregada = '$dep_empregada', playground = '$playground', salao_festas = '$salao_festas', piscina = '$piscina', portao_eletronico = '$portao_eletronico' WHERE idimovel = '$idimovel'";
             if(parent::Execute($Sql)){
@@ -264,7 +264,7 @@
             $Auxilio = str_replace('<%ANGARIADOR%>', utf8_encode($rs['angariador']), $Auxilio);
             $Auxilio = str_replace('<%ENDERECO%>', utf8_encode($rs['endereco']), $Auxilio);
             $Auxilio = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Auxilio);
-            $Auxilio = str_replace('<%ENTRERUAS%>', utf8_encode($rs['entreruas']), $Auxilio);
+            $Auxilio = str_replace('<%ENTRERUAS%>', utf8_encode($rs['entre_ruas']), $Auxilio);
             $Auxilio = str_replace('<%PONTOREFERENCIA%>', utf8_encode($rs['ponto_referencia']), $Auxilio);
             $Auxilio = str_replace('<%CEP%>', $rs['cep'], $Auxilio);
             $Auxilio = str_replace('<%COMPLEMENTO%>', utf8_encode($rs['complemento']), $Auxilio);
@@ -404,7 +404,7 @@
             
             #Terceira table
             $Auxilio = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Auxilio);
-            $Auxilio = str_replace('<%DESCRICAO%>', utf8_encode($rs['descricao']), $Auxilio);
+            $Auxilio = str_replace('<%DESCRICAO%>', utf8_encode($rs['informacoes']), $Auxilio);
             
             #Imagem
             $Imagem = "<img style='max-height: 200px;' src='".UrlPdf.$rs['caminho']."'/>";
