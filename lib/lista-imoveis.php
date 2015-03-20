@@ -17,4 +17,5 @@
 	#Imprime valores
 	$Conteudo = utf8_encode($banco->CarregaHtml('lista-imoveis'));
     $Conteudo = str_replace('<%IMOVEIS%>', $imoveis, $Conteudo);
+    $Conteudo = str_replace('<%PAGINACAO%>', $paginacao, $Conteudo);
 ?>

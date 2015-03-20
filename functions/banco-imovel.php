@@ -23,7 +23,6 @@
                     ORDER BY I.data_cadastro ASC
                     LIMIT $inicio, ".Limite."
                     ";
-            echo $Sql;
             $result = parent::Execute($Sql);
             while($rs = parent::ArrayData($result)){
                 $Linha = $Auxilio;
@@ -52,7 +51,29 @@
         }
         
         #Monta paginacao
-        function MontaPaginacao(){
+        function MontaPaginacao($pagina){
+            $totalPaginas = $this->TotalPaginas();
+            $pag = '';
+            if($totalPaginas > 1){
+                if($pagina == 1){
+                    $pag = '<span class="page active">&laquo;</span>';
+                    $pag .= '<span class="page active">1</span>'; 
+                }else{
+                    
+                }
+                for($i = $pagina; $i < $totalPaginas; $i++){
+                    if($pagina == $i){
+                        $pag .= '<span class="page active">'.$i.'</span>';
+                    }else{
+                        $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.$i.'" class="page">'.$i.'</a>';
+                    }
+                }
+                
+                
+                return $pag;
+            }else{
+                return '';
+            }
             /*
             <a href="#" class="page">&laquo;</a>
                     <a href="#" class="page">2</a>
@@ -62,6 +83,16 @@
                     <a href="#" class="page">6</a>
                     <a href="#"class="page">&raquo;</a>
             */
+        }
+        
+        #Total de paginas
+        function TotalPaginas(){
+            $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
+                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria";
+            $result = parent::Execute($Sql);
+			$num_rows = parent::Linha($result);
+			$totalPag = ceil($num_rows/Limite);
+			return $totalPag;
         }
 	}
 ?>

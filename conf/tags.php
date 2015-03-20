@@ -3,12 +3,12 @@
 	date_default_timezone_set('America/Sao_Paulo');
     
     #PHPMailer
-    define('loginGmail', '');
-    define('pwGmail', '');
-    define('emailRecebimento', '');
+    define('loginGmail', 'sawasakiimoveis@gmail.com');
+    define('pwGmail', 'vendas.sawasakitop10');
+    define('emailRecebimento', 'evandrokoiti@gmail.com');
     
     #Paginacao
-    define('Limite', 16);
+    define('Limite', 12);
     define('QtdPag', 5);
     
     #Verifica SERVER (web/local)

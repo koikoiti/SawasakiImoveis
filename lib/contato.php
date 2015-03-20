@@ -12,10 +12,10 @@
         $sobrenome = strip_tags(trim(addslashes($_POST["sobrenome"])));
         $telefone = strip_tags(trim(addslashes($_POST["telefone"])));
         $comentario = strip_tags(trim(addslashes($_POST["comentario"])));
-    }
-    
-    if($banco->SendMailEmpresa($email, $nome, $sobrenome, $telefone, $comentario)){
-        $banco->SendMailContato($email, $nome);
+        
+        if($banco->SendMailEmpresa($email, $nome, $sobrenome, $telefone, $comentario)){
+            #$banco->SendMailContato($email, $nome);
+        }
     }
 
 	#Imprimi valores
