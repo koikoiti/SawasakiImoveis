@@ -5,6 +5,6 @@
 	#Instancia o objeto
 	$banco = new bancoimovel();
 
-	#Imprimi valores
-	$Conteudo = $banco->CarregaHtml('lista-imovel');
+	#Imprime valores
+	$Conteudo = utf8_encode($banco->CarregaHtml('lista-imoveis'));
 ?>
