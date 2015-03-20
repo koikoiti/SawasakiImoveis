@@ -1,6 +1,11 @@
 <?php
 	#Definições do Sistema
 	date_default_timezone_set('America/Sao_Paulo');
+    
+    #PHPMailer
+    define('loginGmail', '');
+    define('pwGmail', '');
+    
     #Verifica SERVER (web/local)
     if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
         #WEB

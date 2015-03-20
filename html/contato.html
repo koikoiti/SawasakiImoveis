@@ -27,25 +27,22 @@
                         <strong>Cel:</strong> (41) 9207-6881
                         <br />
                         <strong>Email:</strong> <a href="mailto:sawasakiimoveis@gmail.com">sawasakiimoveis@gmail.com</a>
-
-
-
                     </div>
                     <div class="span9">
                         <div id="message"></div>
-                        <div class="form-horizontal contact-agent-form" method="post" action="http://bootstraphunter.com/peachrealestate/php/contact.php" name="contactform" id="contactform">
+                        <div class="form-horizontal contact-agent-form">
                             <div class="row-fluid">
                                 <div class="field span6">
                                     <div class="span12">
-                                        <label for="first_name" accesskey="U">Primeiro nome*</label>
-                                        <input type="text" class="span12" name="first_name" value="" id="first_name" placeholder="">
+                                        <label for="first_name" accesskey="U">*Primeiro nome</label>
+                                        <input required type="text" class="span12" name="nome" value="" id="first_name" placeholder="">
                                     </div>
 
                                 </div>
                                 <div class="field span6">
                                     <div class="span12">
-                                        <label for="last_name" accesskey="O">Sobrenome*</label>
-                                        <input type="text" class="span12" name="last_name" value="" id="last_name" placeholder="">
+                                        <label for="last_name" accesskey="O">Sobrenome</label>
+                                        <input type="text" class="span12" name="sobrenome" value="" id="last_name" placeholder="">
                                     </div>
 
                                 </div>
@@ -53,15 +50,15 @@
                             <div class="row-fluid">
                                 <div class="field span6">
                                     <div class="span12">
-                                        <label for="email" accesskey="E">Email*</label>
-                                        <input type="email" class="span12" name="email" value="" id="email" placeholder="">
+                                        <label for="email" accesskey="E">*Email</label>
+                                        <input required type="email" class="span12" name="email" value="" id="email" placeholder="">
                                     </div>
 
                                 </div>
                                 <div class="field span6">
                                     <div class="span12">
-                                        <label for="phone" accesskey="P">Telefone de contato</label>
-                                        <input type="tel" class="span12" name="phone" value="" id="phone" placeholder="">
+                                        <label for="phone" accesskey="T">Telefone de contato</label>
+                                        <input type="tel" class="span12" name="telefone" value="" id="phone" placeholder="">
                                     </div>
 
                                 </div>
@@ -69,25 +66,22 @@
                             <div class="row-fluid">
                                 <div class="field span12">
                                     <div class="span12">
-                                        <label for="comments" accesskey="C">Comentário*</label>
-                                        <textarea class="span12" id="comments" rows="4" name="comments" placeholder="Faça seu comentário ou pedido aqui..."></textarea>
+                                        <label for="comments" accesskey="C">*Comentário</label>
+                                        <textarea required class="span12" id="comments" rows="4" name="comentario" placeholder="Faça seu comentário ou pedido aqui..."></textarea>
                                     </div>
                                 </div>
                             </div>
 
-                                                        <div class="button-align">
+                                <div class="button-align">
 
                                 <input type="submit" class="btn" id="submit" value="Enviar" />
+                                <input type="hidden" name="acao" value="acao" />
                             </div>
-
-
-
                         </div>
                     </div>
                 </div>
                 <!-- end 6/4 columns -->
             </div>
         </div>
-
         <!-- /container -->
 </section>
