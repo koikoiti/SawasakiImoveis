@@ -6,7 +6,7 @@
             require_once './app/PHPMailer/PHPMailerAutoload.php';
             
             $mail = new PHPMailer();
-            $mail->SMTPDebug = 2;
+            $mail->SMTPDebug = 0;
             // Charset para evitar erros de caracteres
             $mail->CharSet = 'UTF-8';
             
@@ -48,7 +48,7 @@
             require_once './app/PHPMailer/PHPMailerAutoload.php';
             
             $mail = new PHPMailer();
-            $mail->SMTPDebug = 3;
+            $mail->SMTPDebug = 0;
             // Charset para evitar erros de caracteres
             $mail->CharSet = 'UTF-8';
             
@@ -62,7 +62,7 @@
             
             #Corpo do e-mail
             $aux = parent::CarregaHtml('Mail/contato-empresa');
-            echo $aux;die;
+            
             $mail->Body     = $aux;
             
             // Validando a autenticação
@@ -79,10 +79,9 @@
             echo $mail->send();
             // Enviando o e-mail
             if($mail->send()){
-                echo 1;die;
 				return true;
 			}else{
-				echo "<script type='text/javascript'>Erro no envio de e-mail.</script>";
+				echo "<script type='text/javascript'>alert('Erro no envio de e-mail.')</script>";
 			}
 		}
 	}
