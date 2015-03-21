@@ -57,16 +57,61 @@
             if($totalPaginas > 1){
                 if($pagina == 1){
                     $pag = '<span class="page active">&laquo;</span>';
-                    $pag .= '<span class="page active">1</span>'; 
+                    $pag .= '<span class="page active">1</span>';
                 }else{
-                    
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.($pagina-1).'" class="page">&laquo;</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page=1" class="page">1</a>';
                 }
-                for($i = $pagina; $i < $totalPaginas; $i++){
-                    if($pagina == $i){
-                        $pag .= '<span class="page active">'.$i.'</span>';
-                    }else{
-                        $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.$i.'" class="page">'.$i.'</a>';
-                    }
+                $pag .= '<span class="page">...</span>';
+                
+                #Monta a paginação do meio
+				if($totalPaginas < QtdPag){
+				    if($pagina <= $totalPaginas){
+				        for($i = 2; $i <= $totalPaginas - 1; $i++){
+				            if($i == $pagina){
+        						$pag .= '<span class="page active">'.$i.'</span>'; 
+        					}else{
+        						$pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.$i.'" class="page">'.$i.'</a>';	
+        					}
+				        }
+				    }
+				}else{
+				    if($pagina > 2){
+    					$start = $pagina - 2;
+    					$end = $pagina + 2;
+    				}elseif($pagina == 2){
+    					$start = $pagina - 1;
+    					$end = $pagina + 3;
+    				}elseif($pagina == 1){
+    					$start = 1;
+    					$end = $pagina + 4;
+    				}
+    				if($pagina == $totalPaginas){
+    					$start = $pagina - 4;
+    					$end = $totalPaginas;
+    				}elseif($pagina == ($totalPaginas - 1)){
+    					$start = $pagina - 3;
+    					$end = $pagina + 1;
+    				}
+    				for($i = $start; $i <= $end; $i++){
+    					if($i == $pagina){
+    						$pag .= '<span class="page active">'.$i.'</span>'; 
+    					}else{
+    						if($i <= $totalPaginas){
+    							$pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.$i.'" class="page">'.$i.'</a>';
+    						}
+    					}
+    				}
+				}
+                
+                
+                $pag .= '<span class="page">...</span>';
+                if($pagina == $totalPaginas){
+                    $pag .= '<span class="page active">'.$totalPaginas.'</span>';
+                    $pag .= '<span class="page active">&raquo;</span>';
+                }else{
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.$totalPaginas.'" class="page">'.$totalPaginas.'</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.($pagina+1).'"class="page">&raquo;</a>';
                 }
                 
                 
