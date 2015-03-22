@@ -119,15 +119,6 @@
             }else{
                 return '';
             }
-            /*
-            <a href="#" class="page">&laquo;</a>
-                    <a href="#" class="page">2</a>
-                    <a href="#" class="page">3</a>
-                    <span class="page active">4</span>
-                    <a href="#" class="page">5</a>
-                    <a href="#" class="page">6</a>
-                    <a href="#"class="page">&raquo;</a>
-            */
         }
         
         #Total de paginas
@@ -139,5 +130,96 @@
 			$totalPag = ceil($num_rows/Limite);
 			return $totalPag;
         }
+        
+        #Mail contato
+		function SendMailContato($email, $nome, $referencia){
+            require_once './app/PHPMailer/PHPMailerAutoload.php';
+            
+            $mail = new PHPMailer();
+            $mail->SMTPDebug = 0;
+            // Charset para evitar erros de caracteres
+            $mail->CharSet = 'UTF-8';
+            
+            // Dados de quem está enviando o email
+            $mail->From = 'sawasakiimoveis@gmail.com';
+            $mail->FromName = 'Sawasaki Imóveis';
+            
+            // Setando o conteudo
+            $mail->isHTML(true);
+            $mail->Subject = 'Registro de interesse em imóvel através do site da Sawasaki Imóveis!';
+            
+            #Corpo do e-mail
+            $aux = parent::CarregaHtml('Mail/imovel-cliente');
+            $aux = str_replace('<%NOME%>', $nome, $aux);
+            $aux = str_replace('<%REFERENCIA%>', $referencia, $aux);
+            $mail->Body     = $aux;
+            
+            // Validando a autenticação
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host     = "ssl://smtp.googlemail.com";
+			$mail->Port     = 465;
+			$mail->Username = loginGmail;
+			$mail->Password = pwGmail;
+            
+            // Setando o endereço de recebimento
+            $mail->clearAllRecipients();
+            $mail->addAddress($email, $nome);
+            
+            // Enviando o e-mail
+            if($mail->send()){
+                echo "<script type='text/javascript'>alert('Mensagem enviada com sucesso!')</script>";
+				return true;
+			}else{
+				echo "<script type='text/javascript'>alert('Erro no envio de e-mail.')</script>";
+			}
+		}
+        
+        #Mail empresa
+        function SendMailEmpresa($email, $nome, $telefone, $comentario, $referencia){
+            require_once './app/PHPMailer/PHPMailerAutoload.php';
+            
+            $mail = new PHPMailer();
+            $mail->SMTPDebug = 0;
+            // Charset para evitar erros de caracteres
+            $mail->CharSet = 'UTF-8';
+            
+            // Dados de quem está enviando o email
+            $mail->From = 'sawasakiimoveis@gmail.com';
+            $mail->FromName = 'Sawasaki Imoveis';
+            
+            // Setando o conteudo
+            $mail->isHTML(true);
+            $mail->Subject = 'Registro de interesse em imóvel através do site da Sawasaki Imóveis!';
+            
+            #Corpo do e-mail
+            $aux = parent::CarregaHtml('Mail/imovel-empresa');
+            $aux = str_replace('<%NOME%>', $nome, $aux);
+            $aux = str_replace('<%TELEFONE%>', $telefone, $aux);
+            $aux = str_replace('<%EMAIL%>', $email, $aux);
+            $aux = str_replace('<%MENSAGEM%>', $comentario, $aux);
+            $aux = str_replace('<%REFERENCIA%>', $referencia, $aux);
+            $mail->Body     = $aux;
+            
+            // Validando a autenticação
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host     = "ssl://smtp.googlemail.com";
+			$mail->Port     = 465;
+			$mail->Username = loginGmail;
+			$mail->Password = pwGmail;
+            
+            // Setando o endereço de recebimento
+            $mail->clearAllRecipients();
+            $mail->addAddress(emailRecebimento, 'Sawasaki Imoveis');
+            // Enviando o e-mail
+            if($mail->send()){
+				return true;
+			}else{
+				echo "<script type='text/javascript'>alert('Erro no envio de e-mail.')</script>";
+			}
+		}
 	}
 ?>

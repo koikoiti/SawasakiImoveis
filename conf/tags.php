@@ -4,8 +4,8 @@
     
     #PHPMailer
     define('loginGmail', 'sawasakiimoveis@gmail.com');
-    define('pwGmail', 'vendas.sawasakitop10');
-    define('emailRecebimento', 'evandrokoiti@gmail.com');
+    define('pwGmail', 'vendas.sawasaki');
+    define('emailRecebimento', 'sawasakiimoveis@gmail.com');
     
     #Paginacao
     define('Limite', 12);

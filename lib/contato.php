@@ -14,7 +14,7 @@
         $comentario = strip_tags(trim(addslashes($_POST["comentario"])));
         
         $banco->SendMailEmpresa($email, $nome, $sobrenome, $telefone, $comentario);
-        #$banco->SendMailContato($email, $nome);
+        $banco->SendMailContato($email, $nome);
         
     }
 

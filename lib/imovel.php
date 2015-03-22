@@ -18,6 +18,19 @@
     
     $slider = $banco->MontaSliderImovel($idimovel);
     
+    #Trabalha com Post
+	if(isset($_POST["referencia"]) && $_POST["referencia"] != '' ){
+        $email = strip_tags(trim(addslashes($_POST["email"])));
+        $nome = strip_tags(trim(addslashes($_POST["nome"])));
+        $telefone = strip_tags(trim(addslashes($_POST["telefone"])));
+        $comentario = strip_tags(trim(addslashes($_POST["comentario"])));
+        $referencia = strip_tags(trim(addslashes($_POST["referencia"])));
+        
+        $banco->SendMailEmpresa($email, $nome, $telefone, $comentario, $referencia);
+        $banco->SendMailContato($email, $nome, $referencia);
+        
+    }
+    
 	#Imprime valores
 	$Conteudo = $banco->CarregaHtml('imovel');
     $Conteudo = str_replace('<%ENDERECOMAPS%>', urlencode(utf8_encode($enderecomaps)), $Conteudo);
