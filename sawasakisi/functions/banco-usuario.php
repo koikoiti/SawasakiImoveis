@@ -30,7 +30,7 @@
         
         #Insere Usuario no banco
         function InsereUsuario($nome, $login, $senha, $idsetor){
-            $senha = md5($senha);
+            $senha = sha1($senha);
             $Sql = "INSERT INTO t_usuarios (nome_exibicao, login, senha, idsetor) VALUES ('$nome','$login','$senha', '$idsetor')";
             if(parent::Execute($Sql)){
                 return true;
@@ -44,7 +44,7 @@
             if($senha == ""){
                 $Sql = "UPDATE t_usuarios SET nome_exibicao = '$nome', login = '$login', idsetor = '$idsetor' WHERE idusuario = '$idusuario'";
             }else{
-                $senha = md5($senha);
+                $senha = sha1($senha);
                 $Sql = "UPDATE t_usuarios SET nome_exibicao = '$nome', login = '$login', senha = '$senha', idsetor = '$idsetor' WHERE idusuario = '$idusuario'";
             }
             if(parent::Execute($Sql)){
