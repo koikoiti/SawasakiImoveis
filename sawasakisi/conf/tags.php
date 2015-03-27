@@ -25,4 +25,8 @@
     	define('DB_User' , "root");
     	define('DB_Pass' , '');
     }
+    
+    #Paginacao
+    define('Limite', 15);
+    define('QtdPag', 5);
 ?>
