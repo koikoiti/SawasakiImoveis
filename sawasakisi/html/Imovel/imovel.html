@@ -71,7 +71,7 @@
         <div class="form-group" style="width: 25%; float: left">
             <label class="col-sm-3 control-label form-margin">Estado</label>
             <div class="col-sm-6">
-                <input type="text" id="estado" class="form-control" name="estado" value="<%ESTADO%>">
+                <input maxlength="2" onblur="maiusc(this);" type="text" id="estado" class="form-control" name="estado" value="<%ESTADO%>">
             </div>
         </div>
         
@@ -446,6 +446,10 @@ function buscaCep(cep){
     			}
     		);
         }
+    }
+    
+    function maiusc(e){
+        e.value = e.value.toUpperCase();
     }
 </script>
     <script type="text/javascript" src="<%URLPADRAO%>html/js/jasny.bootstrap/extend/js/jasny-bootstrap.min.js"></script>
