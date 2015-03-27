@@ -23,7 +23,7 @@
             if($cidade != ''){
                 $Sql .= " AND I.cidade LIKE '%".utf8_decode($cidade)."%'";
             }
-            $Sql .= " LIMIT $inicio, ".Limite;
+            $Sql .= "  ORDER BY I.referencia LIMIT $inicio, ".Limite;
             $result = parent::Execute($Sql);
             $num_rows = parent::Linha($result);
             if($num_rows){
