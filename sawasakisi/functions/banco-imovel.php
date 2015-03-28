@@ -442,13 +442,17 @@
         function MontaPaginacao($referencia, $idcategoria, $endereco, $bairro, $cidade, $pagina){
             $totalPaginas = $this->TotalPaginas($referencia, $idcategoria, $endereco, $bairro, $cidade);
             $pag = '';
+            if($referencia || $idcategoria || $endereco || $bairro || $cidade){
+                $url = "idcategoria=$idcategoria&endereco=$endereco&referencia=$referencia&bairro=$bairro&cidade=$cidade";
+            }
+            $url .= "&page=";
             if($totalPaginas > 1){
                 if($pagina == 1){
                     $pag = '<span class="page active">&laquo;</span>';
                     $pag .= '<span class="page active">1</span>';
                 }else{
-                    $pag .= '<a href="'.UrlPadrao.'lista-imovel/?page='.($pagina-1).'" class="page">&laquo;</a>';
-                    $pag .= '<a href="'.UrlPadrao.'lista-imovel/?page=1" class="page">1</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imovel/?'.$url.($pagina-1).'" class="page">&laquo;</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imovel/?'.$url.'1" class="page">1</a>';
                 }
                 $pag .= '<span class="page">...</span>';
                 
@@ -459,7 +463,7 @@
 				            if($i == $pagina){
         						$pag .= '<span class="page active">'.$i.'</span>'; 
         					}else{
-        						$pag .= '<a href="'.UrlPadrao.'lista-imovel/?page='.$i.'" class="page">'.$i.'</a>';	
+        						$pag .= '<a href="'.UrlPadrao.'lista-imovel/?'.$url.$i.'" class="page">'.$i.'</a>';	
         					}
 				        }
 				    }
@@ -486,7 +490,7 @@
     						$pag .= '<span class="page active">'.$i.'</span>'; 
     					}else{
     						if($i <= $totalPaginas){
-    							$pag .= '<a href="'.UrlPadrao.'lista-imovel/?page='.$i.'" class="page">'.$i.'</a>';
+    							$pag .= '<a href="'.UrlPadrao.'lista-imovel/?'.$url.$i.'" class="page">'.$i.'</a>';
     						}
     					}
     				}
@@ -498,8 +502,8 @@
                     $pag .= '<span class="page active">'.$totalPaginas.'</span>';
                     $pag .= '<span class="page active">&raquo;</span>';
                 }else{
-                    $pag .= '<a href="'.UrlPadrao.'lista-imovel/?page='.$totalPaginas.'" class="page">'.$totalPaginas.'</a>';
-                    $pag .= '<a href="'.UrlPadrao.'lista-imovel/?page='.($pagina+1).'"class="page">&raquo;</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imovel/?'.$url.$totalPaginas.'" class="page">'.$totalPaginas.'</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imovel/?'.$url.($pagina+1).'"class="page">&raquo;</a>';
                 }
                 
                 
