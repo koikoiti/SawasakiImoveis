@@ -13,7 +13,11 @@
         $endereco = $_GET['endereco'];
         $bairro = $_GET['bairro'];
         $cidade = $_GET['cidade'];
-        $pagina = $_GET['page'];
+        if($_GET['page']){
+            $pagina = $_GET['page'];
+        }else{
+            $pagina = 1;
+        }
     }
     
     $Imoveis = $banco->ListaImoveis($referencia, $idcategoria, $endereco, $bairro, $cidade, $pagina);
