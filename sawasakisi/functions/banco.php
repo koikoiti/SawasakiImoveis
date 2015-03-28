@@ -12,6 +12,9 @@
         
         #Verifica paginas com acesso
         function VerificaAcesso(){
+            if($this->Pagina == 'imovel' && $this->PaginaAux[0] == 'visualizar'){
+                return true;
+            }
             $SqlPagina = "SELECT idpagina FROM t_paginas WHERE url = '".$this->Pagina."'";
             $resultPagina = $this->Execute($SqlPagina);
             $linhaPagina = $this->Linha($resultPagina);
