@@ -15,52 +15,76 @@
         }
         
         #Lista imóveis
-        function ListaImoveis($pagina){
+        function ListaImoveis($idcategoria, $cidadeestado, $min, $max, $pagina){
             $inicio = ($pagina * Limite) - Limite;
             $Auxilio = parent::CarregaHtml('itens/lista-imoveis-itens');
+            if($idcategoria){
+                $where .= "AND I.idcategoria = '$idcategoria'";
+            }
+            if($cidadeestado){
+                $aux = explode('_', $cidadeestado);
+                $where .= " AND I.cidade = '".$aux[0]."' AND I.estado = '".$aux[1]."'";
+            }
+            if($min){
+                $where .= " AND I.valor >= '$min'";
+            }
+            if($max){
+                $where .= " AND I.valor <= '$max'";
+            }
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
-                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria
+                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
+                    WHERE 1 
+                    $where 
                     ORDER BY I.data_cadastro ASC
                     LIMIT $inicio, ".Limite."
                     ";
             $result = parent::Execute($Sql);
-            while($rs = parent::ArrayData($result)){
-                $Linha = $Auxilio;
-                #Foto
-                $SqlFoto = "SELECT * FROM t_imagens_imovel WHERE idimovel = " . $rs['idimovel'] . " ORDER BY caminho ASC";
-                $resultFoto = parent::Execute($SqlFoto);
-                $rsFoto = parent::ArrayData($resultFoto);
-                $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
-                $Linha = str_replace('<%CAMINHO%>', $rsFoto['caminho'], $Linha);
-                $Linha = str_replace('<%REFERENCIA%>', $rs['referencia'], $Linha);
-                $Linha = str_replace('<%CATEGORIA%>', utf8_encode($rs['categoria']), $Linha);
-                $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
-                $Linha = str_replace('<%CIDADEESTADO%>', utf8_encode($rs['cidade'] . "/" . $rs['estado']), $Linha);
-                $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
-                
-                #Colocar 'novo' para imóveis cadastrados a 15 dias
-                if(strtotime($rs['data_cadastro']) < strtotime('-15 day') ){
-                    $label_novo = '';
-                }else{
-                    $label_novo = '<span class="sticker sticker-hot">Novo</span>';
+            $num_rows = parent::Linha($result);
+            if($num_rows){
+                while($rs = parent::ArrayData($result)){
+                    $Linha = $Auxilio;
+                    #Foto
+                    $SqlFoto = "SELECT * FROM t_imagens_imovel WHERE idimovel = " . $rs['idimovel'] . " ORDER BY caminho ASC";
+                    $resultFoto = parent::Execute($SqlFoto);
+                    $rsFoto = parent::ArrayData($resultFoto);
+                    $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
+                    $Linha = str_replace('<%CAMINHO%>', $rsFoto['caminho'], $Linha);
+                    $Linha = str_replace('<%REFERENCIA%>', $rs['referencia'], $Linha);
+                    $Linha = str_replace('<%CATEGORIA%>', utf8_encode($rs['categoria']), $Linha);
+                    $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
+                    $Linha = str_replace('<%CIDADEESTADO%>', utf8_encode($rs['cidade'] . "/" . $rs['estado']), $Linha);
+                    $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
+                    
+                    #Colocar 'novo' para imóveis cadastrados a 15 dias
+                    if(strtotime($rs['data_cadastro']) < strtotime('-15 day') ){
+                        $label_novo = '';
+                    }else{
+                        $label_novo = '<span class="sticker sticker-hot">Novo</span>';
+                    }
+                    $Linha = str_replace('<%NOVO%>', $label_novo, $Linha);
+                    $retorno .= $Linha;
                 }
-                $Linha = str_replace('<%NOVO%>', $label_novo, $Linha);
-                $retorno .= $Linha;
+                return $retorno;
+            }else{
+                return utf8_encode('Sem imóveis para visualizar!');
             }
-            return $retorno;
         }
         
         #Monta paginacao
-        function MontaPaginacao($pagina){
-            $totalPaginas = $this->TotalPaginas();
+        function MontaPaginacao($idcategoria, $ce, $min, $max, $pagina){
+            $totalPaginas = $this->TotalPaginas($idcategoria, $ce, $min, $max);
+            if($idcategoria || $ce || $min || $max){
+                $url = "fcategoria=$idcategoria&fcidadeestado=$ce&fmin=$min&fmax=$max";
+            }
+            $url .= "&page=";
             $pag = '';
             if($totalPaginas > 1){
                 if($pagina == 1){
                     $pag = '<span class="page active">&laquo;</span>';
                     $pag .= '<span class="page active">1</span>';
                 }else{
-                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.($pagina-1).'" class="page">&laquo;</a>';
-                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page=1" class="page">1</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.($pagina-1).'" class="page">&laquo;</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.'=1" class="page">1</a>';
                 }
                 $pag .= '<span class="page">...</span>';
                 
@@ -71,7 +95,7 @@
 				            if($i == $pagina){
         						$pag .= '<span class="page active">'.$i.'</span>'; 
         					}else{
-        						$pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.$i.'" class="page">'.$i.'</a>';	
+        						$pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.$i.'" class="page">'.$i.'</a>';	
         					}
 				        }
 				    }
@@ -98,7 +122,7 @@
     						$pag .= '<span class="page active">'.$i.'</span>'; 
     					}else{
     						if($i <= $totalPaginas){
-    							$pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.$i.'" class="page">'.$i.'</a>';
+    							$pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.$i.'" class="page">'.$i.'</a>';
     						}
     					}
     				}
@@ -110,8 +134,8 @@
                     $pag .= '<span class="page active">'.$totalPaginas.'</span>';
                     $pag .= '<span class="page active">&raquo;</span>';
                 }else{
-                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.$totalPaginas.'" class="page">'.$totalPaginas.'</a>';
-                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?page='.($pagina+1).'"class="page">&raquo;</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.$totalPaginas.'" class="page">'.$totalPaginas.'</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.($pagina+1).'"class="page">&raquo;</a>';
                 }
                 
                 
@@ -122,9 +146,25 @@
         }
         
         #Total de paginas
-        function TotalPaginas(){
+        function TotalPaginas($idcategoria, $ce, $min, $max){
+            if($idcategoria){
+                $where .= "AND I.idcategoria = '$idcategoria'";
+            }
+            if($ce){
+                $aux = explode('_', $ce);
+                $where .= " AND I.cidade = '".$aux[0]."' AND I.estado = '".$aux[1]."'";
+            }
+            if($min){
+                $where .= " AND I.valor >= '$min'";
+            }
+            if($max){
+                $where .= " AND I.valor <= '$max'";
+            }
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
-                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria";
+                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
+                    WHERE 1 
+                    $where
+                    ";
             $result = parent::Execute($Sql);
 			$num_rows = parent::Linha($result);
 			$totalPag = ceil($num_rows/Limite);
@@ -221,5 +261,46 @@
 				echo "<script type='text/javascript'>alert('Erro no envio de e-mail.')</script>";
 			}
 		}
+        
+        #Monta select Categorias
+        function SelectCategorias($idcategoria){
+			$Sql = "SELECT * FROM fixo_categorias_imovel ORDER BY nome";
+			$select_categorias = "<select class='form-control' id='categoria' name='categoria' style='width: auto'>";
+			$select_categorias .= "<option selected value=''>Categoria</option>";
+			$result = parent::Execute($Sql);
+			if($result){
+				while($rs = parent::ArrayData($result)){
+					if($rs['idcategoria'] == $idcategoria){
+						$select_categorias .= "<option selected value='".$rs['idcategoria']."'>".$rs['nome']."</option>";
+					}else{
+						$select_categorias .= "<option value='".$rs['idcategoria']."'>".$rs['nome']."</option>";
+					}
+				}
+				$select_categorias .= "</select>";
+				return $select_categorias;
+			}else{
+				return false;
+			}
+        }
+        
+        #Monta cidade/estado
+        function SelectCidadeEstado($cidadeestado){
+            $auz = explode('_', $cidadeestado);
+            $Sql = 'SELECT DISTINCT cidade, estado FROM t_imoveis WHERE cidade <> "" AND estado <> ""';
+            $result = $this->Execute($Sql);
+            $ce = '<select id="cidadeestado" style="width: auto;">';
+            $ce .= '<option value="">Cidade/UF</option>';
+            while($rs = $this->ArrayData($result)){
+                if($auz[0] == $rs['cidade'] && $auz[1] == $rs['estado']){
+                    $aux = $rs['cidade'] . "/" . $rs['estado'];
+                    $ce .= '<option selected value="'.$aux.'">'.$aux.'</option>';
+                }else{
+                    $aux = $rs['cidade'] . "/" . $rs['estado'];
+                    $ce .= '<option value="'.$aux.'">'.$aux.'</option>';
+                }
+            }
+            $ce .= '</select>';
+            return utf8_encode($ce);
+        }
 	}
 ?>
