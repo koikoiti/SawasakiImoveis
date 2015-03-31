@@ -9,7 +9,7 @@
 						<h1>Lista de Imóveis</h1>
 					</div>
 				</div><!--end of west pane span9-->
-                <div class="row-fluid hotproperties" style="overflow: hidden; width: 98%; background: #FABB00; color: #fff; border-radius: 10px; padding-left: 10px;">
+                <div class="row-fluid hotproperties" style="overflow: hidden; width: 98%; background: #FABB00; color: #fff; border-radius: 10px; padding-left: 10px; margin-bottom: 15px;">
                     <h2>Filtrar por</h2>
                     <%BUSCACATEGORIA%>
                     <%BUSCACIDADEESTADO%>
@@ -88,8 +88,8 @@ $(function() {
 });
 
 function filtrar(){
-    var min = $("#min").val().replace('.', '').replace(',', '.');
-    var max = $("#max").val().replace('.', '').replace(',', '.');
+    var min = $("#min").val();  
+    var max = $("#max").val();
     var cat = $("#categoria").val();
     var ce = $("#cidadeestado").val();
     if(ce == ''){
