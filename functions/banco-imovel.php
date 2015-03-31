@@ -26,9 +26,13 @@
                 $where .= " AND I.cidade = '".$aux[0]."' AND I.estado = '".$aux[1]."'";
             }
             if($min){
+                $min = str_replace('.', '', $min);
+                $min = str_replace(',', '.', $min);
                 $where .= " AND I.valor >= '$min'";
             }
             if($max){
+                $max = str_replace('.', '', $max);
+                $max = str_replace(',', '.', $max);
                 $where .= " AND I.valor <= '$max'";
             }
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
@@ -155,9 +159,13 @@
                 $where .= " AND I.cidade = '".$aux[0]."' AND I.estado = '".$aux[1]."'";
             }
             if($min){
+                $min = str_replace('.', '', $min);
+                $min = str_replace(',', '.', $min);
                 $where .= " AND I.valor >= '$min'";
             }
             if($max){
+                $max = str_replace('.', '', $max);
+                $max = str_replace(',', '.', $max);
                 $where .= " AND I.valor <= '$max'";
             }
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
