@@ -83,6 +83,14 @@
                     }
                     $menu .= '</ul>
                              </li>';
+                    if($_SESSION['idsetor'] <= 2){
+                        $menu .= '<li class="parent"><a href="#"><i class="fa fa-edit"></i><span>Gerenciar Site</span></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="<%URLPADRAO%>gerenciar-slider">Gerenciar Slider</a></li>
+                                        <li><a href="<%URLPADRAO%>gerenciar-destaques">Gerenciar Destaques</a></li>
+                                    </ul>
+                                </li>';
+                    }
                     if($_SESSION['idsetor'] <= 1){
                         $menu .= '<li class="parent"><a href="#"><i class="fa  fa-user"></i><span>Usuários</span></a>
                                     <ul class="sub-menu">
@@ -90,12 +98,7 @@
                                         <li><a href="<%URLPADRAO%>usuario">Inserir Novo</a></li>
                                     </ul>
                                 </li>
-                                <li class="parent"><a href="#"><i class="fa fa-edit"></i><span>Gerenciar Site</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="<%URLPADRAO%>gerenciar-slider">Gerenciar Slider</a></li>
-                                        <li><a href="<%URLPADRAO%>gerenciar-destaques">Gerenciar Destaques</a></li>
-                                    </ul>
-                                </li>';
+                                ';
                     }
                 }
                 $menu .='<li><a href="<%URLPADRAO%>inicio/sair"><i class="fa"></i><span>Sair</span></a></li>
