@@ -3,6 +3,7 @@
     $titulo = "Novo Imóvel";
     $botao_excluir = '';
     $vbaverbada = 'hidden';
+    $vbsuite = 'hidden';
        
 	#include das funcoes da tela imovel
 	include('functions/banco-imovel.php');
@@ -65,6 +66,8 @@
         }
         if($rsImovel['suite'] == 1){
             $cbsuite = 'checked';
+            $vbsuite = 'visible';
+            $quantidade_suite = $rsImovel['quantidade_suite'];
         }
         if($rsImovel['closet'] == 1){
             $cbcloset = 'checked';
@@ -184,6 +187,7 @@
         }
         if($_POST['suite']){
             $suite = 1;
+            $quantidade_suite = $_POST['quantidade_suite'];
         }
         if($_POST['closet']){
             $closet = 1;
@@ -243,7 +247,7 @@
         
         if($idimovel){
             #Update
-            $banco->AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
+            $banco->AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files, $quantidade_suite);
             $banco->RedirecionaPara('lista-imovel');
         }else{
             #Busca Imovel no banco e verifica se ele existe
@@ -253,7 +257,7 @@
                 $msg = "Número de referência já cadastrado!";
             }else{
                 #Insert
-                $banco->InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files);
+                $banco->InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files, $quantidade_suite);
                 $banco->RedirecionaPara('lista-imovel');
             }
         }
@@ -301,6 +305,8 @@
     $Conteudo = str_replace("<%CBLAVABO%>", $cblavabo, $Conteudo);
     $Conteudo = str_replace("<%CBLAVANDERIA%>", $cblavanderia, $Conteudo);
     $Conteudo = str_replace("<%CBSUITE%>", $cbsuite, $Conteudo);
+    $Conteudo = str_replace("<%VBSUITE%>", $vbsuite, $Conteudo);
+    $Conteudo = str_replace("<%QUANTIDADESUITE%>", $quantidade_suite, $Conteudo);
     $Conteudo = str_replace("<%CBCLOSET%>", $cbcloset, $Conteudo);
     $Conteudo = str_replace("<%CBHIDROMASSAGEM%>", $cbhidromassagem, $Conteudo);
     $Conteudo = str_replace("<%CBBWCSOCIAL%>", $cbbwc_social, $Conteudo);

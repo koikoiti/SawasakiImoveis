@@ -124,10 +124,17 @@
             </div>
         </div>
 
-        <div class="form-group" style="width: 50%; float: left">
+        <div class="form-group" style="width: 25%; float: left">
             <label style="width: 100%;" class="col-sm-3 control-label form-margin">Dormitórios</label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="dormitorios" value="<%DORMITORIOS%>">
+            </div>
+        </div>
+        
+        <div class="form-group" style="width: 25%; float: left">
+            <label style="float: left; width: 50%;" class="col-sm-3 control-label form-margin"><input <%CBSUITE%> type="checkbox" id="suite" class="form-control" name="suite" style="width: 16px; height: 16px; float: left;">&nbsp;Suíte</label>
+            <div class="col-sm-6">
+                <input type="text" id="quantidade_suite" class="form-control" name="quantidade_suite" style="visibility: <%VBSUITE%>;" value="<%QUANTIDADESUITE%>">
             </div>
         </div>
         
@@ -224,12 +231,6 @@
         <div class="form-group">
             <div class="col-sm-6">
                 <label style="float: left; width: 50%;" class="col-sm-3 control-label form-margin"><input <%CBLAVANDERIA%> type="checkbox" class="form-control" name="lavanderia" style="width: 16px; height: 16px; float: left;">&nbsp;Lavanderia</label>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <div class="col-sm-6">
-                <label style="float: left; width: 50%;" class="col-sm-3 control-label form-margin"><input <%CBSUITE%> type="checkbox" class="form-control" name="suite" style="width: 16px; height: 16px; float: left;">&nbsp;Suíte</label>
             </div>
         </div>
         
@@ -342,6 +343,14 @@ $(function() {
             $("#averbada").css('visibility', 'visible');  // checked
         }else{
             $("#averbada").css('visibility', 'hidden');
+        }
+    });
+    
+    $('#suite').on('change', function(){
+        if($("#suite").is(':checked')){
+            $("#quantidade_suite").css('visibility', 'visible');  // checked
+        }else{
+            $("#quantidade_suite").css('visibility', 'hidden');
         }
     });
 });
