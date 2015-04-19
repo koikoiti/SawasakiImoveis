@@ -1,0 +1,53 @@
+<div class="header">
+    <h3><%TITULO%></h3>
+</div>
+<div class="content">
+    <div><button type="button" class="btn btn-success btn-flat" onclick="addCategoria()">Criar Nova</button></div>
+    <div id="container-itens" class="col-md-6">
+        <%CATEGORIAS%>
+    </div>
+</div>
+<script type="text/javascript">
+function addCategoria(){
+    if(document.getElementById('novo')){
+        
+    }else{
+        var nova = document.getElementById("container-itens");
+	    var novadiv = document.createElement("div");
+        novadiv.setAttribute('style', 'width: 50%; float: left;');
+        novadiv.setAttribute('class', 'form-group');
+    	novadiv.innerHTML =  '<label class="col-sm-3 control-label form-margin"></label><div class="col-sm-6">Nova: <input id="novo" type="text" class="form-control"/><button type="button" onclick="salvar()" class="btn btn-success btn-flat"><i class="fa fa-check"></i> Salvar</button></div>';
+    	nova.appendChild(novadiv);
+    }
+}
+
+function salvar(){
+    var categoria = $('#novo').val().trim();
+    
+    if(categoria != ''){
+        $.post("<%URLPADRAO%>lib/ajax/salvaCategoria.php",
+			{categoria:categoria},
+			function(retorno){
+			    if(retorno == 1){
+			        window.location.reload();
+			    }
+			}
+		);
+    }
+}
+
+function update(idcategoria){
+    var categoria = $('#'+idcategoria).val().trim();
+    
+    if(categoria != ''){
+        $.post("<%URLPADRAO%>lib/ajax/alteraCategoria.php",
+			{idcategoria:idcategoria, categoria:categoria},
+			function(retorno){
+			    if(retorno == 1){
+			        window.location.reload();
+			    }
+			}
+		);
+    }
+}
+</script>

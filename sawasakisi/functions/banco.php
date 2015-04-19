@@ -79,7 +79,8 @@
                                                 <ul class="sub-menu">
                                                     <li><a href="<%URLPADRAO%>lista-imovel">Listar</a></li>';
                     if($_SESSION['idsetor'] <= 2){
-                        $menu .= '<li><a href="<%URLPADRAO%>imovel">Inserir Novo</a></li>';
+                        $menu .= '<li><a href="<%URLPADRAO%>imovel">Inserir Novo</a></li>
+                                  <li><a href="<%URLPADRAO%>gerenciar-categorias">Gerenciar Categorias</a></li>';
                     }
                     $menu .= '</ul>
                              </li>';
