@@ -8,7 +8,11 @@
         <div>
             <label>Cidade/Estado</label>
             <%SELECTCIDADEESTADO%>
-        </div>  
+        </div>
+        <div>
+            <label>Bairro</label>
+            <%SELECTBAIRRO%>
+        </div>
         <!--div>
             <p>
                 <input type="text" id="beds" readonly class="disabled">
@@ -47,10 +51,15 @@ function enviarBusca(){
         tipo = '';
     }
     
-    if(tipo == '' && foo.length < 1){
+    var bairro = [];
+    $('#bairro :selected').each(function(j, sel){
+        bairro[j] = "bairro[]=" + $(sel).val();
+    });
+    
+    if(tipo == '' && foo.length < 1 && bairro.length < 1){
         alert('Preencha algum parâmetro de busca!');
     }else{
-        window.location.href = "<%URLPADRAO%>busca/?" + foo.join('&') + "&tipo=" + tipo;
+        window.location.href = "<%URLPADRAO%>busca/?" + foo.join('&') + "&tipo=" + tipo + '&' + bairro.join('&');
     }
     
 }

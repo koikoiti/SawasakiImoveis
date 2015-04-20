@@ -129,9 +129,11 @@
             
             $select_categoria = $this->MontaSelectCategoria($idcategoria);
             $cidade_estado = $this->MontaCidadeEstado();
+            $select_bairro = $this->MontaSelectBairro();
             
             $Auxilio = str_replace('<%SELECTCATEGORIA%>', $select_categoria, $Auxilio);
             $Auxilio = str_replace('<%SELECTCIDADEESTADO%>', $cidade_estado, $Auxilio);
+            $Auxilio = str_replace('<%SELECTBAIRRO%>', $select_bairro, $Auxilio);
             return utf8_encode($Auxilio);
         }
         
@@ -159,6 +161,19 @@
             $ce = '<select id="ce" name="ce[]" data-placeholder="-- Cidade --" multiple="multiple" class="chzn-select" style="width:100%;" tabindex="2">';
             while($rs = $this->ArrayData($result)){
                 $aux = $rs['cidade'] . "/" . $rs['estado'];
+                $ce .= '<option value="'.$aux.'">'.$aux.'</option>';
+            }
+            $ce .= '</select>';
+            return $ce;
+        }
+        
+        #Monta select bairro
+        function MontaSelectBairro(){
+            $Sql = 'SELECT DISTINCT bairro FROM t_imoveis WHERE bairro <> ""';
+            $result = $this->Execute($Sql);
+            $ce = '<select id="bairro" name="bairro[]" data-placeholder="-- Bairro --" multiple="multiple" class="chzn-select" style="width:100%;" tabindex="2">';
+            while($rs = $this->ArrayData($result)){
+                $aux = $rs['bairro'];
                 $ce .= '<option value="'.$aux.'">'.$aux.'</option>';
             }
             $ce .= '</select>';

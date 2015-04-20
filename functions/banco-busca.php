@@ -2,7 +2,7 @@
 	class bancobusca extends banco{
 		
         #Monta itens busca rapida
-        function MontaBuscaRapidaItens($idcategoria, $ce){
+        function MontaBuscaRapidaItens($idcategoria, $ce, $bairro){
             $Auxilio = parent::CarregaHtml('itens/busca-itens');
             $Sql = "SELECT I.*, C.nome AS categoria, M.* FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
@@ -20,6 +20,14 @@
                 foreach($ce as $value){
                     $aux = explode('_', $value);
                     $Sql .= " (I.cidade = '".utf8_decode($aux[0])."' AND I.estado = '".utf8_decode($aux[1])."') OR";
+                }
+                $Sql = rtrim($Sql, ' OR');
+                $Sql .= ")";
+            }
+            if($bairro){
+                $Sql .= " AND (";
+                foreach($bairro as $val){
+                    $Sql .= "(I.bairro = '".utf8_decode($val)."') OR";
                 }
                 $Sql = rtrim($Sql, ' OR');
                 $Sql .= ")";

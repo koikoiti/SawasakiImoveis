@@ -16,8 +16,9 @@
             #Busca rápida
             $idcategoria = $_GET['tipo'];
             $ce = $_GET['ce'];
+            $bairro = $_GET['bairro'];
             
-            $busca = $banco->MontaBuscaRapidaItens($idcategoria, $ce);
+            $busca = $banco->MontaBuscaRapidaItens($idcategoria, $ce, $bairro);
             
             $busca_titulo = '<h1>Resultados da busca rápida:</h1>';
         }
