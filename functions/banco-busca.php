@@ -3,7 +3,7 @@
 		
         #Monta itens busca rapida
         function MontaBuscaRapidaItens($idcategoria, $ce, $bairro){
-            $Auxilio = parent::CarregaHtml('itens/busca-itens');
+            $Auxilio = utf8_encode(parent::CarregaHtml('itens/busca-itens'));
             $Sql = "SELECT I.*, C.nome AS categoria, M.* FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
                     INNER JOIN t_imagens_imovel M ON M.idimovel = I.idimovel
@@ -37,7 +37,10 @@
                 $Linha = $Auxilio;
                 $Linha = str_replace('<%CAMINHO%>', $rs['caminho'], $Linha);
                 $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
-                $Linha = str_replace('<%DESCRICAO%>', utf8_encode($rs['descricao']), $Linha);
+                $Linha = str_replace('<%REFERENCIA%>', utf8_encode($rs['referencia']), $Linha);
+                $Linha = str_replace('<%DORMITORIOS%>', utf8_encode($rs['dormitorios']), $Linha);
+                $Linha = str_replace('<%GARAGEM%>', utf8_encode($rs['garagem']), $Linha);
+                $Linha = str_replace('<%AREATOTAL%>', utf8_encode($rs['area_total']), $Linha);
                 $tipo_endereco = $rs['categoria'] . " - " . $rs['cidade'] . "/" . $rs['estado'];
                 $Linha = str_replace('<%TIPOENDERECO%>', utf8_encode($tipo_endereco), $Linha);
                 $Busca .= $Linha;
@@ -48,7 +51,7 @@
         
         #Monta busca normal
         function MontaBuscaNormal($pesquisa){
-            $Auxilio = parent::CarregaHtml('itens/busca-itens');
+            $Auxilio = utf8_encode(parent::CarregaHtml('itens/busca-itens'));
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
                     WHERE I.referencia LIKE '%$pesquisa%' 
@@ -63,7 +66,10 @@
                 $rsCaminho = parent::ArrayData($resultCaminho);
                 $Linha = str_replace('<%CAMINHO%>', $rsCaminho['caminho'], $Linha);
                 $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
-                $Linha = str_replace('<%DESCRICAO%>', utf8_encode($rs['descricao']), $Linha);
+                $Linha = str_replace('<%REFERENCIA%>', utf8_encode($rs['referencia']), $Linha);
+                $Linha = str_replace('<%DORMITORIOS%>', utf8_encode($rs['dormitorios']), $Linha);
+                $Linha = str_replace('<%GARAGEM%>', utf8_encode($rs['garagem']), $Linha);
+                $Linha = str_replace('<%AREATOTAL%>', utf8_encode($rs['area_total']), $Linha);
                 $tipo_endereco = $rs['categoria'] . " - " . $rs['cidade'] . "/" . $rs['estado'];
                 $Linha = str_replace('<%TIPOENDERECO%>', utf8_encode($tipo_endereco), $Linha);
                 $Busca .= $Linha;
