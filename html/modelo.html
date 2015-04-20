@@ -116,7 +116,7 @@
 
 							<div class="navbar-form pull-right" style="overflow: auto; ">
 								<div class="input-append">
-									<input class="span2" id="appendedInputButton" type="text" x-webkit-speech="x-webkit-speech" placeholder="Procure aqui.. (Bairro, Rua, Referência)">
+									<input onkeypress="return runScript(event)" class="span2" id="appendedInputButton" type="text" x-webkit-speech="x-webkit-speech" placeholder="Procure aqui.. (Bairro, Rua, Referência)">
 									<button onclick="pesquisar()" class="btn btn-peach" type="button"> 
 										Pesquisar
 									</button>
@@ -160,20 +160,6 @@
 		</footer>
 		<!-- end footer -->
 
-		<script type="text/javascript">
-
-		    var _gaq = _gaq || [];
-		    _gaq.push(['_setAccount', 'UA-43548732-2']);
-		    _gaq.push(['_trackPageview']);
-
-		    (function () {
-		        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		    })();
-
-		</script>
-		
 		<!--[if !lte IE 6]><!-->
             <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
             <script src="<%URLPADRAO%>html/ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
@@ -245,6 +231,12 @@ function pesquisar(){
     
     if(busca != ''){
         location.href = '<%URLPADRAO%>busca/?pesquisa='+busca;
+    }
+}
+
+function runScript(e) {
+    if (e.keyCode == 13) {
+        pesquisar();
     }
 }
 </script>
