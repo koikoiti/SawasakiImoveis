@@ -25,7 +25,7 @@
                 $Linha = str_replace('<%CAMINHO%>', $rsFoto['caminho'], $Linha);
                 $Linha = str_replace('<%REFERENCIA%>', $rs['referencia'], $Linha);
                 $Linha = str_replace('<%CATEGORIA%>', utf8_encode($rs['categoria']), $Linha);
-                $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
+                $Linha = str_replace('<%BAIRRO%>', $rs['bairro'], $Linha);
                 $Linha = str_replace('<%CIDADEESTADO%>', utf8_encode($rs['cidade'] . "/" . $rs['estado']), $Linha);
                 $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
                 
