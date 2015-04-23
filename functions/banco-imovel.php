@@ -86,8 +86,8 @@
         #Monta paginacao
         function MontaPaginacao($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens, $pagina){
             $totalPaginas = $this->TotalPaginas($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens);
-            if($idcategoria || $ce || $min || $max){
-                $url = "fcategoria=$idcategoria&fcidadeestado=$ce&fmin=$min&fmax=$max";
+            if($idcategoria || $ce || $min || $max || $bairro || $garagens || $dormitorios){
+                $url = "fcategoria=$idcategoria&fcidadeestado=$ce&fmin=$min&fmax=$max&bairro=".utf8_encode($bairro)."&dormitorios=$dor$dormitorios&garagens=$garagens";
             }
             $url .= "&page=";
             $pag = '';
