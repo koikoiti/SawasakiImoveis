@@ -16,16 +16,7 @@
                         Bairro: <input onkeypress="return runScript2(event)" type="text" id="bairro" name="bairro" style="width: 17%;" value="<%BAIRRO%>"/>
                         Dormitórios: <input type="text" id="dormitorios" name="dormitorios" onkeypress="return SomenteNumero(event);" maxlength="2" style="width: 10%;" value="<%DORMITORIOS%>"/>
                         Garagens: <input type="text" id="garagens" name="garagens" style="width: 10%;" onkeypress="return SomenteNumero(event);" maxlength="2" value="<%GARAGENS%>"/>
-                        <select name="order" id="order">
-                            <option>Mais Novos</option>
-                            <option>Mais Antigos</option>
-                            <option>Menor Preço</option>
-                            <option>Maior Preço</option>
-                            <option>Referência Crescente</option>
-                            <option>Referência Decrescente</option>
-                            <option>Cidade A-Z</option>
-                            <option>Cidade Z-A</option>
-                        </select>
+                        <%SELECTORDER%>
                     </div>
                     <div style="width: 100%; float: left;">
                         <%BUSCACATEGORIA%>
@@ -106,6 +97,7 @@ $(function() {
 });
 
 function filtrar(){
+    var order = $("#order").val();
     var min = $("#min").val();  
     var max = $("#max").val();
     var cat = $("#categoria").val();
@@ -119,7 +111,7 @@ function filtrar(){
         var auz = ce.split('/');
         var cidadeestado = auz[0] + '_' + auz[1];
     }
-    location.href = '<%URLPADRAO%>lista-imoveis/?fcidadeestado=' + cidadeestado + "&fcategoria=" + cat + "&fmin=" + min + "&fmax=" + max + "&bairro=" + bairro + "&dormitorios=" + dormitorios + "&garagens=" + garagens;
+    location.href = '<%URLPADRAO%>lista-imoveis/?fcidadeestado=' + cidadeestado + "&fcategoria=" + cat + "&fmin=" + min + "&fmax=" + max + "&bairro=" + bairro + "&dormitorios=" + dormitorios + "&garagens=" + garagens + "&order=" + order;
 }
 
 function removerFiltro(){

@@ -16,7 +16,8 @@
         $bairro = utf8_decode($_GET['bairro']);
         $dormitorios = strip_tags(trim(addslashes($_GET["dormitorios"])));
         $garagens = strip_tags(trim(addslashes($_GET["garagens"])));
-        $botao_remover_filtro = '<button onclick="removerFiltro()" class="btn btn-peach" type="button" style="margin-bottom: 10px;">Remover Filtro</button>';
+        $order = $_GET['order'];
+        $botao_remover_filtro = '<button onclick="removerFiltro()" class="btn btn-peach" type="button" style="margin-bottom: 10px;">Remover Filtros</button>';
         
         if($_GET['page']){
             $pagina = $_GET['page'];
@@ -25,10 +26,11 @@
         }
     }
     
-    $imoveis = $banco->ListaImoveis($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens, $pagina);
-    $paginacao = $banco->MontaPaginacao($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens, $pagina);
+    $imoveis = $banco->ListaImoveis($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens, $pagina, $order);
+    $paginacao = $banco->MontaPaginacao($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens, $pagina, $order);
     $busca_categoria = $banco->SelectCategorias($idcategoria);
     $busca_cidade_estado = $banco->SelectCidadeEstado($ce);
+    $select_order = $banco->SelectOrder($order);
     
 	#Imprime valores
 	$Conteudo = utf8_encode($banco->CarregaHtml('lista-imoveis'));
@@ -42,4 +44,5 @@
     $Conteudo = str_replace('<%DORMITORIOS%>', $dormitorios, $Conteudo);
     $Conteudo = str_replace('<%GARAGENS%>', $garagens, $Conteudo);
     $Conteudo = str_replace('<%REMOVERFILTRO%>', $botao_remover_filtro, $Conteudo);
+    $Conteudo = str_replace('<%SELECTORDER%>', $select_order, $Conteudo);
 ?>

@@ -15,7 +15,7 @@
         }
         
         #Lista imóveis
-        function ListaImoveis($idcategoria, $cidadeestado, $min, $max, $bairro, $dormitorios, $garagens, $pagina){
+        function ListaImoveis($idcategoria, $cidadeestado, $min, $max, $bairro, $dormitorios, $garagens, $pagina, $order){
             $inicio = ($pagina * Limite) - Limite;
             $Auxilio = parent::CarregaHtml('itens/lista-imoveis-itens');
             if($idcategoria){
@@ -44,11 +44,19 @@
             if($garagens){
                 $where .= " AND I.garagem = '$garagens'";
             }
+            if($order){
+                $SqlOrder = "SELECT ordem FROM fixo_order_imovel WHERE idorder = '$order'";
+                $resultOrder = parent::Execute($SqlOrder);
+                $rsOrder = parent::ArrayData($resultOrder);
+                $ordenacao = " ORDER BY " . $rsOrder['ordem'];
+            }else{
+                $ordenacao = " ORDER BY I.data_cadastro ASC";
+            }
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
                     WHERE 1 
                     $where 
-                    ORDER BY I.data_cadastro ASC
+                    $ordenacao 
                     LIMIT $inicio, ".Limite."
                     ";
             $result = parent::Execute($Sql);
@@ -84,10 +92,10 @@
         }
         
         #Monta paginacao
-        function MontaPaginacao($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens, $pagina){
+        function MontaPaginacao($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens, $pagina, $order){
             $totalPaginas = $this->TotalPaginas($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens);
-            if($idcategoria || $ce || $min || $max || $bairro || $garagens || $dormitorios){
-                $url = "fcategoria=$idcategoria&fcidadeestado=$ce&fmin=$min&fmax=$max&bairro=".utf8_encode($bairro)."&dormitorios=$dor$dormitorios&garagens=$garagens";
+            if($idcategoria || $ce || $min || $max || $bairro || $garagens || $dormitorios || $order){
+                $url = "fcategoria=$idcategoria&fcidadeestado=$ce&fmin=$min&fmax=$max&bairro=".utf8_encode($bairro)."&dormitorios=$dor$dormitorios&garagens=$garagens&order=$order";
             }
             $url .= "&page=";
             $pag = '';
@@ -304,6 +312,27 @@
 				}
 				$select_categorias .= "</select>";
 				return $select_categorias;
+			}else{
+				return false;
+			}
+        }
+        
+        #Monta select Order
+        function SelectOrder($idorder){
+            $Sql = "SELECT * FROM fixo_order_imovel ORDER BY idorder";
+			$select_order = "<select onchange='filtrar()' class='form-control' id='order' name='order' style='width: 19%'>";
+			$select_order .= "<option value=''>Ordenar Por</option>";
+			$result = parent::Execute($Sql);
+			if($result){
+				while($rs = parent::ArrayData($result)){
+					if($rs['idorder'] == $idorder){
+						$select_order .= "<option selected value='".$rs['idorder']."'>".$rs['nome']."</option>";
+					}else{
+						$select_order .= "<option value='".$rs['idorder']."'>".$rs['nome']."</option>";
+					}
+				}
+				$select_order .= "</select>";
+				return utf8_encode($select_order);
 			}else{
 				return false;
 			}
