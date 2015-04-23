@@ -16,6 +16,16 @@
                         Bairro: <input onkeypress="return runScript2(event)" type="text" id="bairro" name="bairro" style="width: 17%;" value="<%BAIRRO%>"/>
                         Dormitórios: <input type="text" id="dormitorios" name="dormitorios" onkeypress="return SomenteNumero(event);" maxlength="2" style="width: 10%;" value="<%DORMITORIOS%>"/>
                         Garagens: <input type="text" id="garagens" name="garagens" style="width: 10%;" onkeypress="return SomenteNumero(event);" maxlength="2" value="<%GARAGENS%>"/>
+                        <select name="order" id="order">
+                            <option>Mais Novos</option>
+                            <option>Mais Antigos</option>
+                            <option>Menor Preço</option>
+                            <option>Maior Preço</option>
+                            <option>Referência Crescente</option>
+                            <option>Referência Decrescente</option>
+                            <option>Cidade A-Z</option>
+                            <option>Cidade Z-A</option>
+                        </select>
                     </div>
                     <div style="width: 100%; float: left;">
                         <%BUSCACATEGORIA%>

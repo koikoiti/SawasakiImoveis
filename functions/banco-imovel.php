@@ -36,7 +36,7 @@
                 $where .= " AND I.valor <= '$max'";
             }
             if($bairro){
-                $where .= " AND I.bairro = '$bairro'";
+                $where .= " AND I.bairro LIKE '%$bairro%'";
             }
             if($dormitorios){
                 $where .= " AND I.dormitorios = '$dormitorios'";
@@ -178,7 +178,7 @@
                 $where .= " AND I.valor <= '$max'";
             }
             if($bairro){
-                $where .= " AND I.bairro = '$bairro'";
+                $where .= " AND I.bairro LIKE '%$bairro%'";
             }
             if($dormitorios){
                 $where .= " AND I.dormitorios = '$dormitorios'";
