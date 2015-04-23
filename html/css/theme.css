@@ -869,7 +869,7 @@ p.body-paragraph {
 
 .hotproperties .thumbnail img {
     margin-bottom: 10px;
-/*    width: 100%;*/
+    width: 80%;
     -webkit-box-sizing: border-box; /* webkit */
     -khtml-box-sizing: border-box; /* konqueror */
     -moz-box-sizing: border-box; /* firefox */
