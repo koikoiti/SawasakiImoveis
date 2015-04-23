@@ -9,12 +9,20 @@
 						<h1>Lista de Imóveis</h1>
 					</div>
 				</div><!--end of west pane span9-->
-                <div class="row-fluid hotproperties" style="overflow: hidden; width: 98%; background: #FABB00; color: #fff; border-radius: 10px; padding-left: 10px; margin-bottom: 15px;">
+                <div class="row-fluid hotproperties" style="overflow: hidden; width: 98%; background: #FABB00; color: #000; font-weight: bold; border-radius: 10px; padding-left: 10px; margin-bottom: 15px;">
                     <h2>Filtrar por</h2>
-                    <%BUSCACATEGORIA%>
-                    <%BUSCACIDADEESTADO%>
-                    Valores entre: <input type="text" name="min" id="min" style="width: 20%;" class="money" value="<%MIN%>" /> e <input type="text" name="max" id="max" style="width: 20%;" class="money" value="<%MAX%>" />
-                    <button onclick="filtrar()" class="btn btn-peach" type="button" style="margin-bottom: 10px;">Filtrar</button>
+                    <div style="width: 100%; float: left;">
+                        <%BUSCACIDADEESTADO%>
+                        Bairro: <input onkeypress="return runScript2(event)" type="text" id="bairro" name="bairro" style="width: 17%;" value="<%BAIRRO%>"/>
+                        Dormitórios: <input type="text" id="dormitorios" name="dormitorios" onkeypress="return SomenteNumero(event);" maxlength="2" style="width: 10%;" value="<%DORMITORIOS%>"/>
+                        Garagens: <input type="text" id="garagens" name="garagens" style="width: 10%;" onkeypress="return SomenteNumero(event);" maxlength="2" value="<%GARAGENS%>"/>
+                    </div>
+                    <div style="width: 100%; float: left;">
+                        <%BUSCACATEGORIA%>
+                        Valores entre: <input type="text" name="min" id="min" style="width: 15%;" class="money" value="<%MIN%>" onkeypress="return SomenteNumero(event);" /> e <input type="text" name="max" id="max" style="width: 15%;" class="money" value="<%MAX%>" onkeypress="return SomenteNumero(event);" />
+                        <button onclick="filtrar()" class="btn btn-peach" type="button" style="margin-bottom: 10px; width: 10.5%; margin-left: 8%;">Filtrar</button>
+                        <%REMOVERFILTRO%>
+                    </div>
                 </div>
 				<div class="row-fluid hotproperties" style="overflow: hidden; width: 100%;">
 					<%IMOVEIS%>
@@ -92,12 +100,38 @@ function filtrar(){
     var max = $("#max").val();
     var cat = $("#categoria").val();
     var ce = $("#cidadeestado").val();
+    var bairro = $("#bairro").val();
+    var dormitorios = $("#dormitorios").val();
+    var garagens = $("#garagens").val();
     if(ce == ''){
         var cidadeestado = '';
     }else{
         var auz = ce.split('/');
         var cidadeestado = auz[0] + '_' + auz[1];
     }
-    location.href = '<%URLPADRAO%>lista-imoveis/?fcidadeestado=' + cidadeestado + "&fcategoria=" + cat + "&fmin=" + min + "&fmax=" + max;
+    location.href = '<%URLPADRAO%>lista-imoveis/?fcidadeestado=' + cidadeestado + "&fcategoria=" + cat + "&fmin=" + min + "&fmax=" + max + "&bairro=" + bairro + "&dormitorios=" + dormitorios + "&garagens=" + garagens;
+}
+
+function removerFiltro(){
+    location.href = '<%URLPADRAO%>lista-imoveis';
+}
+
+function SomenteNumero(e){
+    var tecla = (window.event)?event.keyCode:e.which;   
+    if((tecla > 47 && tecla < 58)) return true;
+    else{
+    	if (tecla == 8 || tecla == 0 ){
+    	   return true
+        }else if(tecla == 13){
+            filtrar();
+        }
+	else return false;
+    }
+}
+
+function runScript2(e){
+    if (e.keyCode == 13) {
+        filtrar();
+    }
 }
 </script>

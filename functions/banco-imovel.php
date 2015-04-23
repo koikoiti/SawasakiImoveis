@@ -15,7 +15,7 @@
         }
         
         #Lista imóveis
-        function ListaImoveis($idcategoria, $cidadeestado, $min, $max, $pagina){
+        function ListaImoveis($idcategoria, $cidadeestado, $min, $max, $bairro, $dormitorios, $garagens, $pagina){
             $inicio = ($pagina * Limite) - Limite;
             $Auxilio = parent::CarregaHtml('itens/lista-imoveis-itens');
             if($idcategoria){
@@ -34,6 +34,15 @@
                 $max = str_replace('.', '', $max);
                 $max = str_replace(',', '.', $max);
                 $where .= " AND I.valor <= '$max'";
+            }
+            if($bairro){
+                $where .= " AND I.bairro = '$bairro'";
+            }
+            if($dormitorios){
+                $where .= " AND I.dormitorios = '$dormitorios'";
+            }
+            if($garagens){
+                $where .= " AND I.garagem = '$garagens'";
             }
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
@@ -75,8 +84,8 @@
         }
         
         #Monta paginacao
-        function MontaPaginacao($idcategoria, $ce, $min, $max, $pagina){
-            $totalPaginas = $this->TotalPaginas($idcategoria, $ce, $min, $max);
+        function MontaPaginacao($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens, $pagina){
+            $totalPaginas = $this->TotalPaginas($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens);
             if($idcategoria || $ce || $min || $max){
                 $url = "fcategoria=$idcategoria&fcidadeestado=$ce&fmin=$min&fmax=$max";
             }
@@ -88,7 +97,7 @@
                     $pag .= '<span class="page active">1</span>';
                 }else{
                     $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.($pagina-1).'" class="page">&laquo;</a>';
-                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.'=1" class="page">1</a>';
+                    $pag .= '<a href="'.UrlPadrao.'lista-imoveis/?'.$url.'1" class="page">1</a>';
                 }
                 $pag .= '<span class="page">...</span>';
                 
@@ -150,7 +159,7 @@
         }
         
         #Total de paginas
-        function TotalPaginas($idcategoria, $ce, $min, $max){
+        function TotalPaginas($idcategoria, $ce, $min, $max, $bairro, $dormitorios, $garagens){
             if($idcategoria){
                 $where .= "AND I.idcategoria = '$idcategoria'";
             }
@@ -167,6 +176,15 @@
                 $max = str_replace('.', '', $max);
                 $max = str_replace(',', '.', $max);
                 $where .= " AND I.valor <= '$max'";
+            }
+            if($bairro){
+                $where .= " AND I.bairro = '$bairro'";
+            }
+            if($dormitorios){
+                $where .= " AND I.dormitorios = '$dormitorios'";
+            }
+            if($garagens){
+                $where .= " AND I.garagem = '$garagens'";
             }
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
@@ -273,7 +291,7 @@
         #Monta select Categorias
         function SelectCategorias($idcategoria){
 			$Sql = "SELECT * FROM fixo_categorias_imovel ORDER BY nome";
-			$select_categorias = "<select class='form-control' id='categoria' name='categoria' style='width: auto'>";
+			$select_categorias = "<select class='form-control' id='categoria' name='categoria' style='width: 15%'>";
 			$select_categorias .= "<option selected value=''>Categoria</option>";
 			$result = parent::Execute($Sql);
 			if($result){
@@ -296,7 +314,7 @@
             $auz = explode('_', $cidadeestado);
             $Sql = 'SELECT DISTINCT cidade, estado FROM t_imoveis WHERE cidade <> "" AND estado <> ""';
             $result = $this->Execute($Sql);
-            $ce = '<select id="cidadeestado" style="width: auto;">';
+            $ce = '<select autofocus id="cidadeestado" style="width: 15%;">';
             $ce .= '<option value="">Cidade/UF</option>';
             while($rs = $this->ArrayData($result)){
                 if($auz[0] == $rs['cidade'] && $auz[1] == $rs['estado']){
