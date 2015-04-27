@@ -39,6 +39,7 @@
                 $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
                 $Linha = str_replace('<%REFERENCIA%>', utf8_encode($rs['referencia']), $Linha);
                 $Linha = str_replace('<%DORMITORIOS%>', utf8_encode($rs['dormitorios']), $Linha);
+                $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
                 $Linha = str_replace('<%GARAGEM%>', utf8_encode($rs['garagem']), $Linha);
                 $Linha = str_replace('<%AREATOTAL%>', utf8_encode($rs['area_total']), $Linha);
                 $tipo_endereco = $rs['categoria'] . " - " . $rs['cidade'] . "/" . $rs['estado'];
@@ -68,6 +69,7 @@
                 $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
                 $Linha = str_replace('<%REFERENCIA%>', utf8_encode($rs['referencia']), $Linha);
                 $Linha = str_replace('<%DORMITORIOS%>', utf8_encode($rs['dormitorios']), $Linha);
+                $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
                 $Linha = str_replace('<%GARAGEM%>', utf8_encode($rs['garagem']), $Linha);
                 $Linha = str_replace('<%AREATOTAL%>', utf8_encode($rs['area_total']), $Linha);
                 $tipo_endereco = $rs['categoria'] . " - " . $rs['cidade'] . "/" . $rs['estado'];
