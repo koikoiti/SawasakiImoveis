@@ -35,7 +35,7 @@
 	$Conteudo = $banco->CarregaHtml('imovel');
     $Conteudo = str_replace('<%ENDERECOMAPS%>', urlencode(utf8_encode($enderecomaps)), $Conteudo);
     $Conteudo = str_replace('<%SLIDER%>', $slider, $Conteudo);
-    $Conteudo = str_replace('<%ENDERECO%>', utf8_encode($rs['endereco'] . " - " . $rs['cidade'] . "/" . $rs['estado']), $Conteudo);
+    $Conteudo = str_replace('<%ENDERECO%>', utf8_encode($rs["bairro"] . " - " . $rs['cidade'] . "/" . $rs['estado']), $Conteudo);
     $Conteudo = str_replace('<%QUARTOS%>', $rs['dormitorios'], $Conteudo);
     $Conteudo = str_replace('<%REFERENCIA%>', $rs['referencia'], $Conteudo);
     $Conteudo = str_replace('<%BAIRRO%>', $rs['bairro'], $Conteudo);
