@@ -37,6 +37,7 @@
                 $Linha = $Auxilio;
                 $Linha = str_replace('<%CAMINHO%>', $rs['caminho'], $Linha);
                 $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
+                $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
                 $Linha = str_replace('<%REFERENCIA%>', utf8_encode($rs['referencia']), $Linha);
                 $Linha = str_replace('<%DORMITORIOS%>', utf8_encode($rs['dormitorios']), $Linha);
                 $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
@@ -67,6 +68,7 @@
                 $rsCaminho = parent::ArrayData($resultCaminho);
                 $Linha = str_replace('<%CAMINHO%>', $rsCaminho['caminho'], $Linha);
                 $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
+                $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
                 $Linha = str_replace('<%REFERENCIA%>', utf8_encode($rs['referencia']), $Linha);
                 $Linha = str_replace('<%DORMITORIOS%>', utf8_encode($rs['dormitorios']), $Linha);
                 $Linha = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Linha);
