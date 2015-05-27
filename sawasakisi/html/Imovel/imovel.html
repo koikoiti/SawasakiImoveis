@@ -120,7 +120,7 @@
         <div class="form-group" style="width: 50%; float: left">
             <label style="width: 100%;" class="col-sm-3 control-label form-margin">Telefone</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control telefone" name="telefone" value="<%TELEFONE%>">
+                <input placeholder="(##) ####-####9 / (##) ####-####9 / (##) ####-####9" type="text" class="form-control telefone" name="telefone" value="<%TELEFONE%>">
             </div>
         </div>
 
@@ -336,7 +336,7 @@
 $(function() {
     $('.cep').mask('00000-000');
     $('.money').mask("#.##0,00", {reverse: true, maxlength: false});
-    $('.telefone').mask('(00) 0000-00009');
+    $('.telefone').mask('(00) 0000-00009 / (00) 0000-00009 / (00) 0000-00009');
     
     $('#cbaverbada').on('change', function(){
         if($("#cbaverbada").is(':checked')){
