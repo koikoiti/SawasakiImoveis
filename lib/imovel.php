@@ -38,7 +38,7 @@
     $Conteudo = str_replace('<%ENDERECO%>', utf8_encode($rs["bairro"] . " - " . $rs['cidade'] . "/" . $rs['estado']), $Conteudo);
     $Conteudo = str_replace('<%QUARTOS%>', $rs['dormitorios'], $Conteudo);
     $Conteudo = str_replace('<%REFERENCIA%>', $rs['referencia'], $Conteudo);
-    $Conteudo = str_replace('<%BAIRRO%>', $rs['bairro'], $Conteudo);
+    $Conteudo = str_replace('<%BAIRRO%>', utf8_encode($rs['bairro']), $Conteudo);
     $Conteudo = str_replace('<%GARAGEM%>', $rs['garagem'], $Conteudo);
     $Conteudo = str_replace('<%CATEGORIA%>', utf8_encode($rs['categoria']), $Conteudo);
     $Conteudo = str_replace('<%AREATOTAL%>', utf8_encode($rs['area_total']), $Conteudo);
