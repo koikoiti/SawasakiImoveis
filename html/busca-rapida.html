@@ -59,7 +59,11 @@ function enviarBusca(){
     if(tipo == '' && foo.length < 1 && bairro.length < 1){
         alert('Preencha algum parâmetro de busca!');
     }else{
-        window.location.href = "<%URLPADRAO%>busca/?" + foo.join('&') + "&tipo=" + tipo + '&' + bairro.join('&');
+        if(bairro.length < 1){
+            window.location.href = "<%URLPADRAO%>busca/?" + foo.join('&') + "&tipo=" + tipo;
+        }else{
+            window.location.href = "<%URLPADRAO%>busca/?" + foo.join('&') + "&tipo=" + tipo + '&' + bairro.join('&');
+        }
     }
     
 }

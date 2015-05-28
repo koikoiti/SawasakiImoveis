@@ -1,8 +1,37 @@
 <?php
 	class bancobusca extends banco{
 		
+        #Monta select Order
+        function SelectOrder($idorder){
+            $Sql = "SELECT * FROM fixo_order_imovel ORDER BY idorder";
+			$select_order = "<select onchange='filtrar()' class='form-control' id='order' name='order' style='width: auto; margin: 10px 25px;'>";
+			$select_order .= "<option value=''>Ordenar Por</option>";
+			$result = parent::Execute($Sql);
+			if($result){
+				while($rs = parent::ArrayData($result)){
+					if($rs['idorder'] == $idorder){
+						$select_order .= "<option selected value='".$rs['idorder']."'>".$rs['nome']."</option>";
+					}else{
+						$select_order .= "<option value='".$rs['idorder']."'>".$rs['nome']."</option>";
+					}
+				}
+				$select_order .= "</select>";
+				return utf8_encode($select_order);
+			}else{
+				return false;
+			}
+        }
+        
         #Monta itens busca rapida
-        function MontaBuscaRapidaItens($idcategoria, $ce, $bairro){
+        function MontaBuscaRapidaItens($idcategoria, $ce, $bairro, $order){
+            if($order){
+                $SqlOrder = "SELECT ordem FROM fixo_order_imovel WHERE idorder = '$order'";
+                $resultOrder = parent::Execute($SqlOrder);
+                $rsOrder = parent::ArrayData($resultOrder);
+                $ordenacao = " ORDER BY " . $rsOrder['ordem'];
+            }else{
+                $ordenacao = " ORDER BY I.data_cadastro ASC";
+            }
             $Auxilio = utf8_encode(parent::CarregaHtml('itens/busca-itens'));
             $Sql = "SELECT I.*, C.nome AS categoria, M.* FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
@@ -32,6 +61,7 @@
                 $Sql = rtrim($Sql, ' OR');
                 $Sql .= ")";
             }
+            $Sql .= " $ordenacao";
             $result = parent::Execute($Sql);
             while($rs = parent::ArrayData($result)){
                 $Linha = $Auxilio;
@@ -52,14 +82,23 @@
         }
         
         #Monta busca normal
-        function MontaBuscaNormal($pesquisa){
+        function MontaBuscaNormal($pesquisa, $order){
+            if($order){
+                $SqlOrder = "SELECT ordem FROM fixo_order_imovel WHERE idorder = '$order'";
+                $resultOrder = parent::Execute($SqlOrder);
+                $rsOrder = parent::ArrayData($resultOrder);
+                $ordenacao = " ORDER BY " . $rsOrder['ordem'];
+            }else{
+                $ordenacao = " ORDER BY I.data_cadastro ASC";
+            }
             $Auxilio = utf8_encode(parent::CarregaHtml('itens/busca-itens'));
             $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
                     WHERE I.referencia LIKE '%$pesquisa%' 
                     OR I.bairro LIKE '%$pesquisa%' 
                     OR I.endereco LIKE '%$pesquisa%'
-                    OR I.cidade LIKE '%$pesquisa%'";
+                    OR I.cidade LIKE '%$pesquisa%' 
+                    $ordenacao";
             $result = parent::Execute($Sql);
             while($rs = parent::ArrayData($result)){
                 $Linha = $Auxilio;

@@ -1,38 +1,42 @@
 <section id="main">
-			<div class="body-text">
-				<div class="container-fluid">
-					<div class="row-fluid">
-						<div class="span9">
-							<%TITULOBUSCA%>
+	<div class="body-text">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span9">
+					<%TITULOBUSCA%> <%SELECTORDER%>
+                    
+                    <%BUSCAITENS%>
                             
-                            <%BUSCAITENS%>
-                            
-								<!--div class="pagination pagination-centered">
-									<div class="wp-pagenavi">
-<span class="current">1</span><a href="http://myorange.ca/wp_peachrealestate/page/2/?s=a&amp;submit" class="page larger">2</a><a href="http://myorange.ca/wp_peachrealestate/page/2/?s=a&amp;submit" class="nextpostslink">Próxima »</a>
-</div>							    </div-->
-								
-								
-									
-						</div>
-        <div class="span3"> 
-          <!--
-				"Quick Search" Widget
+					<!--div class="pagination pagination-centered">
+						<div class="wp-pagenavi">
+                            <span class="current">1</span><a href="http://myorange.ca/wp_peachrealestate/page/2/?s=a&amp;submit" class="page larger">2</a><a href="http://myorange.ca/wp_peachrealestate/page/2/?s=a&amp;submit" class="nextpostslink">Próxima »</a>
+                        </div>
+                    </div-->
+				</div>
+                <div class="span3"> 
+                <!--
+				    "Quick Search" Widget
 				
-				SPECIAL NOTE: Please leave the inline style for <Select></Select> "width:100%",
+				    SPECIAL NOTE: Please leave the inline style for <Select></Select> "width:100%",
 							  the width is automatically "Re-adjusted" with javascript
 							  See "config.js" for more details	
-			-->
-          
-         <%BUSCARAPIDA%>
-          
-          
-        </div>
-					</div>
-					
-				</div>
-				
+			     -->
+                    <%BUSCARAPIDA%>
+                </div>
 			</div>
-
-
-		</section>
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+function filtrar(){
+    var order = $("#order").val();
+    var url = location.href;
+    
+    if(url.indexOf('order') > -1){
+        var aux = url.split('order');
+        location.href = aux[0] + 'order=' + order;
+    }else{
+        location.href = url + '&order=' + order;
+    }    
+}
+</script>
