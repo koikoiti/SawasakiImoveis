@@ -324,7 +324,6 @@
                     WHERE 1 
                     $where
                     ";
-            echo $Sql;
             $result = parent::Execute($Sql);
 			$num_rows = parent::Linha($result);
 			$totalPag = ceil($num_rows/LimiteBuscaRapida);
