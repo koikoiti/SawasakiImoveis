@@ -11,7 +11,7 @@
     define('Limite', 12);
     define('QtdPag', 5);
         #Paginacao busca rapida
-    define('LimiteBuscaRapida', 1);
+    define('LimiteBuscaRapida', 10);
     
     #Verifica SERVER (web/local)
     if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
