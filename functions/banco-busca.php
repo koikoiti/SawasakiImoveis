@@ -307,12 +307,12 @@
                 $where .= " AND I.cidade = '".$aux[0]."' AND I.estado = '".$aux[1]."'";
             }
             if($bairro[0] != ''){
-                $Sql .= " AND (";
+                $where .= " AND (";
                 foreach($bairro as $val){
-                    $Sql .= "(I.bairro = '".utf8_decode($val)."') OR";
+                    $where .= "(I.bairro = '".utf8_decode($val)."') OR";
                 }
-                $Sql = rtrim($Sql, ' OR');
-                $Sql .= ")";
+                $where = rtrim($where, ' OR');
+                $where .= ")";
             }
             $Sql = "SELECT I.*, C.nome AS categoria, M.* FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
@@ -324,6 +324,7 @@
                     WHERE 1 
                     $where
                     ";
+            echo $Sql;
             $result = parent::Execute($Sql);
 			$num_rows = parent::Linha($result);
 			$totalPag = ceil($num_rows/LimiteBuscaRapida);
