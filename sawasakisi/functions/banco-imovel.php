@@ -62,7 +62,7 @@
             if(parent::Execute($Sql)){
                 if($files){
                     $lastID = mysql_insert_id();
-                    $this->InsereFotos($lastID, $files);
+                    $this->InsereFotosInsert($lastID, $files);
                 }
                 return true;
             }else{
@@ -70,53 +70,25 @@
             }
         }
         
-        #Insere caminho das fotos no banco e copia para a pasta do imóvel
-        function InsereFotos($idimovel, $files){
+        #Insere caminho das fotos no banco e copia para a pasta do imóvel - INSERT
+        function InsereFotosInsert($idimovel, $files){ 
+            $cont = 1;
             
-            #Verifica update
-            $SqlVerificaUpdate = "SELECT * FROM t_imagens_imovel WHERE idimovel = $idimovel ORDER BY caminho DESC LIMIT 0, 1";
-            $resultVerificaUpdate = parent::Execute($SqlVerificaUpdate);
-            $linhaVerificaUpdate = parent::Linha($resultVerificaUpdate);
-            if($linhaVerificaUpdate){
-                $rsVerificaUpdate = parent::ArrayData($resultVerificaUpdate);
-                $ultimo = $rsVerificaUpdate['caminho'];
-                $ultimo = explode('/', $ultimo);
-                $ultimo = explode(' ', $ultimo[3]);
-                $ultimo = explode('.', $ultimo[2]);
-                $cont = $ultimo[0] + 1;
-            }else{
-                $cont = 1;
-            }
-                        
-            #Verifica SERVER (web/local)
+			#Verifica SERVER (web/local)
             if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
                 $caminhoCriar = $_SERVER['DOCUMENT_ROOT'] . "/arq/imoveis/$idimovel";
             }else{
                 $caminhoCriar = $_SERVER['DOCUMENT_ROOT'] . "/sawasakiimoveis/arq/imoveis/$idimovel";
             }
             $caminho = "arq/imoveis/$idimovel";
-            #Cria diretório
-        /*
-            // Escrita e leitura para o proprietario, nada ninguem mais
-            chmod ("/somedir/somefile", 0600);
             
-            // Escrita e leitura para o proprietario, leitura para todos os outros
-            chmod ("/somedir/somefile", 0644);
-            
-            // Tudo para o proprietario, leitura e execucao para os outros
-            chmod ("/somedir/somefile", 0755);
-            
-            // Tudo para o proprietario, leitura e execucao para o grupo do prop
-            chmod ("/somedir/somefile", 0750);
-        */
-			
-            mkdir($caminhoCriar, 0755);
+			mkdir($caminhoCriar, 0755);
             foreach($files as $file){
                 #Pega extensão da imagem
                 preg_match("/\.(gif|png|jpg|jpeg){1}$/i", $file["name"], $ext);
                 $caminhoMover = "/$idimovel - $cont" . "." . $ext[1];
                 move_uploaded_file($file["tmp_name"], $caminhoCriar.$caminhoMover);
-                $Sql = "INSERT INTO t_imagens_imovel (idimovel, caminho) VALUES ('$idimovel', '".$caminho.$caminhoMover."')";
+                $Sql = "INSERT INTO t_imagens_imovel (idimovel, caminho, ordem) VALUES ('$idimovel', '".$caminho.$caminhoMover."', '$cont')";
                 parent::Execute($Sql);
                 $cont++;
             }
@@ -131,12 +103,53 @@
                     dep_empregada = '$dep_empregada', playground = '$playground', salao_festas = '$salao_festas', piscina = '$piscina', portao_eletronico = '$portao_eletronico', quantidade_suite = '$quantidade_suite' WHERE idimovel = '$idimovel'";
             if(parent::Execute($Sql)){
                 if($files){
-                    $this->InsereFotos($idimovel, $files);
+                    $this->InsereFotosUpdate($idimovel, $files);
                 }
                 return true;
             }else{
                 parent::ChamaManutencao();
             }
+        }
+        
+        #Insere caminho das fotos no banco e copia para a pasta do imóvel - UPDATE
+        function InsereFotosUpdate($idimovel, $files){ 
+            $order = 1;
+            #Verifica SERVER (web/local)
+            if (strpos($_SERVER['DOCUMENT_ROOT'], 'public_html') !== false) {
+                $caminhoCriar = $_SERVER['DOCUMENT_ROOT'] . "/arq/imoveis/$idimovel";
+            }else{
+                $caminhoCriar = $_SERVER['DOCUMENT_ROOT'] . "/sawasakiimoveis/arq/imoveis/$idimovel";
+            }
+			$caminho = "arq/imoveis/$idimovel";
+			
+			#Pega a numeração da última imagem caso precise adicionar 1 novo
+			$SqlIMG = "SELECT * FROM t_imagens_imovel WHERE idimovel = $idimovel ORDER BY idimagemimovel DESC LIMIT 0, 1";
+			$resultIMG = parent::Execute($SqlIMG);
+			$rsIMG = parent::ArrayData($resultIMG);
+			$ultimo = $rsIMG['caminho'];
+			$ultimo = explode('/', $ultimo);
+            $ultimo = explode(' ', $ultimo[3]);
+            $ultimo = explode('.', $ultimo[2]);
+			$ultimo = $ultimo[0];
+			
+			foreach($files as $file){
+				#Verifica file[name]. Se tiver %, update, senão, insert
+				if($file['name'][0] == '%'){
+					#UPDATE
+					$SqlUpdate = "UPDATE t_imagens_imovel SET ordem = $order WHERE idimagemimovel = " . ltrim($file['name'], '%');
+					parent::Execute($SqlUpdate);
+				}else{
+					#INSERT
+					$ultimo++;
+					#Pega extensão da imagem
+					preg_match("/\.(gif|png|jpg|jpeg){1}$/i", $file["name"], $ext);
+					$caminhoMover = "/$idimovel - $ultimo" . "." . $ext[1];
+                    move_uploaded_file($file["tmp_name"], $caminhoCriar.$caminhoMover);
+					$Sql = "INSERT INTO t_imagens_imovel (idimovel, caminho, ordem) VALUES ('$idimovel', '".$caminho.$caminhoMover."', '$order')";
+					parent::Execute($Sql);
+				}
+				$order++;
+			}
         }
         
         #Remove Imovel
@@ -225,12 +238,12 @@
         
         #Monta imagens editar
         function MontaImagens($idimovel){
-            $Sql = "SELECT * FROM t_imagens_imovel WHERE idimovel = $idimovel";
+            $Sql = "SELECT * FROM t_imagens_imovel WHERE idimovel = $idimovel ORDER BY ordem";
             $result = parent::Execute($Sql);
             $num_rows = parent::Linha($result);
             if($num_rows){
                 while($rs = parent::ArrayData($result)){
-                    $imagens .= "<div id='".$rs['idimagemimovel']."' style='float: left; clear: both; width: 20%'><div class='fileinput-preview thumbnail selFile'><img style='max-height: 400px;' src='".UrlFoto.$rs['caminho']."'></div><a href='#' onclick='removeFoto(\"".$rs['idimagemimovel']."\")' class='btn btn-danger'>Remover</a></div>";
+                    $imagens .= "<div id='i=%".$rs['idimagemimovel']."' class='colFoto span_1_of_5'><div style='height: 12.6em;'><img class='img-responsive' style='max-height: 100%;display: block; margin-left: auto; margin-right: auto;' src=\"".UrlFoto.$rs['caminho']."\" data-file='".$rs['idimagemimovel']."'/></div><button type='button' onclick='removeFotoImovel(\"".$rs['idimagemimovel']."\", \"".$idimovel."\")' style='width: 100%; padding: 1px; margin: 1px 0;' class='btn btn-danger'>Remover</button></div>";
                 }
             }
             return $imagens;
@@ -539,5 +552,19 @@
 			$totalPag = ceil($num_rows/Limite);
 			return $totalPag;
         }
+        
+        #Monta ordem hidden
+		function MontaHidden($idimovel){
+			$Sql = "SELECT * FROM t_imagens_imovel WHERE idimovel = $idimovel ORDER BY ordem";
+			$result = parent::Execute($Sql);
+			$num_rows = parent::Linha($result);
+			if($num_rows){
+				while($rs = parent::ArrayData($result)){
+					$hidden .= "i[]=%".$rs['idimagemimovel'].'&';
+				}
+			}
+			$hidden = rtrim($hidden, '&');
+			return $hidden;
+		}
 	}
 ?>

@@ -314,14 +314,14 @@
     <div class="col-md-6" style="width: 100%;">
         <div class="form-group">
             <div class="col-sm-3" style="width: 100%;">
-                <span class="btn btn-primary btn-file"><span class="fileinput-new">Selecionar Imagens</span><input id="files" type="file" name="imagens[]" multiple="multiple" accept="image/*"></span>
-                <div id="selectedFiles" style="display: flex;"><%IMAGENS%></div>
+                <input id="files" <%REQUIREFOTO%> name="imagens[]" multiple type="file" class="filestyle" data-buttonText="Selecionar Imagens" data-input="false" accept="image/png, image/jpg, image/gif, image/jpeg" data-badge="false"/>
             </div>
         </div>
-      
+        <div id="sortable" class="sectionFoto group"><%IMAGENS%></div>
       <div class="form-group">
             <div class="col-sm-6 form-margin">
-                <button style="box-shadow: none;background-color: #19b698;border-color: transparent;border-color: #CCCCCC;border-radius: 0;-webkit-border-radius: 0;outline: none;margin-bottom: 5px;margin-left: 3px;font-size: 13px;padding: 7px 11px;" type="submit" class="btn btn-success btn-flat">
+                <input type="hidden" name="imgOrder" id="imgOrder" value="<%HIDDEN%>" />
+                <button onclick="return verificaFotos()" style="box-shadow: none;background-color: #19b698;border-color: transparent;border-color: #CCCCCC;border-radius: 0;-webkit-border-radius: 0;outline: none;margin-bottom: 5px;margin-left: 3px;font-size: 13px;padding: 7px 11px;" type="submit" class="btn btn-success btn-flat">
                     <i class="fa fa-check"></i> Salvar
                 </button>
                 <%BOTAOVOLTAR%>
@@ -394,48 +394,51 @@ function buscaCep(cep){
 </script>
 <script type="text/javascript">
 /* Multifiles */
-    var selDiv = "";
-	var storedFiles = [];
+var selDiv = "";
+var storedFiles = [];
+
+$(document).ready(function() {
+	$("#files").on("change", handleFileSelect);
 	
-	$(document).ready(function() {
-		$("#files").on("change", handleFileSelect);
-		
-		selDiv = $("#selectedFiles"); 
-		//$("#myForm").on("submit", handleForm);
-		
-		$("body").on("click", ".fileinput-exists", removeFile);
-	});
-    
-    function handleFileSelect(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		filesArr.forEach(function(f) {			
-			if(!f.type.match("image.*")) {
-				return;
-			}
-			storedFiles.push(f);
-			
-			var reader = new FileReader();
-			reader.onload = function (e) {
-                var html = "<div style='float: left; clear: both; width: 20%'><div class='fileinput-preview thumbnail selFile'><img style='max-height: 400px;' src=\"" + e.target.result + "\" data-file='"+f.name+"'></div><a href='#' class='btn btn-danger fileinput-exists'>Remover</a></div>";
-			//	var html = "<div>" + f.name + "<br clear=\"left\"/></div>";
-				selDiv.append(html);
-				
-			}
-			reader.readAsDataURL(f); 
-		});	
-	}
-    
-    function removeFile(e) {
-		var file = $(this).data("file");
-		for(var i=0;i<storedFiles.length;i++) {
-			if(storedFiles[i].name === file) {
-				storedFiles.splice(i,1);
-				break;
-			}
+	selDiv = $("#sortable"); 
+	//$("#myForm").on("submit", handleForm);
+	
+	$("body").on("click", ".upRemove", removeFile);
+});
+
+function handleFileSelect(e) {
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	filesArr.forEach(function(f) {			
+		if(!f.type.match("image.*")) {
+			return;
 		}
-		$(this).parent().remove();
+        
+		storedFiles.push(f);
+        
+		var reader = new FileReader();
+		reader.onload = function (e) {
+            var html = "<div id='i="+f.name+"' class='colFoto span_1_of_5'><div style='height: 12.6em;'><img class='img-responsive' style='max-height: 100%;display: block; margin-left: auto; margin-right: auto;' src=\"" + e.target.result + "\" data-file='"+f.name+"'/></div><button type='button' style='width: 100%; padding: 1px; margin: 1px 0;' class='btn btn-danger upRemove'>Remover</button></div>";
+			selDiv.append(html);
+			var sorted = $('#sortable').sortable( "serialize", { expression: (/(.+)[=](.+)/) } );
+			$("#imgOrder").val(sorted);
+		}
+		reader.readAsDataURL(f);
+	});	
+}
+
+function removeFile(e) {
+	var file = $(this).data("file");
+	for(var i=0;i<storedFiles.length;i++) {
+		if(storedFiles[i].name === file) {
+			storedFiles.splice(i,1);
+			break;
+		}
 	}
+	$(this).parent().remove();
+	var sorted = $('#sortable').sortable( "serialize", { expression: (/(.+)[=](.+)/) } );
+	$("#imgOrder").val(sorted);
+}
 </script>
 <script type="text/javascript">
     function excluir(id){
@@ -444,14 +447,20 @@ function buscaCep(cep){
         }
     }
     
-    function removeFoto(id){
+    function removeFotoImovel(idimagemimovel, idimovel){
         if(confirm("Deseja remover a imagem desse imóvel?")){
             $.post("<%URLPADRAO%>lib/ajax/removeFotoImovel.php",
-    			{id:id},
+    			{idimagemimovel:idimagemimovel, idimovel:idimovel},
     			function(retorno){
 				    if(retorno == 1){
-				        $('#'+id).remove();
-				    }
+				        console.log(retorno);
+						var element = document.getElementById("i=%"+idimagemimovel);
+						element.parentNode.removeChild(element);
+						var sorted = $('#sortable').sortable( "serialize", { expression: (/(.+)[=](.+)/) } );
+						$("#imgOrder").val(sorted);
+					}else if(retorno == 9){
+						alert('Ocorreu um erro com o banco de dados. Tente novamente.');
+					}
     			}
     		);
         }
@@ -460,6 +469,28 @@ function buscaCep(cep){
     function maiusc(e){
         e.value = e.value.toUpperCase();
     }
+    
+    function verificaFotos(){
+	   var hidden = $("#imgOrder").val();
+    	if(hidden.length < 1){
+    		alert("É necessário pelo menos uma foto!!");
+    		return false;
+    	}else{
+    		return true;
+    	}
+    }
+</script>
+<script type="text/javascript">
+$(function(){
+	$("#sortable").sortable();
+	$("#sortable").disableSelection();
+	$("#sortable").sortable({
+		stop: function(e, ui){
+			var sorted = $('#sortable').sortable( "serialize", { expression: (/(.+)[=](.+)/) } );
+			$("#imgOrder").val(sorted);
+		}
+	});
+});
 </script>
     <script type="text/javascript" src="<%URLPADRAO%>html/js/jasny.bootstrap/extend/js/jasny-bootstrap.min.js"></script>
     <script type="text/javascript" src="<%URLPADRAO%>html/js/bootstrap.daterangepicker/moment.min.js"></script>
@@ -471,3 +502,62 @@ function buscaCep(cep){
     <script type="text/javascript" src="<%URLPADRAO%>html/js/jquery.select2/select2.min.js"></script>
     <script type="text/javascript" src="<%URLPADRAO%>html/js/bootstrap.slider/js/bootstrap-slider.js"></script>
     <script type="text/javascript" src="<%URLPADRAO%>html/js/jquery.icheck/icheck.min.js"></script>
+<style>
+/*  SECTIONS  */
+.sectionFoto {
+	clear: both;
+	padding: 0px;
+	margin: 10px 0 0 0;
+}
+
+/*  COLUMN SETUP  */
+.colFoto {
+	display: block;
+	float:left;
+	margin: 0 0 1% 1.2%;
+	padding: 3px;
+	border-radius: 5px;
+	border: 1px solid black;
+	background: rgb(240, 240, 233);
+	height: 15em;
+}
+.colFoto:first-child { margin-left: 1.2%; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF FIVE  */
+.span_5_of_5 {
+	width: 100%;
+}
+.span_4_of_5 {
+	width: 79.68%;
+}
+.span_3_of_5 {
+	width: 59.36%;
+}
+.span_2_of_5 {
+	width: 39.04%;
+}
+.span_1_of_5 {
+	width: 18.72%;
+	position: relative;
+	display: inline-block;
+	margin-bottom: 2em;
+}
+/*.span_1_of_5:after {
+    content: '';
+    display: block;
+    margin-top: 75%;
+}*/
+
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.colFoto { margin: 1% 0 1% 0%; background: rgb(240, 240, 233); }
+	.span_1_of_5, .span_2_of_5, .span_3_of_5, .span_4_of_5, .span_5_of_5 { width: 100%; }
+	.colFoto:first-child { margin-left: 0; }
+}
+</style>

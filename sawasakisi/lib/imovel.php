@@ -1,9 +1,11 @@
 <?php
     #Variáveis
     $titulo = "Novo Imóvel";
+    $hidden = "";
     $botao_excluir = '';
     $vbaverbada = 'hidden';
     $vbsuite = 'hidden';
+    $require_foto = 'required';
        
 	#include das funcoes da tela imovel
 	include('functions/banco-imovel.php');
@@ -13,7 +15,9 @@
     
     if($this->PaginaAux[0] == 'editar'){
         #Trabalha com editar
+        $require_foto = '';
         $idimovel = $this->PaginaAux[1];
+        $hidden = $banco->MontaHidden($idimovel);
         $rImovel = $banco->BuscaImovelPorId($idimovel);
         $rsImovel = $banco->ArrayData($rImovel);
         
@@ -229,27 +233,76 @@
             $portao_eletronico = 1;
         }
         
-        #Pega as imagens e arruma num array
-        if($_FILES['imagens']['name'][0] !== ""){
-            $files=array();
-            $fdata=$_FILES['imagens'];
-            if(is_array($fdata['name'])){
-                for($i=0;$i<count($fdata['name']);++$i){
-                    $files[]=array(
-                        'name'     => $fdata['name'][$i],
-                        'tmp_name' => $fdata['tmp_name'][$i],
-                    );
-                }
-            }else{
-                $files[]=$fdata;
-            }
-        }
-        
         if($idimovel){
             #Update
-            $banco->AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files, $quantidade_suite);
+            #Pega as imagens e arruma num array
+    		if($_FILES['imagens']['name'][0] !== ""){
+    			$files = array();
+    			$fdata = $_FILES['imagens'];
+    			if(is_array($fdata['name'])){
+    				for($i = 0; $i < count($fdata['name']); ++$i){
+    					$files[] = array(
+    							'name'     => $fdata['name'][$i],
+    							'tmp_name' => $fdata['tmp_name'][$i],
+    					);
+    				}
+    			}else{
+    				$files[] = $fdata;
+    			}
+    		}
+    		$order = explode('i[]=', $_POST['imgOrder']);
+    		foreach($order as $key => $value){
+    			$nomeImagem = rtrim($value, '&');
+    			if($nomeImagem != ''){
+    				if($nomeImagem[0] == "%"){
+    					$auxImagens[] = array(
+    						'name'     => $nomeImagem,
+    						'tmp_name' => '',
+    					);
+    				}else{
+    					foreach($files as $f){
+    						if($nomeImagem == $f['name']){
+    							$auxImagens[] = array(
+    								'name'     => $f['name'],
+    								'tmp_name' => $f['tmp_name'],
+    							);
+    						break;
+    						}
+    					}
+    				}
+    			}
+    		}
+            $banco->AtualizaImovel($idimovel, $idcategoria, $referencia, $angariador, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $auxImagens, $quantidade_suite);
             $banco->RedirecionaPara('lista-imovel');
         }else{
+            #Pega as imagens e arruma num array
+    		if($_FILES['imagens']['name'][0] !== ""){
+    			$files = array();
+    			$fdata = $_FILES['imagens'];
+    			if(is_array($fdata['name'])){
+    				for($i = 0; $i < count($fdata['name']); ++$i){
+    					$files[] = array(
+    							'name'     => $fdata['name'][$i],
+    							'tmp_name' => $fdata['tmp_name'][$i],
+    					);
+    				}
+    			}else{
+    				$files[] = $fdata;
+    			}
+    		}
+    		$order = explode('i[]=', $_POST['imgOrder']);
+    		foreach($order as $key => $value){
+    			$nomeImagem = rtrim($value, '&');
+    			foreach($files as $f){
+    				if($nomeImagem == $f['name']){
+    					$auxImagens[] = array(
+    									'name'     => $f['name'],
+    									'tmp_name' => $f['tmp_name'],
+    									);
+    					break;
+    				}
+    			}
+    		}
             #Busca Imovel no banco e verifica se ele existe
             $result = $banco->BuscaImovelPorReferencia($referencia);
             $num_rows = $banco->Linha($result);
@@ -257,7 +310,7 @@
                 $msg = "Número de referência já cadastrado!";
             }else{
                 #Insert
-                $banco->InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $files, $quantidade_suite);
+                $banco->InsereImovel($referencia, $angariador, $idcategoria, $cep ,$cidade, $estado, $endereco, $numero, $bairro, $complemento, $ponto_referencia, $entre_ruas, $area_util, $area_total, $proprietario, $telefone, $dormitorios, $garagem, $sala, $churrasqueira, $piso, $esquadrias, $idade, $valor, $descricao, $informacoes, $averbada, $copa, $cozinha, $lavabo, $lavanderia, $suite, $closet, $hidromassagem, $bwc_social, $lareira, $atico, $armarios, $sacada, $escritorio, $dep_empregada, $playground, $salao_festas, $piscina, $portao_eletronico, $auxImagens, $quantidade_suite);
                 $banco->RedirecionaPara('lista-imovel');
             }
         }
@@ -322,9 +375,11 @@
     $Conteudo = str_replace("<%CBPORTAOELETRONICO%>", $cbportao_eletronico, $Conteudo);
     #Imagens
     $Conteudo = str_replace("<%IMAGENS%>", $imagens, $Conteudo);
+    $Conteudo = str_replace("<%REQUIREFOTO%>", $require_foto, $Conteudo);
     #Botões
     $Conteudo = str_replace("<%BOTAOEXCLUIR%>", $botao_excluir, $Conteudo);
     $Conteudo = str_replace("<%BOTAOATIVARINATIVAR%>", $botao_ativar_inativar, $Conteudo);
     $Conteudo = str_replace("<%BOTAOVOLTAR%>", $botao_voltar, $Conteudo);
+    $Conteudo = str_replace("<%HIDDEN%>", $hidden, $Conteudo);
     $Conteudo = utf8_encode($Conteudo);
 ?>

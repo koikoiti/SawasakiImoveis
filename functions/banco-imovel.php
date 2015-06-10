@@ -4,7 +4,7 @@
 		#Monta slider
         function MontaSliderImovel($idimovel){
             $Auxilio = parent::CarregaHtml('itens/imovel-slider-itens');
-            $Sql = "SELECT * FROM t_imagens_imovel WHERE idimovel = $idimovel";
+            $Sql = "SELECT * FROM t_imagens_imovel WHERE idimovel = $idimovel ORDER BY ordem";
             $result = parent::Execute($Sql);
             while($rs = mysql_fetch_array($result, MYSQL_ASSOC)){
                 $Linha = $Auxilio;
