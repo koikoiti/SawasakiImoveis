@@ -70,6 +70,14 @@
             }
         }
         
+        #Busca total imoveis
+        function BuscaTotalImoveis(){
+            $Sql = "SELECT COUNT(*) AS total FROM t_imoveis";
+            $result = parent::Execute($Sql);
+            $rs = parent::ArrayData($result);
+            return $rs['total'];
+        }
+        
         #Insere caminho das fotos no banco e copia para a pasta do imóvel - INSERT
         function InsereFotosInsert($idimovel, $files){ 
             $cont = 1;

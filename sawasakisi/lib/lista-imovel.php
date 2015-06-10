@@ -22,6 +22,8 @@
     
     $Imoveis = $banco->ListaImoveis($referencia, $idcategoria, $endereco, $bairro, $cidade, $pagina);
     
+    $total_imoveis = $banco->BuscaTotalImoveis();
+    
     $select_categorias = $banco->SelectBuscaCategorias($idcategoria);
     
     $paginacao = $banco->MontaPaginacao($referencia, $idcategoria, $endereco, $bairro, $cidade, $pagina);
@@ -35,4 +37,5 @@
     $Conteudo = str_replace("<%BAIRRO%>", $bairro, $Conteudo);
     $Conteudo = str_replace("<%CIDADE%>", $cidade, $Conteudo);
     $Conteudo = str_replace('<%PAGINACAO%>', $paginacao, $Conteudo);
+    $Conteudo = str_replace("<%TOTALIMOVEIS%>", $total_imoveis, $Conteudo);
 ?>
