@@ -264,7 +264,7 @@
                     INNER JOIN fixo_categorias_imovel C ON I.idcategoria = C.idcategoria
                     INNER JOIN t_imagens_imovel X ON X.idimovel = I.idimovel
                     WHERE I.idimovel = $idimovel 
-                    ORDER BY caminho ASC";
+                    ORDER BY X.ordem ASC";
             $result = parent::Execute($Sql);
             $rs = parent::ArrayData($result);
             
