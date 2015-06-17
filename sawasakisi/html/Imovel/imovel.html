@@ -482,7 +482,7 @@ function removeFile(e) {
 </script>
 <script type="text/javascript">
 $(function(){
-	$("#sortable").sortable();
+	$("#sortable").sortable({scroll: false});
 	$("#sortable").disableSelection();
 	$("#sortable").sortable({
 		stop: function(e, ui){
