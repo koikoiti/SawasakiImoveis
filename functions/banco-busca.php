@@ -65,7 +65,7 @@
             $result = parent::Execute($Sql);
             while($rs = parent::ArrayData($result)){
                 $Linha = $Auxilio;
-                $SqlFoto = "SELECT * FROM t_imagens_imovel WHERE idimovel = " . $rs['idimovel'] . " AND ordem = 1";
+                $SqlFoto = "SELECT * FROM t_imagens_imovel WHERE idimovel = " . $rs['idimovel'] . " AND (ordem = 1 OR ordem = 0)";
                 $resultFoto = parent::Execute($SqlFoto);
                 $rsFoto = parent::ArrayData($resultFoto);
                 $Linha = str_replace('<%CAMINHO%>', $rsFoto['caminho'], $Linha);
