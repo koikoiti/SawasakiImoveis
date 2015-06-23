@@ -25,6 +25,7 @@
         #Monta itens busca rapida
         function MontaBuscaRapidaItens($idcategoria, $ce, $bairro, $pagina, $order){
             $inicio = ($pagina * LimiteBuscaRapida) - LimiteBuscaRapida;
+            
             if($order){
                 $SqlOrder = "SELECT ordem FROM fixo_order_imovel WHERE idorder = '$order'";
                 $resultOrder = parent::Execute($SqlOrder);
@@ -34,14 +35,10 @@
                 $ordenacao = " ORDER BY I.data_cadastro ASC";
             }
             $Auxilio = utf8_encode(parent::CarregaHtml('itens/busca-itens'));
-            $Sql = "SELECT I.*, C.nome AS categoria, M.* FROM t_imoveis I 
+            $Sql = "SELECT I.*, C.nome AS categoria FROM t_imoveis I 
                     INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
-                    INNER JOIN t_imagens_imovel M ON M.idimovel = I.idimovel
-                    INNER JOIN 
-                    (
-                      SELECT *, MIN(caminho) AS minC FROM t_imagens_imovel GROUP BY idimovel
-                    ) X ON X.idimovel = I.idimovel AND M.caminho = X.minC
-                    WHERE 1";
+                    WHERE 1 ";
+            
             if($idcategoria != ''){
                 $Sql .= " AND I.idcategoria = '$idcategoria'";
             }
@@ -64,10 +61,14 @@
             }
             $Sql .= " $ordenacao";
             $Sql .= " LIMIT $inicio, ".LimiteBuscaRapida;
+            
             $result = parent::Execute($Sql);
             while($rs = parent::ArrayData($result)){
                 $Linha = $Auxilio;
-                $Linha = str_replace('<%CAMINHO%>', $rs['caminho'], $Linha);
+                $SqlFoto = "SELECT * FROM t_imagens_imovel WHERE idimovel = " . $rs['idimovel'] . " AND ordem = 1";
+                $resultFoto = parent::Execute($SqlFoto);
+                $rsFoto = parent::ArrayData($resultFoto);
+                $Linha = str_replace('<%CAMINHO%>', $rsFoto['caminho'], $Linha);
                 $Linha = str_replace('<%ID%>', $rs['idimovel'], $Linha);
                 $Linha = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Linha);
                 $Linha = str_replace('<%REFERENCIA%>', utf8_encode($rs['referencia']), $Linha);
@@ -303,8 +304,13 @@
                 $where .= "AND I.idcategoria = '$idcategoria'";
             }
             if($ce[0] != ''){
-                $aux = explode('_', $ce);
-                $where .= " AND I.cidade = '".$aux[0]."' AND I.estado = '".$aux[1]."'";
+                $where .= " AND (";
+                foreach($ce as $value){
+                    $aux = explode('_', $value);
+                    $where .= " (I.cidade = '".utf8_decode($aux[0])."' AND I.estado = '".utf8_decode($aux[1])."') OR";
+                }
+                $where = rtrim($where, ' OR');
+                $where .= ")";
             }
             if($bairro[0] != ''){
                 $where .= " AND (";
@@ -314,13 +320,7 @@
                 $where = rtrim($where, ' OR');
                 $where .= ")";
             }
-            $Sql = "SELECT I.*, C.nome AS categoria, M.* FROM t_imoveis I 
-                    INNER JOIN fixo_categorias_imovel C ON C.idcategoria = I.idcategoria 
-                    INNER JOIN t_imagens_imovel M ON M.idimovel = I.idimovel
-                    INNER JOIN 
-                    (
-                      SELECT *, MIN(caminho) AS minC FROM t_imagens_imovel GROUP BY idimovel
-                    ) X ON X.idimovel = I.idimovel AND M.caminho = X.minC
+            $Sql = "SELECT I.* FROM t_imoveis I 
                     WHERE 1 
                     $where
                     ";
