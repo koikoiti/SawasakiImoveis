@@ -42,6 +42,7 @@
     $Conteudo = str_replace('<%GARAGEM%>', $rs['garagem'], $Conteudo);
     $Conteudo = str_replace('<%CATEGORIA%>', utf8_encode($rs['categoria']), $Conteudo);
     $Conteudo = str_replace('<%AREATOTAL%>', utf8_encode($rs['area_total']), $Conteudo);
+    $Conteudo = str_replace('<%AREAUTIL%>', utf8_encode($rs['area_util']), $Conteudo);
     $Conteudo = str_replace('<%VALOR%>', number_format($rs['valor'], 2, ',', '.'), $Conteudo);
     $Conteudo = str_replace('<%DESCRICAO%>', utf8_encode($rs['descricao']), $Conteudo);
     $Conteudo = str_replace('<%SLIDER%>', $slider, $Conteudo);
