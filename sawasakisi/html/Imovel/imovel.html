@@ -453,7 +453,7 @@ function removeFile(e) {
     			{idimagemimovel:idimagemimovel, idimovel:idimovel},
     			function(retorno){
 				    if(retorno == 1){
-				        console.log(retorno);
+				        //console.log(retorno);
 						var element = document.getElementById("i=%"+idimagemimovel);
 						element.parentNode.removeChild(element);
 						var sorted = $('#sortable').sortable( "serialize", { expression: (/(.+)[=](.+)/) } );
