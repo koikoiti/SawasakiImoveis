@@ -36,7 +36,7 @@
 	$Conteudo = utf8_encode($banco->CarregaHtml('lista-imoveis'));
     $Conteudo = str_replace('<%IMOVEIS%>', $imoveis, $Conteudo);
     $Conteudo = str_replace('<%PAGINACAO%>', $paginacao, $Conteudo);
-    $Conteudo = str_replace('<%BUSCACATEGORIA%>', $busca_categoria, $Conteudo);
+    $Conteudo = str_replace('<%BUSCACATEGORIA%>', utf8_encode($busca_categoria), $Conteudo);
     $Conteudo = str_replace('<%BUSCACIDADEESTADO%>', $busca_cidade_estado, $Conteudo);
     $Conteudo = str_replace('<%MIN%>', $min, $Conteudo);
     $Conteudo = str_replace('<%MAX%>', $max, $Conteudo);

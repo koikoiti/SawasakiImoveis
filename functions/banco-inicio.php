@@ -62,8 +62,8 @@
             while($rs = mysql_fetch_array($result, MYSQL_ASSOC)){
                 $Linha = $Auxilio;
                 $Linha = str_replace('<%CAMINHO%>', $rs['caminho'], $Linha);
-                $Linha = str_replace('<%TEXTO1%>', $rs['texto1'], $Linha);
-                $Linha = str_replace('<%TEXTO2%>', $rs['texto2'], $Linha);
+                $Linha = str_replace('<%TEXTO1%>', utf8_encode($rs['texto1']), $Linha);
+                $Linha = str_replace('<%TEXTO2%>', utf8_encode($rs['texto2']), $Linha);
                 $Linha = str_replace('<%LINK%>', $rs['link'], $Linha);
                 $Slider .= $Linha;
             }

@@ -31,7 +31,7 @@
 	#Imprime valores
 	$Conteudo = utf8_encode($banco->CarregaHtml('Imovel/lista-imovel'));
     $Conteudo = str_replace("<%IMOVEIS%>", $Imoveis, $Conteudo);
-    $Conteudo = str_replace("<%BUSCATIPO%>", $select_categorias, $Conteudo);
+    $Conteudo = str_replace("<%BUSCATIPO%>", utf8_encode($select_categorias), $Conteudo);
     $Conteudo = str_replace("<%REFERENCIA%>", $referencia, $Conteudo);
     $Conteudo = str_replace("<%ENDERECO%>", $endereco, $Conteudo);
     $Conteudo = str_replace("<%BAIRRO%>", $bairro, $Conteudo);
