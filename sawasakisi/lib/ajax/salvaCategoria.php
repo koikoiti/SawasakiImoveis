@@ -6,7 +6,7 @@
 	$banco->Conecta();
 	session_start('login');
     
-    $categoria = $_POST['categoria'];
+    $categoria = utf8_decode($_POST['categoria']);
     
     $Sql = "INSERT INTO fixo_categorias_imovel (nome) VALUES ('$categoria')";
     $banco->Execute($Sql);

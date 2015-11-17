@@ -7,7 +7,7 @@
 	session_start('login');
     
     $idcategoria = $_POST['idcategoria'];
-    $categoria = $_POST['categoria'];
+    $categoria = utf8_decode($_POST['categoria']);
     
     $Sql = "UPDATE fixo_categorias_imovel SET nome = '$categoria' WHERE idcategoria = $idcategoria";
     $banco->Execute($Sql);

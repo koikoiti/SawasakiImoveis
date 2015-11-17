@@ -37,7 +37,7 @@ h6,
 .h5,
 .h6 {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-weight: 600;
 }
 
 a {
@@ -60,7 +60,7 @@ p {
 }
 
 b {
-    font-weight: 400;
+    font-weight: 600;
 }
 
 blockquote p {
@@ -227,7 +227,7 @@ code {
 
 .hthin {
     font-family: "Raleway", Helvetica, sans-serif !important;
-    font-weight: 100 !important;
+    font-weight: 600 !important;
 }
 
 blockquote {
@@ -251,26 +251,26 @@ pre {
 .cont h2 {
     font-family: "Raleway", Helvetica, sans-serif;
     font-size: 32px;
-    font-weight: 100;
+    font-weight: 600;
     line-height: 38px;
     margin: 0 0 10px 0;
 }
 
 .cont h5 {
     font-size: 13px;
-    font-weight: 200;
+    font-weight: 600;
     line-height: 21px;
 }
 
 .cont p {
     color: #333;
     font-size: 13px;
-    font-weight: 200;
+    font-weight: 600;
     line-height: 23px;
 }
 
 .cont b {
-    font-weight: 400;
+    font-weight: 600;
 }
 /*Media List*/
 .media-heading {
@@ -309,7 +309,7 @@ pre {
         clear: both;
         color: #333333;
         display: block;
-        font-weight: normal;
+        font-weight: 600;
         line-height: 1.42857;
         white-space: nowrap;
     }
@@ -414,7 +414,7 @@ pre {
     color: #2c3e50;
     background: url(../images/logo.png) no-repeat 0 11px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
-    font-weight: 300;
+    font-weight: 600;
     font-size: 19px;
     line-height: 18px;
 }
@@ -432,7 +432,7 @@ pre {
 .navbar-default .navbar-nav > li > a {
     color: #3F4148;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
     .navbar-default .navbar-nav > li > a:hover {
@@ -503,7 +503,7 @@ pre {
     }
 
 .navbar-default .navbar-nav > li.button .dropdown-menu li ul > li > a {
-    font-weight: 300;
+    font-weight: 600;
     color: #444;
     padding: 11px 10px;
     padding-left: 33px;
@@ -584,7 +584,7 @@ pre {
 
 .navbar-default .navbar-nav > li.button .dropdown-menu .title {
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 600;
     border-bottom: 1px solid #DDDDDF;
     padding: 8px 17px;
     color: #444;
@@ -742,7 +742,7 @@ pre {
         margin-bottom: 0;
         margin-top: 6px;
         font-family: 'Open Sans', sans-serif;
-        font-weight: 300;
+        font-weight: 600;
         letter-spacing: -1px;
     }
 
@@ -1060,7 +1060,7 @@ input::-webkit-input-speech-button {
     background-color: #F0F0F0;
     color: inherit;
     font-size: 13px;
-    font-weight: 200;
+    font-weight: 600;
     line-height: 21px;
     padding: 15px 30px 30px 30px;
     margin-top: 0;
@@ -1130,7 +1130,7 @@ input::-webkit-input-speech-button {
     #cl-wrapper .cl-sidebar .side-user .info p {
         color: #FFF;
         font-size: 20px;
-        font-weight: 300;
+        font-weight: 600;
         margin-bottom: 2px;
         text-align: right;
     }
@@ -1141,7 +1141,7 @@ input::-webkit-input-speech-button {
 
         #cl-wrapper .cl-sidebar .side-user .info p a {
             color: #FFF;
-            font-weight: 300;
+            font-weight: 600;
             display: inline-block;
             float: right;
         }
@@ -1194,7 +1194,7 @@ input::-webkit-input-speech-button {
         padding: 14px 25px;
         color: rgba(255, 255, 255, 0.6);
         font-size: 13px;
-        font-weight: 400;
+        font-weight: 600;
         white-space: nowrap;
         -webkit-transition: color 250ms ease;
         -moz-transition: color 250ms ease;
@@ -1839,7 +1839,7 @@ body.texture {
 .page-aside.email .compose {
     margin-top: 10px;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 600;
     text-transform: uppercase;
     text-align: center;
     padding: 20px 25px;
@@ -1947,7 +1947,7 @@ body.texture {
         .mail-inbox .head h3 span,
         .main-app .head h3 span {
             color: #888;
-            font-weight: 300;
+            font-weight: 600;
             font-size: 16px;
         }
 
@@ -2048,7 +2048,7 @@ body.texture {
     }
 
         .message .head h3 span {
-            font-weight: 300;
+            font-weight: 600;
             font-size: 20px;
             float: right;
         }
@@ -2059,7 +2059,7 @@ body.texture {
             }
 
     .message .head h4 span {
-        font-weight: 100;
+        font-weight: 600;
         font-size: 15px;
         float: right;
     }
@@ -2078,7 +2078,7 @@ body.texture {
 
     .message .mail p {
         font-size: 15px;
-        font-weight: 100;
+        font-weight: 600;
     }
 
 .message .mails .item {
@@ -2131,7 +2131,7 @@ body.texture {
 }
 
 .message .head .subject input {
-    font-weight: 300;
+    font-weight: 600;
     font-size: 25px;
     height: auto;
     padding: 10px 0;
@@ -2237,7 +2237,7 @@ body.texture {
 .page-aside.codeditor .compose {
     margin-top: 10px;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 600;
     text-transform: uppercase;
     text-align: center;
     padding: 20px 25px;
@@ -2332,7 +2332,7 @@ body.texture {
 
         .mail-inbox .head h3 span {
             color: #888;
-            font-weight: 300;
+            font-weight: 600;
             font-size: 16px;
         }
 
@@ -2418,7 +2418,7 @@ body.texture {
     }
 
         .message .head h3 span {
-            font-weight: 300;
+            font-weight: 600;
             font-size: 20px;
             float: right;
         }
@@ -2429,7 +2429,7 @@ body.texture {
             }
 
     .message .head h4 span {
-        font-weight: 100;
+        font-weight: 600;
         font-size: 15px;
         float: right;
     }
@@ -2448,7 +2448,7 @@ body.texture {
 
     .message .mail p {
         font-size: 15px;
-        font-weight: 100;
+        font-weight: 600;
     }
 
 .message .mails .item {
@@ -2769,7 +2769,7 @@ table.information > tbody > tr > td {
 
 .main-app .items.products .item .price {
     font-size: 22px;
-    font-weight: 300;
+    font-weight: 600;
 }
 
 .main-app .items.products .item .product-image {
@@ -3811,7 +3811,7 @@ table.information > tbody > tr > td {
 .btn-lg {
     padding: 12px 14px;
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 600;
 }
 
     .btn-lg i {
@@ -4260,7 +4260,7 @@ fieldset[disabled] .btn-primary.active {
 
     .counter-detail .counter p {
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 600;
         margin: 0;
     }
 
@@ -4352,7 +4352,7 @@ fieldset[disabled] .btn-primary.active {
 
         .cbp-spmenu > .header h3 {
             color: #fff;
-            font-weight: 300;
+            font-weight: 600;
             font-size: 1.9em;
             margin: 0;
         }
@@ -4372,14 +4372,14 @@ fieldset[disabled] .btn-primary.active {
             display: inline-block;
             margin: 0;
             font-size: 13px;
-            font-weight: 400;
+            font-weight: 600;
         }
 
     .cbp-spmenu a {
         display: block;
         color: #fff;
         font-size: 1.1em;
-        font-weight: 300;
+        font-weight: 600;
     }
 
         .cbp-spmenu a:hover {
@@ -4695,7 +4695,7 @@ fieldset[disabled] .btn-primary.active {
         display: inline-block;
         padding: 8px 9px 5px 9px;
         font-size: 12px;
-        font-weight: 400;
+        font-weight: 600;
         color: #FFF;
         margin: 0 60px 0 0;
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
@@ -4766,7 +4766,7 @@ fieldset[disabled] .btn-primary.active {
         height: 47px;
         padding: 10px;
         font-size: 15px;
-        font-weight: 200;
+        font-weight: 600;
         color: #555;
     }
 
@@ -5107,7 +5107,7 @@ fieldset[disabled] .btn-primary.active {
 
 .gritter-title {
     text-shadow: none;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 17px;
 }
 
@@ -5372,7 +5372,7 @@ fieldset[disabled] .btn-primary.active {
 .label {
     border-radius: 0;
     -webkit-border-radius: 0;
-    font-weight: normal;
+    font-weight: 600;
     font-size: 95%;
 }
 
@@ -5433,7 +5433,7 @@ fieldset[disabled] .btn-primary.active {
 }
 /*Bagde*/
 .badge {
-    font-weight: normal;
+    font-weight: 600;
     font-size: 95%;
     padding: 4px 6px;
     background-color: #a1a1a1;
@@ -5777,12 +5777,12 @@ a.list-group-item:hover {
 
 .modal-content h4,
 .modal-content h4 {
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .modal-content h3,
 .modal-content h3 {
-    font-weight: 300;
+    font-weight: 600;
     margin-top: 0;
     display: inline;
 }
@@ -5813,12 +5813,12 @@ a.list-group-item:hover {
 
     .md-content h4,
     .modal-content h4 {
-        font-weight: 400;
+        font-weight: 600;
     }
 
     .md-content h3,
     .modal-content h3 {
-        font-weight: 300;
+        font-weight: 600;
         margin-top: 0;
     }
 
@@ -6088,7 +6088,7 @@ body.modal-open,
         text-indent: 0;
         color: #fff;
         font-size: 20px;
-        font-weight: normal;
+        font-weight: 600;
     }
 
     .dd3-handle:hover {
@@ -6218,7 +6218,7 @@ body.modal-open,
 .block-flat .header h2 {
     margin: 0;
     font-family: "Raleway", Helvetica, sans-serif;
-    font-weight: 100;
+    font-weight: 600;
     font-size: 29px;
     line-height: 38px;
 }
@@ -6226,14 +6226,14 @@ body.modal-open,
 .block .header h3 {
     margin: 3px 0;
     font-family: "Raleway", Helvetica, sans-serif;
-    font-weight: 200;
+    font-weight: 600;
 }
 
 .widget-block .header h3,
 .block-flat .header h3 {
     margin-top: 3px;
     font-family: "Raleway", Helvetica, sans-serif;
-    font-weight: 200;
+    font-weight: 600;
 }
 
 .block-flat .actions,
@@ -6314,7 +6314,7 @@ body.modal-open,
 }
 
 .block .header h4 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 15px;
     margin: 6px 0;
 }
@@ -6868,7 +6868,7 @@ table.dashed td {
 table thead th {
     padding: 5px;
     font-size: 13px;
-    font-weight: 200;
+    font-weight: 600;
 }
 
 table tbody td {
@@ -7420,7 +7420,7 @@ table tbody td .btn-group .dropdown-menu {
     margin-top: 10px;
     margin-bottom: 0;
     color: #fff;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .weather h1 {
@@ -7442,7 +7442,7 @@ table tbody td .btn-group .dropdown-menu {
 
     .fd-tile.weather .day h6 {
         color: #fff;
-        font-weight: 400;
+        font-weight: 600;
     }
 
 .fd-tile.tile-green {
@@ -7542,7 +7542,7 @@ table tbody td .btn-group .dropdown-menu {
     .fd-tile .header .title {
         display: inline-block;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 600;
         padding: 5px;
         position: absolute;
         text-transform: uppercase;
@@ -7645,7 +7645,7 @@ table tbody td .btn-group .dropdown-menu {
 
 .fd-tile .content h1 {
     margin: 0 0 0;
-    font-weight: 300;
+    font-weight: 600;
     font-size: 40px;
 }
 /*Stats*/
@@ -7701,7 +7701,7 @@ table tbody td .btn-group .dropdown-menu {
 .butpro .sub h2 {
     margin: 0 0 5px 0;
     font-size: 11px;
-    font-weight: normal;
+    font-weight: 600;
     text-align: center;
     text-transform: uppercase;
 }
@@ -7710,7 +7710,7 @@ table tbody td .btn-group .dropdown-menu {
     color: #434D55;
     display: block;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
     text-align: center;
     line-height: 26px;
 }
@@ -7923,7 +7923,7 @@ ul.timeline {
             color: #fff;
             padding: 2em;
             font-size: 1.2em;
-            font-weight: 300;
+            font-weight: 600;
             line-height: 1.4;
             position: relative;
             border-radius: 5px;
@@ -7962,7 +7962,7 @@ ul.timeline {
             font-family: 'ecoico';
             speak: none;
             font-style: normal;
-            font-weight: normal;
+            font-weight: 600;
             font-variant: normal;
             text-transform: none;
             font-size: 1.4em;
@@ -8025,7 +8025,7 @@ ul.timeline {
     .cbp_tmtimeline > li .cbp_tmlabel {
         margin: 0 0 30px 0;
         padding: 1em;
-        font-weight: 400;
+        font-weight: 600;
         font-size: 95%;
     }
 
@@ -8136,7 +8136,7 @@ ul.timeline {
 }
 
 .treeview label {
-    font-weight: 400;
+    font-weight: 600;
     margin: 0;
     padding: 7px 18px;
     display: block;
@@ -8258,14 +8258,14 @@ ul.timeline {
     .widget-block.weather-box h2 {
         margin-top: 60px;
         font-size: 28px;
-        font-weight: 400;
+        font-weight: 600;
         text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
     }
 
     .widget-block.weather-box .day {
         text-align: center;
         font-size: 24px;
-        font-weight: 300;
+        font-weight: 600;
         text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
         margin-bottom: 70px;
         margin-top: 3px;
@@ -8288,20 +8288,20 @@ ul.timeline {
 
     .fb-box h2 {
         font-size: 19px;
-        font-weight: 400;
+        font-weight: 600;
         margin: 0 0 5px 0;
         padding-top: 10px;
     }
 
     .fb-box h3 {
         font-size: 13px;
-        font-weight: 200;
+        font-weight: 600;
         margin: 0 0 20px 0;
     }
 
     .fb-box h4 {
         font-size: 13px;
-        font-weight: 400;
+        font-weight: 600;
         margin: 0 0 5px 0;
     }
 
@@ -8415,7 +8415,7 @@ ul.timeline {
 .widget-block .header h3 {
     margin: 0;
     font-size: 13px;
-    font-weight: 200;
+    font-weight: 600;
     line-height: 21px;
     color: #666;
 }
@@ -8524,7 +8524,7 @@ ul.timeline {
             margin: 0;
             font-size: 35px;
             color: #444;
-            font-weight: 300;
+            font-weight: 600;
         }
 
         .cl-mcont .block .stat-data .stat-number span,
@@ -8642,21 +8642,21 @@ ul.timeline {
 .widget-block .total-data h2 {
     margin: 0;
     font-size: 24px;
-    font-weight: 300;
+    font-weight: 600;
     line-height: 32px;
 }
 
 .block .total-data h3,
 .widget-block .total-data h3 {
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 600;
     margin: 0;
 }
 
 .block .total-data h4,
 .widget-block .total-data h4 {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 600;
     margin: 0;
 }
 
@@ -8672,14 +8672,14 @@ ul.timeline {
 .widget-block .fact-data h2 {
     margin: 0;
     font-size: 32px;
-    font-weight: 300;
+    font-weight: 600;
 }
 
 .block .fact-data h3,
 .widget-block .fact-data h3 {
     text-transform: uppercase;
     margin: 0;
-    font-weight: 200;
+    font-weight: 600;
     font-size: 13px;
 }
 
@@ -8703,12 +8703,12 @@ ul.timeline {
 .widget-block h3 {
     font-size: 17px;
     margin: 5px 0 0 0;
-    font-weight: 200;
+    font-weight: 600;
 }
 
 .widget-block h2 {
     font-size: 32px;
-    font-weight: 300;
+    font-weight: 600;
 }
 
 .block h2 i {
